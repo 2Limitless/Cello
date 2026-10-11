@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Music, PenTool, Wrench, ShieldCheck, ArrowRight, X, Clock, MapPin, Star, GraduationCap, History, BookOpen, ShoppingBag, Sparkles, ChevronLeft, ChevronRight, Quote, Award, CheckCircle2, Phone } from "lucide-react";
+import { Music, PenTool, Wrench, ShieldCheck, ArrowRight, X, Clock, MapPin, GraduationCap, History, BookOpen, ShoppingBag, Sparkles, Phone } from "lucide-react";
 import { getModalContent } from "./modalContent";
 import { CartProvider, useCart } from "@/context/CartContext";
 import { PRODUCTS } from "@/data/products";
@@ -11,6 +11,7 @@ import { AtelierBoutique } from "@/components/AtelierBoutique";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { VIPBookingModal } from "@/components/VIPBookingModal";
 import { CommissionLedgerModal } from "@/components/CommissionLedgerModal";
+import { VirtuosoFolio } from "@/components/VirtuosoFolio";
 
 export default function Home() {
   return (
@@ -177,37 +178,47 @@ function HomeContent() {
     {
       quote: "The only luthier in the region I trust with my 1734 Guarneri. Matthew's bridge calibration unlocked acoustic richness and projection that fills Whitney Hall effortlessly.",
       author: "Elena Rostova",
+      signature: "Elena Rostova",
       role: "Principal Cellist, Louisville Orchestra",
       credential: "Verified Patron · 1734 Guarneri Cello Calibration",
-      tag: "Principal Soloist"
+      tag: "Principal Soloist",
+      year: "Patron Since 2018"
     },
     {
       quote: "They found a radiant voice in the tonewood I never knew existed. After Lane & Edwards dressed the fingerboard and cut a French bridge, tonal response increased tenfold.",
       author: "Marcus Chen",
+      signature: "Marcus Chen",
       role: "Concertmaster & International Soloist",
       credential: "Verified Patron · Master Violin Setup",
-      tag: "Concertmaster"
+      tag: "Concertmaster",
+      year: "Patron Since 2014"
     },
     {
       quote: "Every serious cello and violin student in my studio acquires their instrument through Lane & Edwards. Their 100% equity trade-in policy gives families complete peace of mind.",
       author: "Prof. Edward Lin",
+      signature: "Edward Lin",
       role: "String Department Chair, Conservatory",
       credential: "Verified Educator · Juilliard & Eastman Repertoire",
-      tag: "Conservatory Chair"
+      tag: "Conservatory Chair",
+      year: "Patron Since 2008"
     },
     {
       quote: "I shipped my 1920 French viola across the country specifically for Matthew to carve a custom soundpost. The balance across the C and A strings is now pure velvet.",
       author: "Sarah Jenkins",
+      signature: "Sarah Jenkins",
       role: "Grammy-Nominated Chamber Musician",
       credential: "Verified Patron · Soundpost Optimization",
-      tag: "Chamber Soloist"
+      tag: "Chamber Soloist",
+      year: "Patron Since 2021"
     },
     {
       quote: "Simply unmatched craftsmanship, integrity, and warmth. Finding this level of Parisian and Cremonese atelier standards in St. Matthews is an extraordinary treasure for Kentucky.",
       author: "David Alessi",
+      signature: "David Alessi",
       role: "Juilliard Alumnus & Principal Violist",
       credential: "Verified Patron · Pernambuco Bow Calibration",
-      tag: "Recording Artist"
+      tag: "Recording Artist",
+      year: "Patron Since 2016"
     }
   ];
 
@@ -405,15 +416,28 @@ function HomeContent() {
                     );
                   })}
                 </div>
+
+                {/* Mobile / Narrow Viewport: Render Folio immediately after Volume 01 */}
+                {category === 'Instruments & Sales' && (
+                  <div className="lg:hidden mt-8">
+                    <VirtuosoFolio
+                      testimonials={testimonials}
+                      reviewIndex={reviewIndex}
+                      setReviewIndex={setReviewIndex}
+                      handleTouchStart={handleTouchStart}
+                      handleTouchEnd={handleTouchEnd}
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
-          {/* 40% RIGHT: Virtuoso Review Showcase (Uniform with 'Find Your Instrument') */}
-          <div className="w-full lg:w-[38%] xl:w-[40%] self-stretch flex flex-col">
+          {/* 40% RIGHT: Virtuoso Review Showcase (Desktop sticky column) */}
+          <div className="hidden lg:flex w-full lg:w-[38%] xl:w-[40%] self-stretch flex-col">
             
             {/* Desktop spacer: perfectly matches the Volume 01 header so the Review Box starts flush with 'Find Your Instrument' */}
-            <div className="hidden lg:flex flex-col mb-10 pl-2 invisible pointer-events-none select-none" aria-hidden="true">
+            <div className="flex flex-col mb-10 pl-2 invisible pointer-events-none select-none" aria-hidden="true">
               <div className="flex items-center gap-4 mb-3">
                 <span className="text-[10px] tracking-[0.3em] uppercase">Volume 01</span>
                 <div className="h-[1px] w-16"></div>
@@ -421,120 +445,14 @@ function HomeContent() {
               <h2 className="font-serif text-4xl lg:text-5xl tracking-tight">Instruments & Sales</h2>
             </div>
 
-            {/* The Review Card: exact same vertical height as 'Find Your Instrument' (h-[376px] md:h-[524px]) */}
-            <div 
-              className="w-full h-[376px] md:h-[524px] lg:sticky lg:top-24 relative overflow-hidden rounded-[24px] md:rounded-[30px] border border-[#9B7E58]/35 shadow-2xl bg-[#1A1A17] flex flex-col justify-between"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
-              {/* Top subtle hairline accent */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#9B7E58]/60 to-transparent z-20" />
-
-              {/* Background texture & warm tone */}
-              <Image src="/sheet_music.jpg" alt="Patron Reviews" fill className="object-cover opacity-10 mix-blend-luminosity pointer-events-none" />
-              <div className="absolute inset-0 bg-[#1A1A17]/95 pointer-events-none" />
-
-              <div className="relative z-10 p-6 md:p-8 lg:p-9 flex flex-col justify-between h-full">
-                
-                {/* Top Section: Header & Rating */}
-                <div className="flex flex-col gap-3.5">
-                  {/* Header: Understated Label & Origin */}
-                  <div className="flex items-center justify-between gap-3 border-b border-[#9B7E58]/20 pb-3">
-                    <span className="text-[11px] md:text-xs font-serif tracking-[0.2em] uppercase text-[#D4AF37] font-medium">
-                      Patron Endorsements
-                    </span>
-                    <span className="text-[11px] font-mono tracking-wider text-[#FAF9F5]/40 uppercase">
-                      St. Matthews Atelier
-                    </span>
-                  </div>
-
-                  {/* Rating Display */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <div className="flex gap-1 text-[#D4AF37]">
-                        {[...Array(5)].map((_, idx) => (
-                          <Star key={idx} size={15} fill="currentColor" />
-                        ))}
-                      </div>
-                      <span className="text-xs font-mono font-medium text-white/80 tracking-wider">5.0 / 5.0</span>
-                    </div>
-                    <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-wider text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-1 rounded-full border border-[#D4AF37]/25">
-                      {testimonials[reviewIndex].tag}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Center Section: Smooth Quote Area */}
-                <div className="relative my-auto flex flex-col justify-center py-2">
-                  <Quote className="text-[#9B7E58]/10 absolute -top-4 -right-1 w-16 h-16 pointer-events-none" />
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                      key={reviewIndex}
-                      initial={{ opacity: 0, y: 8, filter: "blur(2px)" }}
-                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      exit={{ opacity: 0, y: -8, filter: "blur(2px)" }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="flex flex-col justify-center"
-                    >
-                      <p className="font-serif text-lg md:text-xl lg:text-[22px] text-white/95 font-light italic leading-relaxed mb-4">
-                        &quot;{testimonials[reviewIndex].quote}&quot;
-                      </p>
-                      <div className="border-l-2 border-[#9B7E58] pl-4 py-0.5">
-                        <div className="flex items-center gap-2">
-                          <p className="font-sans font-bold text-base md:text-lg text-white tracking-wide">{testimonials[reviewIndex].author}</p>
-                          <CheckCircle2 size={14} className="text-[#9B7E58] shrink-0" />
-                        </div>
-                        <p className="font-sans text-xs tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">{testimonials[reviewIndex].role}</p>
-                        <p className="font-mono text-[11px] text-white/50 tracking-tight mt-0.5">{testimonials[reviewIndex].credential}</p>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-
-                {/* Bottom Section: Controls */}
-                <div className="pt-3.5 border-t border-white/10 z-20 flex items-center justify-between mt-auto">
-                  {/* Progress dots */}
-                  <div className="flex items-center gap-2">
-                    {testimonials.map((_, i) => (
-                      <button 
-                        key={i} 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setReviewIndex(i);
-                        }} 
-                        aria-label={`Go to review ${i + 1}`}
-                        className={`h-[3px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-7 bg-[#D4AF37]' : 'w-2.5 bg-white/20 hover:bg-white/40'}`} 
-                      />
-                    ))}
-                  </div>
-
-                  {/* Subtle chevrons */}
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-                      }}
-                      className="w-9 h-9 rounded-full border border-white/20 hover:border-[#D4AF37] bg-white/5 hover:bg-[#D4AF37]/15 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
-                      title="Previous Review"
-                    >
-                      <ChevronLeft size={15} />
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setReviewIndex((prev) => (prev + 1) % testimonials.length);
-                      }}
-                      className="w-9 h-9 rounded-full border border-white/20 hover:border-[#D4AF37] bg-white/5 hover:bg-[#D4AF37]/15 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
-                      title="Next Review"
-                    >
-                      <ChevronRight size={15} />
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+            {/* The Virtuoso Letterpress Folio */}
+            <VirtuosoFolio
+              testimonials={testimonials}
+              reviewIndex={reviewIndex}
+              setReviewIndex={setReviewIndex}
+              handleTouchStart={handleTouchStart}
+              handleTouchEnd={handleTouchEnd}
+            />
 
           </div>
 
