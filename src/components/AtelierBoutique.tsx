@@ -12,10 +12,7 @@ interface AtelierBoutiqueProps {
 
 export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
   const {
-    addToCart,
     setSelectedProduct,
-    setIsCartOpen,
-    totalItems,
     setBookingProduct,
     setIsBookingModalOpen
   } = useCart();
@@ -24,7 +21,6 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory || 'all');
   const [activeInstrumentType, setActiveInstrumentType] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
-  const [recentlyAddedId, setRecentlyAddedId] = useState<string | null>(null);
 
   const categories = [
     { id: 'all', label: 'All Acquisitions' },
@@ -77,12 +73,7 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
     });
   }, [activeCategory, activeInstrumentType, searchQuery, sortBy]);
 
-  const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
-    e.stopPropagation();
-    addToCart(product, 1);
-    setRecentlyAddedId(product.id);
-    setTimeout(() => setRecentlyAddedId(null), 1500);
-  };
+
 
   return (
     <section id="boutique" className="w-full bg-[#FAF9F5] text-[#1A1A17] pt-12 pb-24 border-t-4 border-[#1A1A17]">
@@ -103,15 +94,10 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full lg:w-auto">
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="px-8 py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-xl flex items-center gap-3 cursor-pointer"
-            >
-              <span>View Atelier Bag</span>
-              <span className="w-5 h-5 rounded-full bg-[#9B7E58] text-white flex items-center justify-center text-[10px] font-mono">
-                {totalItems}
-              </span>
-            </button>
+            <div className="px-6 py-4 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold shadow-xl flex items-center gap-3">
+              <Calendar size={15} className="text-[#9B7E58]" />
+              <span>Acoustic Trials by Appointment</span>
+            </div>
           </div>
         </div>
 
@@ -218,7 +204,6 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => {
-              const isAdded = recentlyAddedId === product.id;
               return (
                 <div
                   key={product.id}
@@ -282,45 +267,28 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                         </span>
                       </div>
 
-                      {product.category === 'instruments' ? (
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setBookingProduct(product);
-                              setIsBookingModalOpen(true);
-                            }}
-                            className="px-4 py-3 bg-[#1A1A17] text-white hover:bg-[#9B7E58] uppercase tracking-[0.15em] text-[11px] font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer"
-                          >
-                            <Calendar size={13} className="text-[#9B7E58]" />
-                            <span>Reserve Trial (Free)</span>
-                          </button>
-                          <button
-                            onClick={(e) => handleQuickAdd(product, e)}
-                            title="Add to Online Cart"
-                            className="p-3 bg-white border-2 border-[#1A1A17] text-[#1A1A17] hover:bg-[#1A1A17] hover:text-white transition-all shadow-sm flex items-center justify-center cursor-pointer"
-                          >
-                            <Plus size={14} />
-                          </button>
-                        </div>
+                      {product.category === 'instruments' || product.category === 'bows' ? (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setBookingProduct(product);
+                            setIsBookingModalOpen(true);
+                          }}
+                          className="px-5 py-3.5 bg-[#1A1A17] text-white hover:bg-[#9B7E58] uppercase tracking-[0.15em] text-[11px] font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                        >
+                          <Calendar size={13} className="text-[#9B7E58]" />
+                          <span>Reserve Studio Trial</span>
+                        </button>
                       ) : (
                         <button
-                          onClick={(e) => handleQuickAdd(product, e)}
-                          className={`px-6 py-3 uppercase tracking-[0.2em] text-xs font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer ${
-                            isAdded
-                              ? 'bg-emerald-800 text-white'
-                              : 'bg-[#1A1A17] text-white hover:bg-[#9B7E58]'
-                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedProduct(product);
+                          }}
+                          className="px-5 py-3.5 bg-white border-2 border-[#1A1A17] text-[#1A1A17] hover:bg-[#1A1A17] hover:text-white uppercase tracking-[0.15em] text-[11px] font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer"
                         >
-                          {isAdded ? (
-                            <>
-                              <Check size={14} /> Added
-                            </>
-                          ) : (
-                            <>
-                              <Plus size={14} /> Add to Bag
-                            </>
-                          )}
+                          <Eye size={13} />
+                          <span>Examine Specs</span>
                         </button>
                       )}
                     </div>

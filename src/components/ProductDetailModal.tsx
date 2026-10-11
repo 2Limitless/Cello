@@ -3,14 +3,13 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { X, Check, ShieldCheck, Sparkles, Plus, Calendar } from 'lucide-react';
+import { X, Check, ShieldCheck, Sparkles, Calendar, Phone } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export function ProductDetailModal() {
   const {
     selectedProduct,
     setSelectedProduct,
-    addToCart,
     setBookingProduct,
     setIsBookingModalOpen
   } = useCart();
@@ -181,45 +180,35 @@ export function ProductDetailModal() {
               </div>
             </div>
 
-            {/* CTAs */}
-            <div className="pt-6 border-t-2 border-[#1A1A17] flex flex-col sm:flex-row gap-4">
-              {selectedProduct.category === 'instruments' ? (
-                <>
-                  <button
-                    onClick={() => {
-                      const p = selectedProduct;
-                      setSelectedProduct(null);
-                      setBookingProduct(p);
-                      setIsBookingModalOpen(true);
-                    }}
-                    className="flex-1 py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-xl flex items-center justify-center gap-3 cursor-pointer"
-                  >
-                    <Calendar size={16} className="text-[#9B7E58]" />
-                    <span>Reserve In-Shop Playing Session (Free)</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      addToCart(selectedProduct, 1);
-                      setSelectedProduct(null);
-                    }}
-                    className="py-5 px-6 border-2 border-[#1A1A17] text-[#1A1A17] uppercase tracking-[0.15em] text-xs font-bold hover:bg-[#1A1A17]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
-                  >
-                    <Plus size={15} />
-                    <span>Buy Online</span>
-                  </button>
-                </>
-              ) : (
+            {/* CTAs: Atelier Reservation & In-Person Availability */}
+            <div className="pt-6 border-t-2 border-[#1A1A17]">
+              {selectedProduct.category === 'instruments' || selectedProduct.category === 'bows' ? (
                 <button
                   onClick={() => {
-                    addToCart(selectedProduct, 1);
+                    const p = selectedProduct;
                     setSelectedProduct(null);
+                    setBookingProduct(p);
+                    setIsBookingModalOpen(true);
                   }}
                   className="w-full py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-xl flex items-center justify-center gap-3 cursor-pointer"
                 >
-                  <Plus size={16} />
-                  <span>Add to Atelier Bag — ${selectedProduct.price.toLocaleString()}</span>
+                  <Calendar size={16} className="text-[#9B7E58]" />
+                  <span>Reserve In-Shop Playing Session (Complimentary)</span>
                 </button>
+              ) : (
+                <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-[#FAF9F5] border-2 border-[#1A1A17]">
+                  <div className="text-left">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#9B7E58] font-bold block">In-Stock at 315 Wallace Ave</span>
+                    <span className="text-xs text-[#1A1A17]/80 font-serif italic">Walk in during atelier hours or hold for in-store pickup</span>
+                  </div>
+                  <a
+                    href="tel:5026905908"
+                    className="px-6 py-3.5 bg-[#1A1A17] text-white hover:bg-[#9B7E58] uppercase tracking-[0.15em] text-xs font-bold transition-colors flex items-center gap-2 shrink-0 cursor-pointer shadow-md"
+                  >
+                    <Phone size={14} className="text-[#9B7E58]" />
+                    <span>Call Shop: (502) 690-5908</span>
+                  </a>
+                </div>
               )}
             </div>
           </div>

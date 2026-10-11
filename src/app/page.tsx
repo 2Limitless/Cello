@@ -8,9 +8,7 @@ import { getModalContent } from "./modalContent";
 import { CartProvider, useCart } from "@/context/CartContext";
 import { PRODUCTS } from "@/data/products";
 import { AtelierBoutique } from "@/components/AtelierBoutique";
-import { BoutiqueCart } from "@/components/BoutiqueCart";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
-import { CheckoutModal } from "@/components/CheckoutModal";
 import { VIPBookingModal } from "@/components/VIPBookingModal";
 import { CommissionLedgerModal } from "@/components/CommissionLedgerModal";
 
@@ -27,7 +25,7 @@ function HomeContent() {
   const [currentTime, setCurrentTime] = useState<string>("");
   const [reviewIndex, setReviewIndex] = useState(0);
 
-  const { totalItems, setIsCartOpen, setIsLedgerOpen, setBookingProduct, setIsBookingModalOpen } = useCart();
+  const { setIsLedgerOpen, setBookingProduct, setIsBookingModalOpen } = useCart();
 
   useEffect(() => {
     const updateTime = () => {
@@ -290,20 +288,20 @@ function HomeContent() {
               const el = document.getElementById('boutique');
               el?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="hidden sm:flex items-center gap-2 hover:text-[#9B7E58] transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 border border-[#9B7E58] text-[#1A1A17] hover:bg-[#9B7E58] hover:text-white transition-all cursor-pointer shadow-sm"
           >
             <Sparkles size={13} className="text-[#9B7E58]" />
-            <span className="font-bold">Boutique</span>
+            <span className="font-bold">Collection</span>
           </button>
           
-          <button
-            onClick={() => setIsCartOpen(true)}
+          <a
+            href="tel:5026905908"
             className="flex items-center gap-2 px-3.5 py-1.5 bg-[#1A1A17] text-white hover:bg-[#9B7E58] transition-colors cursor-pointer shadow-md"
           >
-            <ShoppingBag size={13} className="text-[#9B7E58]" />
-            <span>Bag</span>
-            <span className="font-mono text-[#9B7E58] font-bold">({totalItems})</span>
-          </button>
+            <Phone size={13} className="text-[#9B7E58]" />
+            <span className="hidden sm:inline font-mono">(502) 690-5908</span>
+            <span className="sm:hidden font-mono">Call</span>
+          </a>
 
           <span className="hidden lg:flex items-center gap-2 text-[#1A1A17]/50"><MapPin size={12} /> Louisville, KY</span>
           <span className="hidden md:flex items-center gap-2 text-[#1A1A17]/50"><Clock size={12} /> {currentTime || "..."}</span>
@@ -568,25 +566,8 @@ function HomeContent() {
         </div>
       </footer>
 
-      {/* Floating Bag Indicator */}
-      <div className="fixed bottom-8 right-8 z-[90]">
-        <button
-          onClick={() => setIsCartOpen(true)}
-          className="p-4 bg-[#1A1A17] text-white border-2 border-[#9B7E58] shadow-[6px_6px_0px_#9B7E58] flex items-center gap-3 hover:-translate-y-1 transition-all cursor-pointer group"
-          aria-label="Open Atelier Bag"
-        >
-          <ShoppingBag size={18} className="text-[#9B7E58] group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold tracking-[0.2em] uppercase hidden sm:inline">Atelier Bag</span>
-          <span className="w-6 h-6 rounded-full bg-[#9B7E58] text-white flex items-center justify-center text-xs font-mono font-bold">
-            {totalItems}
-          </span>
-        </button>
-      </div>
-
-      {/* E-Commerce Modals & Drawers */}
-      <BoutiqueCart />
+      {/* Atelier Modals */}
       <ProductDetailModal />
-      <CheckoutModal />
       <VIPBookingModal />
       <CommissionLedgerModal />
 
