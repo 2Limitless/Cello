@@ -113,7 +113,7 @@ function HomeContent() {
       title: "Restoration & Repair",
       subtitle: "The Craft",
       icon: Wrench,
-      image: null,
+      image: "/repair_bg.jpg",
       colSpan: "col-span-1",
       rowSpan: "row-span-1",
       description: "Complete repair and restoration services for violins, violas, cellos, and double basses. From sound adjustments to crack repair, our master luthiers treat each instrument with the utmost reverence.",
