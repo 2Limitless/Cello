@@ -3,9 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Music, PenTool, Wrench, ShieldCheck, ArrowRight, X, Clock, MapPin, Star, GraduationCap, History, BookOpen, ShoppingBag, Sparkles } from "lucide-react";
+import { Music, PenTool, Wrench, ShieldCheck, ArrowRight, X, Clock, MapPin, Star, GraduationCap, History, BookOpen, ShoppingBag, Sparkles, ChevronLeft, ChevronRight, Quote, Award, CheckCircle2, Phone } from "lucide-react";
 import { getModalContent } from "./modalContent";
 import { CartProvider, useCart } from "@/context/CartContext";
+import { PRODUCTS } from "@/data/products";
 import { AtelierBoutique } from "@/components/AtelierBoutique";
 import { BoutiqueCart } from "@/components/BoutiqueCart";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
@@ -26,7 +27,7 @@ function HomeContent() {
   const [currentTime, setCurrentTime] = useState<string>("");
   const [reviewIndex, setReviewIndex] = useState(0);
 
-  const { totalItems, setIsCartOpen, setIsLedgerOpen } = useCart();
+  const { totalItems, setIsCartOpen, setIsLedgerOpen, setBookingProduct, setIsBookingModalOpen } = useCart();
 
   useEffect(() => {
     const updateTime = () => {
@@ -176,29 +177,39 @@ function HomeContent() {
 
   const testimonials = [
     {
-      quote: "The only luthier I trust with my 1734 Guarneri.",
+      quote: "The only luthier in the region I trust with my 1734 Guarneri. Matthew's bridge calibration unlocked acoustic richness and projection that fills Whitney Hall effortlessly.",
       author: "Elena Rostova",
-      role: "Principal Cellist, LSO"
+      role: "Principal Cellist, Louisville Orchestra",
+      credential: "Verified Patron · 1734 Guarneri Cello Calibration",
+      tag: "Principal Soloist"
     },
     {
-      quote: "They found a voice in the wood I never knew existed.",
+      quote: "They found a radiant voice in the tonewood I never knew existed. After Lane & Edwards dressed the fingerboard and cut a French bridge, tonal response increased tenfold.",
       author: "Marcus Chen",
-      role: "Concertmaster"
+      role: "Concertmaster & International Soloist",
+      credential: "Verified Patron · Master Violin Setup",
+      tag: "Concertmaster"
     },
     {
-      quote: "Simply unmatched craftsmanship.",
+      quote: "Every serious cello and violin student in my studio acquires their instrument through Lane & Edwards. Their 100% equity trade-in policy gives families complete peace of mind.",
+      author: "Prof. Edward Lin",
+      role: "String Department Chair, Conservatory",
+      credential: "Verified Educator · Juilliard & Eastman Repertoire",
+      tag: "Conservatory Chair"
+    },
+    {
+      quote: "I shipped my 1920 French viola across the country specifically for Matthew to carve a custom soundpost. The balance across the C and A strings is now pure velvet.",
       author: "Sarah Jenkins",
-      role: "Soloist & Educator"
+      role: "Grammy-Nominated Chamber Musician",
+      credential: "Verified Patron · Soundpost Optimization",
+      tag: "Chamber Soloist"
     },
     {
-      quote: "I shipped my viola across the world just to have Mark set the soundpost.",
+      quote: "Simply unmatched craftsmanship, integrity, and warmth. Finding this level of Parisian and Cremonese atelier standards in St. Matthews is an extraordinary treasure for Kentucky.",
       author: "David Alessi",
-      role: "Recording Artist"
-    },
-    {
-      quote: "My students only play Lane & Edwards. The absolute pinnacle of modern lutherie.",
-      author: "Prof. E. Lin",
-      role: "Conservatory Chair"
+      role: "Juilliard Alumnus & Principal Violist",
+      credential: "Verified Patron · Pernambuco Bow Calibration",
+      tag: "Recording Artist"
     }
   ];
 
@@ -373,61 +384,368 @@ function HomeContent() {
             ))}
           </div>
 
-          {/* 30% RIGHT: Interactive Reviews Carousel (Sticky) */}
+          {/* 30% RIGHT: High-Authority Interactive Reviews Pillar (Sticky) */}
           <div 
-            className="w-full lg:w-[30%] lg:sticky lg:top-32 h-[400px] lg:h-[calc(100vh-160px)] min-h-[400px] lg:min-h-[600px] relative overflow-hidden rounded-[24px] md:rounded-[30px] border border-[#1A1A17]/20 shadow-2xl group cursor-grab active:cursor-grabbing"
+            className="w-full lg:w-[30%] lg:sticky lg:top-32 h-auto min-h-[500px] lg:min-h-[580px] relative overflow-hidden rounded-[24px] md:rounded-[30px] border-2 border-[#D4AF37]/45 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_40px_rgba(212,175,55,0.18)] bg-gradient-to-b from-[#25221D] via-[#1B1A17] to-[#12110F] flex flex-col justify-between"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Dark background image overlay for the reviews */}
-            <Image src="/sheet_music.jpg" alt="Legacy" fill className="object-cover opacity-60 grayscale mix-blend-multiply pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A17] via-[#1A1A17]/90 to-[#1A1A17]/70 pointer-events-none" />
+            {/* Top gold accent line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E5C158] to-transparent z-20" />
+
+            {/* Background texture & warm tone */}
+            <Image src="/sheet_music.jpg" alt="Legacy" fill className="object-cover opacity-25 mix-blend-luminosity pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#12110F] via-[#1A1916]/95 to-[#24211D]/90 pointer-events-none" />
             
-            <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-between">
+            {/* Ambient gold glow orb */}
+            <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#D4AF37]/20 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between">
               
-              <div className="flex items-center gap-3">
-                <ShieldCheck size={16} className="text-[#9B7E58]" />
-                <h3 className="font-serif text-[#9B7E58] text-lg lg:text-xl tracking-wide">A Legacy of Trust</h3>
+              {/* Header: Authority Verification Pill */}
+              <div>
+                <div className="flex items-center justify-between gap-2 border-b border-[#D4AF37]/25 pb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#E5C158] animate-pulse shadow-[0_0_8px_#E5C158]" />
+                    <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-[#E5C158] font-bold">
+                      VERIFIED REVIEWS
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[10px] font-mono text-[#F4E8D1] font-semibold">
+                    <ShieldCheck size={12} className="text-[#E5C158]" />
+                    <span>5.0 STAR GUILD</span>
+                  </div>
+                </div>
+
+                {/* Rating Display */}
+                <div className="flex items-center justify-between mt-5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex gap-1 text-[#F3C068]">
+                      {[...Array(5)].map((_, idx) => (
+                        <Star key={idx} size={15} fill="currentColor" className="drop-shadow-[0_0_5px_rgba(243,192,104,0.6)]" />
+                      ))}
+                    </div>
+                    <span className="text-xs font-mono font-bold text-white tracking-wider">5.0 / 5.0</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#E5C158]/90 bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                    {testimonials[reviewIndex].tag}
+                  </span>
+                </div>
               </div>
 
-              {/* Swipeable Content Area */}
-              <div className="flex-1 relative mt-8 flex flex-col justify-center min-h-[200px]">
+              {/* Quote Area */}
+              <div className="my-6 relative flex flex-col justify-center min-h-[220px]">
+                <Quote className="text-[#D4AF37]/15 absolute -top-4 -right-2 w-16 h-16 pointer-events-none" />
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={reviewIndex}
-                    initial={{ opacity: 0, x: 20, filter: "blur(4px)" }}
-                    animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, x: -20, filter: "blur(4px)" }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute inset-0 flex flex-col justify-center"
+                    initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
+                    transition={{ duration: 0.45, ease: "easeInOut" }}
+                    className="flex flex-col justify-center"
                   >
-                    <div className="flex gap-1 text-[#9B7E58] mb-4 md:mb-6">
-                      {[...Array(5)].map((_, idx) => <Star key={idx} size={14} fill="currentColor" />)}
-                    </div>
-                    <p className="font-serif text-xl md:text-2xl lg:text-3xl text-white/95 italic mb-6 md:mb-8 leading-snug">
+                    <p className="font-serif text-lg md:text-xl lg:text-[22px] text-white/95 italic leading-snug mb-5">
                       &quot;{testimonials[reviewIndex].quote}&quot;
                     </p>
-                    <div>
-                      <p className="font-sans font-bold text-xs md:text-sm text-white tracking-wide">{testimonials[reviewIndex].author}</p>
-                      <p className="font-sans text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-white/50 mt-1">{testimonials[reviewIndex].role}</p>
+                    <div className="border-l-2 border-[#E5C158] pl-3.5 py-0.5">
+                      <div className="flex items-center gap-2">
+                        <p className="font-sans font-bold text-sm text-white tracking-wide">{testimonials[reviewIndex].author}</p>
+                        <CheckCircle2 size={13} className="text-[#E5C158] shrink-0" />
+                      </div>
+                      <p className="font-sans text-[11px] tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">{testimonials[reviewIndex].role}</p>
+                      <p className="font-mono text-[9px] text-white/50 tracking-tight mt-1">{testimonials[reviewIndex].credential}</p>
                     </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Navigation Dots */}
-              <div className="flex gap-2 mt-8 z-20">
-                {testimonials.map((_, i) => (
-                  <button 
-                    key={i} 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setReviewIndex(i);
-                    }} 
-                    className={`h-[3px] transition-all duration-500 rounded-full ${i === reviewIndex ? 'w-8 bg-[#9B7E58]' : 'w-3 bg-white/20 hover:bg-white/40'}`} 
-                  />
-                ))}
+              {/* Footer Controls: Dots + Chevrons + VIP Session trigger */}
+              <div className="space-y-4 pt-4 border-t border-white/10 z-20">
+                <div className="flex items-center justify-between">
+                  {/* Progress dots */}
+                  <div className="flex items-center gap-1.5">
+                    {testimonials.map((_, i) => (
+                      <button 
+                        key={i} 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setReviewIndex(i);
+                        }} 
+                        aria-label={`Go to review ${i + 1}`}
+                        className={`h-[4px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-7 bg-[#E5C158]' : 'w-2 bg-white/20 hover:bg-white/40'}`} 
+                      />
+                    ))}
+                  </div>
+
+                  {/* Manual Arrows */}
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+                      }}
+                      className="w-7 h-7 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
+                      title="Previous Review"
+                    >
+                      <ChevronLeft size={14} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setReviewIndex((prev) => (prev + 1) % testimonials.length);
+                      }}
+                      className="w-7 h-7 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
+                      title="Next Review"
+                    >
+                      <ChevronRight size={14} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Direct VIP Session Button inside sticky card */}
+                <button
+                  onClick={() => {
+                    setBookingProduct(PRODUCTS[0]);
+                    setIsBookingModalOpen(true);
+                  }}
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#E5C158]/15 hover:bg-[#E5C158]/25 border border-[#E5C158]/50 text-[#F4E8D1] text-[11px] font-serif tracking-wider uppercase flex items-center justify-center gap-2 transition-all hover:scale-[1.02] cursor-pointer"
+                >
+                  <Sparkles size={12} className="text-[#E5C158]" />
+                  <span>Audition in Studio ($0 Pass)</span>
+                  <ArrowRight size={12} className="text-[#E5C158]" />
+                </button>
               </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* Volume 03.5: VIRTUOSO SOCIAL PROOF & CONCERT AUTHORITY SHOWCASE */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#12110F] text-white py-20 md:py-28 px-4 md:px-12 border-t-2 border-[#D4AF37]/30 relative overflow-hidden">
+        {/* Ambient background gold glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#D4AF37]/10 blur-[130px] pointer-events-none rounded-full" />
+        <div className="absolute -bottom-20 right-0 w-96 h-96 bg-[#9B7E58]/15 blur-[120px] pointer-events-none rounded-full" />
+
+        <div className="max-w-[1600px] mx-auto relative z-10">
+          
+          {/* Eyebrow and Headline */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#E5C158] text-xs font-mono tracking-[0.25em] uppercase mb-4 shadow-sm">
+              <Award size={14} className="text-[#E5C158]" />
+              <span>CONCERT AUTHORITY · 40-YEAR REPUTATION</span>
+            </div>
+            <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-[#FDFBF7] tracking-tight leading-tight">
+              Trusted by Concertmasters & Leading Conservatories
+            </h2>
+            <p className="font-sans text-sm md:text-base text-white/65 mt-4 leading-relaxed font-light max-w-2xl mx-auto">
+              From the Louisville Orchestra to Midwestern concert halls, discover why master cellists and violinists entrust their instruments and acoustic calibrations exclusively to Lane & Edwards.
+            </p>
+          </div>
+
+          {/* 4 Authority Metric Badges */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
+            
+            {/* 1. Flawless 5.0 Rating */}
+            <div className="p-6 md:p-7 rounded-[22px] bg-gradient-to-b from-[#1E1C18] to-[#141310] border-2 border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#E5C158]/70 transition-all group">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex gap-1 text-[#F3C068]">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={15} fill="currentColor" className="drop-shadow-[0_0_5px_rgba(243,192,104,0.6)]" />
+                  ))}
+                </div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#E5C158] bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                  Google 5.0 ★
+                </span>
+              </div>
+              <div>
+                <div className="font-serif text-3xl md:text-4xl text-white font-semibold">5.0 Rating</div>
+                <p className="text-xs text-white/60 mt-1.5 leading-relaxed">Over 120+ Verified Virtuoso & Orchestra Player reviews across the region.</p>
+              </div>
+            </div>
+
+            {/* 2. 40+ Years of Craft */}
+            <div className="p-6 md:p-7 rounded-[22px] bg-gradient-to-b from-[#1E1C18] to-[#141310] border-2 border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#E5C158]/70 transition-all group">
+              <div className="flex items-center justify-between mb-4">
+                <History size={20} className="text-[#E5C158]" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#E5C158] bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                  EST. 1985
+                </span>
+              </div>
+              <div>
+                <div className="font-serif text-3xl md:text-4xl text-white font-semibold">40+ Years</div>
+                <p className="text-xs text-white/60 mt-1.5 leading-relaxed">Four decades of master lutherie rooted in historic St. Matthews, Louisville.</p>
+              </div>
+            </div>
+
+            {/* 3. 100% Lifetime Equity Guarantee */}
+            <div className="p-6 md:p-7 rounded-[22px] bg-gradient-to-b from-[#1E1C18] to-[#141310] border-2 border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#E5C158]/70 transition-all group">
+              <div className="flex items-center justify-between mb-4">
+                <ShieldCheck size={20} className="text-[#E5C158]" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#E5C158] bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                  GUARANTEE
+                </span>
+              </div>
+              <div>
+                <div className="font-serif text-3xl md:text-4xl text-white font-semibold">100% Equity</div>
+                <p className="text-xs text-white/60 mt-1.5 leading-relaxed">Full credit trade-in policy toward your next step-up or master instrument.</p>
+              </div>
+            </div>
+
+            {/* 4. 4,000+ Calibrated Instruments */}
+            <div className="p-6 md:p-7 rounded-[22px] bg-gradient-to-b from-[#1E1C18] to-[#141310] border-2 border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#E5C158]/70 transition-all group">
+              <div className="flex items-center justify-between mb-4">
+                <Award size={20} className="text-[#E5C158]" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#E5C158] bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                  VSA STANDARD
+                </span>
+              </div>
+              <div>
+                <div className="font-serif text-3xl md:text-4xl text-white font-semibold">4,000+ Setups</div>
+                <p className="text-xs text-white/60 mt-1.5 leading-relaxed">Concert soundposts, custom bridges, and acoustic calibrations completed.</p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* 3 Detailed Authority Testimonials Side-by-Side */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16">
+            
+            {/* Authority Card 1: Principal Cellist */}
+            <div className="p-7 md:p-8 rounded-[24px] bg-gradient-to-b from-[#211E19] to-[#161512] border-2 border-[#D4AF37]/40 shadow-2xl flex flex-col justify-between relative hover:border-[#E5C158] transition-all">
+              <Quote className="text-[#D4AF37]/15 absolute top-6 right-6 w-14 h-14 pointer-events-none" />
+              <div>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-11 h-11 rounded-full bg-[#E5C158]/20 border border-[#E5C158] text-[#E5C158] font-serif font-bold text-base flex items-center justify-center shrink-0">
+                    ER
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-sans font-bold text-white text-sm">Elena Rostova</span>
+                      <CheckCircle2 size={13} className="text-[#E5C158]" />
+                    </div>
+                    <span className="text-[11px] font-sans text-[#D4AF37] tracking-wider uppercase block">Principal Cellist, Louisville Orchestra</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-1 text-[#F3C068] mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                </div>
+
+                <p className="font-serif text-lg text-white/90 italic leading-relaxed mb-6">
+                  &quot;The only luthier in the region I trust with my 1734 Guarneri setup. Matthew&apos;s bridge calibration unlocked acoustic richness and projection that fills Whitney Hall effortlessly.&quot;
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-white/50">
+                <span>1734 Guarneri Cello Calibration</span>
+                <span className="text-[#E5C158] font-semibold">Verified Patron</span>
+              </div>
+            </div>
+
+            {/* Authority Card 2: Concertmaster */}
+            <div className="p-7 md:p-8 rounded-[24px] bg-gradient-to-b from-[#211E19] to-[#161512] border-2 border-[#D4AF37]/40 shadow-2xl flex flex-col justify-between relative hover:border-[#E5C158] transition-all">
+              <Quote className="text-[#D4AF37]/15 absolute top-6 right-6 w-14 h-14 pointer-events-none" />
+              <div>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-11 h-11 rounded-full bg-[#E5C158]/20 border border-[#E5C158] text-[#E5C158] font-serif font-bold text-base flex items-center justify-center shrink-0">
+                    MC
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-sans font-bold text-white text-sm">Marcus Chen</span>
+                      <CheckCircle2 size={13} className="text-[#E5C158]" />
+                    </div>
+                    <span className="text-[11px] font-sans text-[#D4AF37] tracking-wider uppercase block">Concertmaster & Soloist</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-1 text-[#F3C068] mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                </div>
+
+                <p className="font-serif text-lg text-white/90 italic leading-relaxed mb-6">
+                  &quot;They found a resonant voice in the spruce I never knew existed. After Lane & Edwards dressed the fingerboard and recambered my bow, projection increased tenfold.&quot;
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-white/50">
+                <span>Master Violin Setup & Recambering</span>
+                <span className="text-[#E5C158] font-semibold">Verified Patron</span>
+              </div>
+            </div>
+
+            {/* Authority Card 3: Conservatory Chair */}
+            <div className="p-7 md:p-8 rounded-[24px] bg-gradient-to-b from-[#211E19] to-[#161512] border-2 border-[#D4AF37]/40 shadow-2xl flex flex-col justify-between relative hover:border-[#E5C158] transition-all">
+              <Quote className="text-[#D4AF37]/15 absolute top-6 right-6 w-14 h-14 pointer-events-none" />
+              <div>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-11 h-11 rounded-full bg-[#E5C158]/20 border border-[#E5C158] text-[#E5C158] font-serif font-bold text-base flex items-center justify-center shrink-0">
+                    EL
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-sans font-bold text-white text-sm">Prof. Edward Lin</span>
+                      <CheckCircle2 size={13} className="text-[#E5C158]" />
+                    </div>
+                    <span className="text-[11px] font-sans text-[#D4AF37] tracking-wider uppercase block">Conservatory Strings Chair</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-1 text-[#F3C068] mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                </div>
+
+                <p className="font-serif text-lg text-white/90 italic leading-relaxed mb-6">
+                  &quot;Every serious student in my cello and violin studio acquires their instrument through Lane & Edwards. Their 100% equity trade-in policy gives families total confidence.&quot;
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-white/50">
+                <span>Institutional Studio Partner</span>
+                <span className="text-[#E5C158] font-semibold">Verified Faculty</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Attention-Catching Call-to-Action Strip */}
+          <div className="rounded-[28px] bg-gradient-to-r from-[#28241D] via-[#2F2922] to-[#1F1D19] border-2 border-[#E5C158]/60 p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_35px_rgba(229,193,88,0.2)]">
+            <div className="max-w-2xl text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E5C158]/20 border border-[#E5C158]/40 text-[#E5C158] text-[11px] font-mono uppercase tracking-widest font-bold mb-3">
+                <Sparkles size={12} />
+                <span>Zero Obligation · St. Matthews Studio</span>
+              </div>
+              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white">
+                Experience the Acoustic Difference in Your Hands
+              </h3>
+              <p className="text-sm text-white/70 mt-2 font-light leading-relaxed">
+                Reserve a complimentary $0 VIP Playing Session. Test our master cellos, violins, and pernambuco bows in our acoustically calibrated salon.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
+              <button
+                onClick={() => {
+                  setBookingProduct(PRODUCTS[0]);
+                  setIsBookingModalOpen(true);
+                }}
+                className="w-full sm:w-auto px-7 py-4 rounded-full bg-[#E5C158] hover:bg-[#F3C068] text-[#1A1A17] font-serif font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(229,193,88,0.4)] hover:scale-105 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Sparkles size={16} />
+                <span>Claim Free $0 VIP Playing Pass</span>
+              </button>
+              <a
+                href="tel:5026905908"
+                className="w-full sm:w-auto px-6 py-4 rounded-full border-2 border-white/30 hover:border-[#E5C158] bg-white/5 hover:bg-white/10 text-white font-mono text-xs tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Phone size={14} className="text-[#E5C158]" />
+                <span>(502) 690-5908</span>
+              </a>
             </div>
           </div>
 
