@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight, CheckCircle2 } from "lucide-react";
 
@@ -34,11 +35,27 @@ export function VirtuosoFolio({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Clean, Minimal Luxury Review Card */}
-      <div className="w-full h-full bg-[#1A1A17] text-white rounded-[24px] md:rounded-[30px] border border-white/10 shadow-2xl p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between relative">
+      {/* Clean, Minimal Luxury Review Card with Exotic Leather Print Background */}
+      <div className="w-full h-full bg-[#12110E] text-white rounded-[24px] md:rounded-[30px] border border-[#D4AF37]/20 shadow-2xl p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden group">
         
+        {/* Weird Exotic Leather Print Texture Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          <Image
+            src="/leather_print_bg.jpg"
+            alt="Artisanal exotic leather print texture"
+            fill
+            sizes="(max-width: 768px) 100vw, 40vw"
+            className="object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out opacity-85"
+            priority
+          />
+          {/* Warm Dark Vignette & Texture Tint for contrast and elegance */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#12110E]/85 via-[#12110E]/65 to-[#12110E]/90 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 rounded-[24px] md:rounded-[30px] border border-white/10 pointer-events-none" />
+        </div>
+
         {/* Top: 5 Stars & Minimal Verified Label */}
-        <div className="flex items-center justify-between pb-4 border-b border-white/10">
+        <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/15">
           <div className="flex items-center gap-2">
             <div className="flex text-[#D4AF37] gap-1">
               {[...Array(5)].map((_, i) => (
@@ -54,7 +71,7 @@ export function VirtuosoFolio({
         </div>
 
         {/* Center: The Quote (Spacious, Elegant, Breathing Room) */}
-        <div className="my-auto py-6 md:py-8">
+        <div className="relative z-10 my-auto py-6 md:py-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={reviewIndex}
@@ -63,7 +80,7 @@ export function VirtuosoFolio({
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <p className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[24px] xl:text-[26px] text-white/95 font-light italic leading-relaxed md:leading-[1.5] tracking-tight">
+              <p className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[24px] xl:text-[26px] text-white font-light italic leading-relaxed md:leading-[1.5] tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                 &ldquo;{current.quote}&rdquo;
               </p>
             </motion.div>
@@ -71,7 +88,7 @@ export function VirtuosoFolio({
         </div>
 
         {/* Bottom: Author & Endless Looping Controls (Zero Numbers) */}
-        <div className="pt-5 border-t border-white/10 flex items-end justify-between gap-4">
+        <div className="relative z-10 pt-5 border-t border-white/15 flex items-end justify-between gap-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={reviewIndex}
