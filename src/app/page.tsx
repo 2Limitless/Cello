@@ -386,7 +386,7 @@ function HomeContent() {
 
           {/* 30% RIGHT: High-Authority Interactive Reviews Pillar (Sticky) */}
           <div 
-            className="w-full lg:w-[30%] lg:sticky lg:top-32 h-auto min-h-[500px] lg:min-h-[580px] relative overflow-hidden rounded-[24px] md:rounded-[30px] border-2 border-[#D4AF37]/45 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_40px_rgba(212,175,55,0.18)] bg-gradient-to-b from-[#25221D] via-[#1B1A17] to-[#12110F] flex flex-col justify-between"
+            className="w-full lg:w-[30%] lg:sticky lg:top-20 xl:top-24 h-auto relative overflow-hidden rounded-[22px] md:rounded-[26px] border-2 border-[#D4AF37]/45 shadow-[0_15px_40px_rgba(0,0,0,0.5),0_0_30px_rgba(212,175,55,0.15)] bg-gradient-to-b from-[#24211D] via-[#1B1A17] to-[#12110F] flex flex-col justify-between"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -394,74 +394,74 @@ function HomeContent() {
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E5C158] to-transparent z-20" />
 
             {/* Background texture & warm tone */}
-            <Image src="/sheet_music.jpg" alt="Legacy" fill className="object-cover opacity-25 mix-blend-luminosity pointer-events-none" />
+            <Image src="/sheet_music.jpg" alt="Legacy" fill className="object-cover opacity-20 mix-blend-luminosity pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#12110F] via-[#1A1916]/95 to-[#24211D]/90 pointer-events-none" />
             
             {/* Ambient gold glow orb */}
-            <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#D4AF37]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-16 -right-16 w-44 h-44 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between">
+            <div className="relative z-10 p-5 md:p-6 h-full flex flex-col justify-between">
               
               {/* Header: Authority Verification Pill */}
               <div>
-                <div className="flex items-center justify-between gap-2 border-b border-[#D4AF37]/25 pb-4">
+                <div className="flex items-center justify-between gap-2 border-b border-[#D4AF37]/25 pb-3">
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#E5C158] animate-pulse shadow-[0_0_8px_#E5C158]" />
-                    <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-[#E5C158] font-bold">
+                    <span className="w-2 h-2 rounded-full bg-[#E5C158] animate-pulse shadow-[0_0_8px_#E5C158]" />
+                    <span className="text-[10px] md:text-[11px] font-mono tracking-[0.2em] uppercase text-[#E5C158] font-bold">
                       VERIFIED REVIEWS
                     </span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[10px] font-mono text-[#F4E8D1] font-semibold">
-                    <ShieldCheck size={12} className="text-[#E5C158]" />
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[9px] md:text-[10px] font-mono text-[#F4E8D1] font-semibold">
+                    <ShieldCheck size={11} className="text-[#E5C158]" />
                     <span>5.0 STAR GUILD</span>
                   </div>
                 </div>
 
                 {/* Rating Display */}
-                <div className="flex items-center justify-between mt-5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex gap-1 text-[#F3C068]">
+                <div className="flex items-center justify-between mt-3">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-0.5 text-[#F3C068]">
                       {[...Array(5)].map((_, idx) => (
-                        <Star key={idx} size={15} fill="currentColor" className="drop-shadow-[0_0_5px_rgba(243,192,104,0.6)]" />
+                        <Star key={idx} size={14} fill="currentColor" className="drop-shadow-[0_0_4px_rgba(243,192,104,0.6)]" />
                       ))}
                     </div>
                     <span className="text-xs font-mono font-bold text-white tracking-wider">5.0 / 5.0</span>
                   </div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#E5C158]/90 bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-[#E5C158]/90 bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
                     {testimonials[reviewIndex].tag}
                   </span>
                 </div>
               </div>
 
               {/* Quote Area */}
-              <div className="my-6 relative flex flex-col justify-center min-h-[220px]">
-                <Quote className="text-[#D4AF37]/15 absolute -top-4 -right-2 w-16 h-16 pointer-events-none" />
+              <div className="my-3 relative flex flex-col justify-center min-h-[140px] md:min-h-[150px]">
+                <Quote className="text-[#D4AF37]/15 absolute -top-2 -right-1 w-12 h-12 pointer-events-none" />
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={reviewIndex}
-                    initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+                    initial={{ opacity: 0, y: 10, filter: "blur(3px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
-                    transition={{ duration: 0.45, ease: "easeInOut" }}
+                    exit={{ opacity: 0, y: -10, filter: "blur(3px)" }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
                     className="flex flex-col justify-center"
                   >
-                    <p className="font-serif text-lg md:text-xl lg:text-[22px] text-white/95 italic leading-snug mb-5">
+                    <p className="font-serif text-base md:text-lg text-white/95 italic leading-snug mb-3">
                       &quot;{testimonials[reviewIndex].quote}&quot;
                     </p>
-                    <div className="border-l-2 border-[#E5C158] pl-3.5 py-0.5">
-                      <div className="flex items-center gap-2">
-                        <p className="font-sans font-bold text-sm text-white tracking-wide">{testimonials[reviewIndex].author}</p>
-                        <CheckCircle2 size={13} className="text-[#E5C158] shrink-0" />
+                    <div className="border-l-2 border-[#E5C158] pl-3 py-0.5">
+                      <div className="flex items-center gap-1.5">
+                        <p className="font-sans font-bold text-xs md:text-sm text-white tracking-wide">{testimonials[reviewIndex].author}</p>
+                        <CheckCircle2 size={12} className="text-[#E5C158] shrink-0" />
                       </div>
-                      <p className="font-sans text-[11px] tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">{testimonials[reviewIndex].role}</p>
-                      <p className="font-mono text-[9px] text-white/50 tracking-tight mt-1">{testimonials[reviewIndex].credential}</p>
+                      <p className="font-sans text-[10px] md:text-[11px] tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">{testimonials[reviewIndex].role}</p>
+                      <p className="font-mono text-[9px] text-white/50 tracking-tight mt-0.5">{testimonials[reviewIndex].credential}</p>
                     </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
               {/* Footer Controls: Dots + Chevrons + VIP Session trigger */}
-              <div className="space-y-4 pt-4 border-t border-white/10 z-20">
+              <div className="space-y-3 pt-3 border-t border-white/10 z-20">
                 <div className="flex items-center justify-between">
                   {/* Progress dots */}
                   <div className="flex items-center gap-1.5">
@@ -473,7 +473,7 @@ function HomeContent() {
                           setReviewIndex(i);
                         }} 
                         aria-label={`Go to review ${i + 1}`}
-                        className={`h-[4px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-7 bg-[#E5C158]' : 'w-2 bg-white/20 hover:bg-white/40'}`} 
+                        className={`h-[3px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-6 bg-[#E5C158]' : 'w-2 bg-white/20 hover:bg-white/40'}`} 
                       />
                     ))}
                   </div>
@@ -488,7 +488,7 @@ function HomeContent() {
                       className="w-7 h-7 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
                       title="Previous Review"
                     >
-                      <ChevronLeft size={14} />
+                      <ChevronLeft size={13} />
                     </button>
                     <button
                       onClick={(e) => {
@@ -498,7 +498,7 @@ function HomeContent() {
                       className="w-7 h-7 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
                       title="Next Review"
                     >
-                      <ChevronRight size={14} />
+                      <ChevronRight size={13} />
                     </button>
                   </div>
                 </div>
@@ -509,7 +509,7 @@ function HomeContent() {
                     setBookingProduct(PRODUCTS[0]);
                     setIsBookingModalOpen(true);
                   }}
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#E5C158]/15 hover:bg-[#E5C158]/25 border border-[#E5C158]/50 text-[#F4E8D1] text-[11px] font-serif tracking-wider uppercase flex items-center justify-center gap-2 transition-all hover:scale-[1.02] cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#E5C158]/15 hover:bg-[#E5C158]/25 border border-[#E5C158]/50 text-[#F4E8D1] text-[10px] md:text-[11px] font-serif tracking-wider uppercase flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer"
                 >
                   <Sparkles size={12} className="text-[#E5C158]" />
                   <span>Audition in Studio ($0 Pass)</span>
