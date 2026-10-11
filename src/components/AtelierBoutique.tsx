@@ -1,0 +1,364 @@
+"use client";
+
+import React, { useState, useMemo } from 'react';
+import Image from 'next/image';
+import { Search, Plus, Eye, ShieldCheck, Check, Calendar } from 'lucide-react';
+import { PRODUCTS, Product } from '@/data/products';
+import { useCart } from '@/context/CartContext';
+
+interface AtelierBoutiqueProps {
+  initialCategory?: string;
+}
+
+export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
+  const {
+    addToCart,
+    setSelectedProduct,
+    setIsCartOpen,
+    totalItems,
+    setBookingProduct,
+    setIsBookingModalOpen
+  } = useCart();
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState<string>(initialCategory || 'all');
+  const [activeInstrumentType, setActiveInstrumentType] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
+  const [recentlyAddedId, setRecentlyAddedId] = useState<string | null>(null);
+
+  const categories = [
+    { id: 'all', label: 'All Acquisitions' },
+    { id: 'instruments', label: 'Master Instruments' },
+    { id: 'bows', label: 'Fine Bows' },
+    { id: 'strings', label: 'Concert Strings' },
+    { id: 'cases', label: 'Cases & Travel' },
+    { id: 'accessories', label: 'Luthier Care' },
+  ];
+
+  const instrumentTypes = [
+    { id: 'all', label: 'All Families' },
+    { id: 'violin', label: 'Violin' },
+    { id: 'viola', label: 'Viola' },
+    { id: 'cello', label: 'Cello' },
+  ];
+
+  const filteredProducts = useMemo(() => {
+    return PRODUCTS.filter((product) => {
+      // Category filter
+      if (activeCategory !== 'all' && product.category !== activeCategory) {
+        return false;
+      }
+
+      // Instrument type filter
+      if (activeInstrumentType !== 'all') {
+        if (product.instrumentType && product.instrumentType !== activeInstrumentType && product.instrumentType !== 'all') {
+          return false;
+        }
+      }
+
+      // Search query filter
+      if (searchQuery.trim() !== '') {
+        const q = searchQuery.toLowerCase();
+        const matchesName = product.name.toLowerCase().includes(q);
+        const matchesSubtitle = product.subtitle.toLowerCase().includes(q);
+        const matchesOrigin = product.origin.toLowerCase().includes(q);
+        const matchesMaker = product.maker?.toLowerCase().includes(q);
+        const matchesWood = product.tonewood?.toLowerCase().includes(q);
+        if (!matchesName && !matchesSubtitle && !matchesOrigin && !matchesMaker && !matchesWood) {
+          return false;
+        }
+      }
+
+      return true;
+    }).sort((a, b) => {
+      if (sortBy === 'price-asc') return a.price - b.price;
+      if (sortBy === 'price-desc') return b.price - a.price;
+      return 0; // featured order in dataset
+    });
+  }, [activeCategory, activeInstrumentType, searchQuery, sortBy]);
+
+  const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToCart(product, 1);
+    setRecentlyAddedId(product.id);
+    setTimeout(() => setRecentlyAddedId(null), 1500);
+  };
+
+  return (
+    <section id="boutique" className="w-full bg-[#FAF9F5] text-[#1A1A17] pt-12 pb-24 border-t-4 border-[#1A1A17]">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-12">
+        {/* Editorial Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16 pb-12 border-b-2 border-[#1A1A17]">
+          <div>
+            <div className="flex items-center gap-4 text-[#9B7E58] mb-3">
+              <span className="text-[11px] tracking-[0.3em] font-bold uppercase">Volume 04 // Private Acquisitions</span>
+              <div className="h-[1px] w-20 bg-[#9B7E58]" />
+            </div>
+            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-[#1A1A17] tracking-tight">
+              The Atelier Boutique
+            </h2>
+            <p className="font-serif italic text-xl md:text-2xl text-[#1A1A17]/80 mt-4 max-w-2xl font-light">
+              Master instruments, pernambuco bows, and concert fittings—rigorously vetted and acoustically balanced in our Louisville workshop.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full lg:w-auto">
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="px-8 py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-xl flex items-center gap-3 cursor-pointer"
+            >
+              <span>View Atelier Bag</span>
+              <span className="w-5 h-5 rounded-full bg-[#9B7E58] text-white flex items-center justify-center text-[10px] font-mono">
+                {totalItems}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Filter Controls Suite */}
+        <div className="space-y-6 mb-12">
+          {/* Search + Sort Bar */}
+          <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+            {/* Search Input */}
+            <div className="relative flex-1 max-w-md">
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1A1A17]/40" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by maker, tonewood, or model..."
+                className="w-full pl-12 pr-4 py-3.5 bg-white border-2 border-[#1A1A17] text-sm outline-none focus:border-[#9B7E58] shadow-[4px_4px_0px_#1A1A17] transition-all"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#1A1A17]/50 hover:text-[#1A1A17]"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Sort Dropdown */}
+            <div className="flex items-center gap-3 self-end md:self-auto">
+              <span className="text-xs uppercase tracking-widest text-[#1A1A17]/60 font-bold hidden sm:inline">Sort:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as 'featured' | 'price-asc' | 'price-desc')}
+                className="bg-white border-2 border-[#1A1A17] px-4 py-3 text-xs uppercase tracking-wider font-bold shadow-[4px_4px_0px_#1A1A17] outline-none cursor-pointer"
+              >
+                <option value="featured">Featured Curation</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="price-asc">Price: Low to High</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-[#1A1A17]/10">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`px-5 py-2.5 text-xs uppercase tracking-[0.15em] font-bold transition-all cursor-pointer ${
+                    isActive
+                      ? 'bg-[#1A1A17] text-white shadow-[4px_4px_0px_#9B7E58]'
+                      : 'bg-white border border-[#1A1A17]/20 text-[#1A1A17] hover:border-[#1A1A17]'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Instrument Family Secondary Filters (when on All or Instruments or Bows) */}
+          {(activeCategory === 'all' || activeCategory === 'instruments' || activeCategory === 'bows') && (
+            <div className="flex items-center gap-3 text-xs">
+              <span className="text-[11px] uppercase tracking-wider font-bold text-[#9B7E58]">Filter Family:</span>
+              <div className="flex gap-2">
+                {instrumentTypes.map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => setActiveInstrumentType(t.id)}
+                    className={`px-3 py-1 text-[11px] uppercase tracking-wider font-bold transition-colors cursor-pointer ${
+                      activeInstrumentType === t.id
+                        ? 'bg-[#9B7E58] text-white'
+                        : 'text-[#1A1A17]/70 hover:text-[#1A1A17] underline underline-offset-4'
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Product Grid */}
+        {filteredProducts.length === 0 ? (
+          <div className="py-24 text-center border-2 border-dashed border-[#1A1A17]/20 p-12">
+            <h4 className="font-serif text-3xl text-[#1A1A17] mb-3">No matching acquisitions found</h4>
+            <p className="text-[#1A1A17]/60 max-w-md mx-auto text-sm mb-6">
+              Our workshop curates fine instruments continuously. Contact our luthiers to request a custom acquisition or adjustment.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setActiveCategory('all');
+                setActiveInstrumentType('all');
+              }}
+              className="px-6 py-3 bg-[#1A1A17] text-white uppercase text-xs tracking-widest font-bold"
+            >
+              Reset Filters
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product) => {
+              const isAdded = recentlyAddedId === product.id;
+              return (
+                <div
+                  key={product.id}
+                  onClick={() => setSelectedProduct(product)}
+                  className="group bg-white border-2 border-[#1A1A17] shadow-[8px_8px_0px_#1A1A17] flex flex-col justify-between overflow-hidden cursor-pointer hover:-translate-y-1 transition-all duration-300"
+                >
+                  {/* Image container */}
+                  <div className="relative aspect-[4/3] w-full bg-[#1A1A17] overflow-hidden border-b-2 border-[#1A1A17]">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-[#1A1A17]/10 group-hover:bg-transparent transition-colors" />
+
+                    {/* Top Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-10">
+                      {product.badge ? (
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] tracking-[0.25em] uppercase font-bold">
+                          <span className="w-1.5 h-1.5 bg-[#9B7E58]" />
+                          {product.badge}
+                        </div>
+                      ) : <div />}
+
+                      <div className="px-2.5 py-1 bg-[#FAF9F5] border border-[#1A1A17] text-[#1A1A17] text-[10px] uppercase tracking-widest font-bold">
+                        {product.origin.split(',')[0]}
+                      </div>
+                    </div>
+
+                    {/* Quick Examine Button Overlay on Hover */}
+                    <div className="absolute inset-0 bg-[#1A1A17]/40 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="px-6 py-3 bg-white text-[#1A1A17] uppercase tracking-[0.2em] text-xs font-bold shadow-xl flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <Eye size={14} /> Examine Specs
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-between space-y-6">
+                    <div>
+                      <div className="flex justify-between items-start gap-4">
+                        <h4 className="font-serif text-2xl md:text-3xl text-[#1A1A17] leading-tight group-hover:text-[#9B7E58] transition-colors">
+                          {product.name}
+                        </h4>
+                      </div>
+                      <p className="font-serif italic text-sm text-[#9B7E58] mt-1">
+                        {product.subtitle}
+                      </p>
+                      <p className="text-[#1A1A17]/70 text-sm leading-relaxed mt-4 font-light line-clamp-2">
+                        {product.shortDesc}
+                      </p>
+                    </div>
+
+                    {/* Card Footer: Price & Add to Bag */}
+                    <div className="pt-6 border-t-2 border-[#1A1A17]/10 flex justify-between items-center">
+                      <div>
+                        <span className="text-[10px] tracking-widest uppercase text-[#1A1A17]/50 block font-bold">Investment</span>
+                        <span className="font-serif text-3xl font-bold text-[#1A1A17]">
+                          ${product.price.toLocaleString()}
+                        </span>
+                      </div>
+
+                      {product.category === 'instruments' ? (
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setBookingProduct(product);
+                              setIsBookingModalOpen(true);
+                            }}
+                            className="px-4 py-3 bg-[#1A1A17] text-white hover:bg-[#9B7E58] uppercase tracking-[0.15em] text-[11px] font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                          >
+                            <Calendar size={13} className="text-[#9B7E58]" />
+                            <span>Reserve Trial (Free)</span>
+                          </button>
+                          <button
+                            onClick={(e) => handleQuickAdd(product, e)}
+                            title="Add to Online Cart"
+                            className="p-3 bg-white border-2 border-[#1A1A17] text-[#1A1A17] hover:bg-[#1A1A17] hover:text-white transition-all shadow-sm flex items-center justify-center cursor-pointer"
+                          >
+                            <Plus size={14} />
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={(e) => handleQuickAdd(product, e)}
+                          className={`px-6 py-3 uppercase tracking-[0.2em] text-xs font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer ${
+                            isAdded
+                              ? 'bg-emerald-800 text-white'
+                              : 'bg-[#1A1A17] text-white hover:bg-[#9B7E58]'
+                          }`}
+                        >
+                          {isAdded ? (
+                            <>
+                              <Check size={14} /> Added
+                            </>
+                          ) : (
+                            <>
+                              <Plus size={14} /> Add to Bag
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* 100% Equity Banner */}
+        <div className="mt-20 bg-[#1A1A17] text-white p-10 md:p-16 border-4 border-[#9B7E58] relative overflow-hidden shadow-2xl">
+          <ShieldCheck size={360} className="absolute -bottom-20 -right-20 text-white/[0.03] pointer-events-none" />
+          <div className="relative z-10 max-w-3xl">
+            <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#9B7E58] mb-4 block">
+              The Lane & Edwards Guarantee
+            </span>
+            <h3 className="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight">
+              Every instrument you acquire protects <span className="italic text-[#9B7E58]">100% of your equity</span>.
+            </h3>
+            <p className="text-white/80 text-base md:text-lg leading-relaxed font-light mb-8">
+              When you or your student are ready to advance to a master instrument, every dollar paid towards your current Lane & Edwards instrument is credited directly toward your new voice. Lutherie should nurture your artistic journey, not diminish it.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => {
+                  setActiveCategory('instruments');
+                  const el = document.getElementById('boutique');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-8 py-4 bg-[#9B7E58] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-white hover:text-[#1A1A17] transition-colors cursor-pointer"
+              >
+                Browse Master Instruments
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

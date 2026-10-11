@@ -1,0 +1,230 @@
+"use client";
+
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { X, Check, ShieldCheck, Sparkles, Plus, Calendar } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+
+export function ProductDetailModal() {
+  const {
+    selectedProduct,
+    setSelectedProduct,
+    addToCart,
+    setBookingProduct,
+    setIsBookingModalOpen
+  } = useCart();
+
+  if (!selectedProduct) return null;
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[250] flex items-center justify-center p-0 md:p-6 lg:p-12">
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedProduct(null)}
+          className="fixed inset-0 bg-[#1A1A17]/70 backdrop-blur-md cursor-pointer"
+        />
+
+        {/* Modal Window */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          transition={{ type: "spring", damping: 25, stiffness: 280 }}
+          className="relative z-10 w-full max-w-5xl max-h-[92vh] bg-[#FAF9F5] border-4 border-[#1A1A17] shadow-2xl flex flex-col lg:flex-row overflow-hidden md:rounded-[32px]"
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setSelectedProduct(null)}
+            className="absolute top-6 right-6 z-30 w-12 h-12 rounded-full bg-[#1A1A17] text-white flex items-center justify-center hover:bg-[#9B7E58] transition-colors cursor-pointer shadow-xl"
+            aria-label="Close"
+          >
+            <X size={20} />
+          </button>
+
+          {/* Left: Image Showcase */}
+          <div className="lg:w-1/2 h-[340px] lg:h-auto relative bg-[#1A1A17] shrink-0 overflow-hidden">
+            <Image
+              src={selectedProduct.image}
+              alt={selectedProduct.name}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A17] via-transparent to-transparent opacity-80" />
+
+            <div className="absolute bottom-6 left-6 right-6 text-white z-10">
+              {selectedProduct.badge && (
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] tracking-[0.25em] uppercase font-bold mb-3">
+                  <span className="w-1.5 h-1.5 bg-[#9B7E58]" />
+                  {selectedProduct.badge}
+                </div>
+              )}
+              <p className="text-xs uppercase tracking-[0.2em] text-[#9B7E58] font-bold">
+                {selectedProduct.origin}
+              </p>
+              <h4 className="font-serif text-3xl md:text-4xl text-white mt-1">
+                ${selectedProduct.price.toLocaleString()}
+              </h4>
+            </div>
+          </div>
+
+          {/* Right: Detailed Content */}
+          <div className="lg:w-1/2 flex-1 p-8 md:p-12 overflow-y-auto no-scrollbar flex flex-col justify-between space-y-8">
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs uppercase tracking-[0.25em] text-[#9B7E58] font-bold">
+                  Atelier Catalog // {selectedProduct.category.toUpperCase()}
+                </span>
+                <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] mt-2 leading-tight">
+                  {selectedProduct.name}
+                </h3>
+                <p className="font-serif italic text-lg md:text-xl text-[#9B7E58] mt-1">
+                  {selectedProduct.subtitle}
+                </p>
+              </div>
+
+              {/* Description */}
+              <p className="text-[#1A1A17]/80 text-base md:text-lg leading-relaxed font-light">
+                {selectedProduct.fullDesc}
+              </p>
+
+              {/* Tone Profile Bar Chart if instrument */}
+              {selectedProduct.toneProfile && (
+                <div className="bg-[#1A1A17] text-white p-6 shadow-xl space-y-4">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                    <span className="text-xs uppercase tracking-[0.25em] text-[#9B7E58] font-bold flex items-center gap-2">
+                      <Sparkles size={14} /> Acoustic Tone Architecture
+                    </span>
+                    <span className="text-[10px] text-white/50 font-mono">Calibrated in Shop</span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {[
+                      { label: "Warmth & Depth", val: selectedProduct.toneProfile.warmth },
+                      { label: "Hall Projection", val: selectedProduct.toneProfile.projection },
+                      { label: "Overtone Brilliance", val: selectedProduct.toneProfile.brilliance },
+                      { label: "Bow Responsiveness", val: selectedProduct.toneProfile.responsiveness },
+                    ].map((item, idx) => (
+                      <div key={idx} className="space-y-1">
+                        <div className="flex justify-between text-xs font-mono text-white/80">
+                          <span>{item.label}</span>
+                          <span className="text-[#9B7E58] font-bold">{item.val}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-white/10 overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${item.val}%` }}
+                            transition={{ duration: 0.8, delay: 0.1 * idx }}
+                            className="h-full bg-gradient-to-r from-[#9B7E58] to-amber-200"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Provenance & Specs Table */}
+              <div className="border-t-2 border-[#1A1A17] pt-6 space-y-3 text-sm">
+                <span className="text-xs uppercase tracking-[0.25em] text-[#9B7E58] font-bold block mb-3">
+                  Luthier Specifications
+                </span>
+                {selectedProduct.maker && (
+                  <div className="flex justify-between py-1.5 border-b border-[#1A1A17]/10">
+                    <span className="text-[#1A1A17]/60">Maker:</span>
+                    <span className="font-medium text-[#1A1A17]">{selectedProduct.maker}</span>
+                  </div>
+                )}
+                {selectedProduct.tonewood && (
+                  <div className="flex justify-between py-1.5 border-b border-[#1A1A17]/10">
+                    <span className="text-[#1A1A17]/60">Selected Tonewood:</span>
+                    <span className="font-medium text-[#1A1A17] text-right max-w-xs">{selectedProduct.tonewood}</span>
+                  </div>
+                )}
+                {selectedProduct.varnish && (
+                  <div className="flex justify-between py-1.5 border-b border-[#1A1A17]/10">
+                    <span className="text-[#1A1A17]/60">Varnish Formulation:</span>
+                    <span className="font-medium text-[#1A1A17] text-right max-w-xs">{selectedProduct.varnish}</span>
+                  </div>
+                )}
+                {selectedProduct.setup && (
+                  <div className="flex justify-between py-1.5 border-b border-[#1A1A17]/10">
+                    <span className="text-[#1A1A17]/60">Acoustic Setup:</span>
+                    <span className="font-medium text-[#1A1A17] text-right max-w-xs">{selectedProduct.setup}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Highlights Checklist */}
+              <div className="space-y-2 pt-2">
+                {selectedProduct.features.map((feat, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm text-[#1A1A17]/80">
+                    <div className="w-5 h-5 rounded-full bg-[#9B7E58] text-white flex items-center justify-center shrink-0 mt-0.5">
+                      <Check size={12} />
+                    </div>
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Guarantee Banner */}
+              <div className="p-4 bg-white border-2 border-[#1A1A17] flex items-center gap-4">
+                <ShieldCheck size={28} className="text-[#9B7E58] shrink-0" />
+                <p className="text-xs text-[#1A1A17]/80 font-light leading-snug">
+                  <strong className="font-bold text-[#1A1A17]">100% Lifetime Equity Protection:</strong> Any instrument acquired maintains full purchase value in trade towards an instrument of greater value.
+                </p>
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="pt-6 border-t-2 border-[#1A1A17] flex flex-col sm:flex-row gap-4">
+              {selectedProduct.category === 'instruments' ? (
+                <>
+                  <button
+                    onClick={() => {
+                      const p = selectedProduct;
+                      setSelectedProduct(null);
+                      setBookingProduct(p);
+                      setIsBookingModalOpen(true);
+                    }}
+                    className="flex-1 py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-xl flex items-center justify-center gap-3 cursor-pointer"
+                  >
+                    <Calendar size={16} className="text-[#9B7E58]" />
+                    <span>Reserve In-Shop Playing Session (Free)</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      addToCart(selectedProduct, 1);
+                      setSelectedProduct(null);
+                    }}
+                    className="py-5 px-6 border-2 border-[#1A1A17] text-[#1A1A17] uppercase tracking-[0.15em] text-xs font-bold hover:bg-[#1A1A17]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <Plus size={15} />
+                    <span>Buy Online</span>
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    addToCart(selectedProduct, 1);
+                    setSelectedProduct(null);
+                  }}
+                  className="w-full py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-xl flex items-center justify-center gap-3 cursor-pointer"
+                >
+                  <Plus size={16} />
+                  <span>Add to Atelier Bag — ${selectedProduct.price.toLocaleString()}</span>
+                </button>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+}
