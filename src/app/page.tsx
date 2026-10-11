@@ -337,12 +337,15 @@ function HomeContent() {
                 <div className={`grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[250px]`}>
                   {bentoItems.filter(i => i.category === category).map((item) => {
                     const Icon = item.icon;
+                    const isLarge = item.rowSpan.includes('row-span-2');
                     return (
                       <motion.button
                         layoutId={`card-${item.id}`}
                         key={item.id}
                         onClick={() => setSelectedIntent(item.id)}
-                        className={`group overflow-hidden rounded-[24px] md:rounded-[30px] text-left flex flex-col justify-end p-5 md:p-8 lg:p-10 border border-[#1A1A17]/10 bg-white shadow-lg shadow-[#1A1A17]/5 relative cursor-pointer ${item.colSpan} ${item.rowSpan}`}
+                        className={`group overflow-hidden rounded-[24px] md:rounded-[30px] text-left flex flex-col justify-between border border-[#1A1A17]/10 bg-white shadow-lg shadow-[#1A1A17]/5 relative cursor-pointer ${
+                          isLarge ? 'p-5 md:p-8 lg:p-9' : 'p-4 md:p-5 lg:p-6'
+                        } ${item.colSpan} ${item.rowSpan}`}
                       >
                         {item.image && (
                           <motion.div layoutId={`image-container-${item.id}`} className="absolute inset-0">
@@ -356,22 +359,46 @@ function HomeContent() {
                           <motion.div layoutId={`image-container-${item.id}`} className="absolute inset-0 bg-gradient-to-br from-[#9B7E58]/5 to-[#9B7E58]/10 group-hover:from-[#9B7E58]/10 group-hover:to-[#9B7E58]/20 transition-colors duration-700" />
                         )}
 
-                        <motion.div layoutId={`content-container-${item.id}`} className="relative z-10 w-full flex flex-col justify-between h-full min-h-[120px]">
+                        <motion.div layoutId={`content-container-${item.id}`} className="relative z-10 w-full flex flex-col justify-between h-full">
                           <div className="flex justify-end items-center w-full">
-                            <motion.div layoutId={`icon-${item.id}`} className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center backdrop-blur-md border ${item.image ? 'bg-black/40 border-white/20 text-white shadow-xl' : 'bg-[#1A1A17]/5 border-[#1A1A17]/10 text-[#9B7E58]'}`}>
-                              <Icon size={16} />
+                            <motion.div 
+                              layoutId={`icon-${item.id}`} 
+                              className={`rounded-full flex items-center justify-center backdrop-blur-md border ${
+                                isLarge ? 'w-10 h-10 md:w-12 md:h-12' : 'w-8 h-8 md:w-10 md:h-10'
+                              } ${item.image ? 'bg-black/40 border-white/20 text-white shadow-xl' : 'bg-[#1A1A17]/5 border-[#1A1A17]/10 text-[#9B7E58]'}`}
+                            >
+                              <Icon size={isLarge ? 16 : 14} />
                             </motion.div>
                           </div>
-                          <div className="mt-8">
-                            <motion.h3 layoutId={`title-${item.id}`} className={`font-serif text-2xl md:text-3xl xl:text-4xl mb-2 md:mb-4 leading-tight ${item.image ? 'text-white drop-shadow-lg' : 'text-[#1A1A17]'}`}>
+
+                          <div className="mt-auto pt-2">
+                            <motion.h3 
+                              layoutId={`title-${item.id}`} 
+                              className={`font-serif leading-tight ${
+                                isLarge 
+                                  ? 'text-2xl md:text-3xl xl:text-4xl mb-2 md:mb-3' 
+                                  : 'text-lg md:text-xl xl:text-2xl mb-1.5 md:mb-2'
+                              } ${item.image ? 'text-white drop-shadow-lg' : 'text-[#1A1A17]'}`}
+                            >
                               {item.title}
                             </motion.h3>
-                            <div className="flex justify-between items-end w-full">
-                              <motion.p layoutId={`subtitle-${item.id}`} className={`font-sans text-[9px] md:text-xs tracking-[0.2em] uppercase max-w-[70%] ${item.image ? 'text-white/80 font-medium drop-shadow-md' : 'text-[#1A1A17]/60'}`}>
+
+                            <div className="flex justify-between items-end w-full gap-2">
+                              <motion.p 
+                                layoutId={`subtitle-${item.id}`} 
+                                className={`font-sans text-[9px] md:text-[11px] tracking-[0.2em] uppercase truncate max-w-[70%] ${
+                                  item.image ? 'text-white/80 font-medium drop-shadow-md' : 'text-[#1A1A17]/60'
+                                }`}
+                              >
                                 {item.subtitle}
                               </motion.p>
-                              <div className={`p-2 md:p-3 rounded-full backdrop-blur-sm transition-all duration-500 shrink-0 ${item.image ? 'bg-white/10 group-hover:bg-white text-white group-hover:text-[#1A1A17]' : 'bg-[#1A1A17]/5 group-hover:bg-[#9B7E58] text-[#9B7E58] group-hover:text-white'}`}>
-                                <ArrowRight size={14} className="-rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                              
+                              <div className={`p-1.5 md:p-2 rounded-full backdrop-blur-sm transition-all duration-500 shrink-0 ${
+                                item.image 
+                                  ? 'bg-white/10 group-hover:bg-white text-white group-hover:text-[#1A1A17]' 
+                                  : 'bg-[#1A1A17]/5 group-hover:bg-[#9B7E58] text-[#9B7E58] group-hover:text-white'
+                              }`}>
+                                <ArrowRight size={13} className="-rotate-45 group-hover:rotate-0 transition-transform duration-500" />
                               </div>
                             </div>
                           </div>
