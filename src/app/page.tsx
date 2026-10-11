@@ -322,8 +322,19 @@ function HomeContent() {
       {/* The Asymmetric Split Hub */}
       <section className={`w-full flex-1 flex flex-col pt-24 md:pt-32 px-4 md:px-12 pb-16 md:pb-24 transition-all duration-700 ${selectedIntent ? 'opacity-0 scale-95 pointer-events-none blur-md' : 'opacity-100 scale-100 blur-0'}`}>
         
-        <div className="text-left md:text-center mb-8 md:mb-12 pl-2 md:pl-0">
+        <div className="text-left md:text-center mb-6 md:mb-12 pl-2 md:pl-0">
           <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">How may we assist you today?</h1>
+        </div>
+
+        {/* Mobile Featured Review: Immediately visible upon arrival on mobile */}
+        <div className="lg:hidden w-full max-w-[1600px] mx-auto mb-8">
+          <VirtuosoFolio
+            testimonials={testimonials}
+            reviewIndex={reviewIndex}
+            setReviewIndex={setReviewIndex}
+            handleTouchStart={handleTouchStart}
+            handleTouchEnd={handleTouchEnd}
+          />
         </div>
 
         {/* 70/30 Split Layout */}
@@ -416,19 +427,6 @@ function HomeContent() {
                     );
                   })}
                 </div>
-
-                {/* Mobile / Narrow Viewport: Render Folio immediately after Volume 01 */}
-                {category === 'Instruments & Sales' && (
-                  <div className="lg:hidden mt-8">
-                    <VirtuosoFolio
-                      testimonials={testimonials}
-                      reviewIndex={reviewIndex}
-                      setReviewIndex={setReviewIndex}
-                      handleTouchStart={handleTouchStart}
-                      handleTouchEnd={handleTouchEnd}
-                    />
-                  </div>
-                )}
               </div>
             ))}
           </div>

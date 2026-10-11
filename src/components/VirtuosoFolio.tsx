@@ -31,12 +31,12 @@ export function VirtuosoFolio({
 
   return (
     <div
-      className="w-full h-[390px] md:h-[524px] lg:sticky lg:top-24 select-text flex flex-col"
+      className="w-full h-auto min-h-[340px] md:min-h-[380px] lg:h-[524px] lg:sticky lg:top-24 select-text flex flex-col"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* Minimalist Swiss-Luxury Architectural Card */}
-      <div className="w-full h-full bg-white rounded-[24px] md:rounded-[30px] border border-[#1A1A17]/15 shadow-[0_8px_30px_rgba(26,26,23,0.04)] p-6 md:p-9 lg:p-11 flex flex-col justify-between relative overflow-hidden">
+      <div className="w-full h-full bg-white rounded-[22px] md:rounded-[30px] border border-[#1A1A17]/15 shadow-[0_8px_30px_rgba(26,26,23,0.04)] p-5 sm:p-7 md:p-9 lg:p-11 flex flex-col justify-between relative overflow-hidden">
         
         {/* Top Header: Pure Editorial Tracking */}
         <div className="relative z-10 flex items-center justify-between gap-4 border-b border-[#1A1A17]/10 pb-4">
