@@ -313,12 +313,21 @@ function HomeContent() {
       {/* The Asymmetric Split Hub */}
       <section className={`w-full flex-1 flex flex-col pt-24 md:pt-32 px-4 md:px-12 pb-16 md:pb-24 transition-all duration-700 ${selectedIntent ? 'opacity-0 scale-95 pointer-events-none blur-md' : 'opacity-100 scale-100 blur-0'}`}>
         
-        <div className="text-left md:text-center mb-8 md:mb-12 pl-2 md:pl-0">
+        <div className="text-left md:text-center mb-6 md:mb-8 pl-2 md:pl-0">
           <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">How may we assist you today?</h1>
+          <div className="mt-2.5 inline-flex items-center justify-center gap-2.5 text-xs text-[#1A1A17]/70 font-sans">
+            <span className="flex items-center gap-1 text-[#9B7E58] font-bold">
+              <Star size={13} fill="currentColor" /> 5.0 Star Rated
+            </span>
+            <span>·</span>
+            <span>120+ Soloist & Guild Reviews</span>
+            <span className="hidden sm:inline">·</span>
+            <span className="hidden sm:inline">Est. 1985 Louisville, KY</span>
+          </div>
         </div>
 
         {/* 70/30 Split Layout */}
-        <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-6 md:gap-8">
+        <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-6 md:gap-8 items-start">
           
           {/* 70% LEFT: Scrollable Navigation Sections */}
           <div className="w-full lg:w-[70%] flex flex-col gap-16 lg:gap-24 pb-12">
@@ -384,9 +393,9 @@ function HomeContent() {
             ))}
           </div>
 
-          {/* 30% RIGHT: High-Authority Interactive Reviews Pillar (Sticky) */}
+          {/* 30% RIGHT: High-Authority Interactive Reviews Pillar (Compact & Non-stretching) */}
           <div 
-            className="w-full lg:w-[30%] lg:sticky lg:top-20 xl:top-24 h-auto relative overflow-hidden rounded-[22px] md:rounded-[26px] border-2 border-[#D4AF37]/45 shadow-[0_15px_40px_rgba(0,0,0,0.5),0_0_30px_rgba(212,175,55,0.15)] bg-gradient-to-b from-[#24211D] via-[#1B1A17] to-[#12110F] flex flex-col justify-between"
+            className="w-full lg:w-[30%] lg:sticky lg:top-24 self-start relative overflow-hidden rounded-[20px] md:rounded-[24px] border-2 border-[#D4AF37]/50 shadow-[0_15px_35px_rgba(0,0,0,0.5),0_0_25px_rgba(212,175,55,0.15)] bg-gradient-to-b from-[#24211D] via-[#1B1A17] to-[#12110F]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -398,70 +407,68 @@ function HomeContent() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#12110F] via-[#1A1916]/95 to-[#24211D]/90 pointer-events-none" />
             
             {/* Ambient gold glow orb */}
-            <div className="absolute -top-16 -right-16 w-44 h-44 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#D4AF37]/15 rounded-full blur-2xl pointer-events-none" />
 
-            <div className="relative z-10 p-5 md:p-6 h-full flex flex-col justify-between">
+            <div className="relative z-10 p-4 sm:p-5 flex flex-col gap-3">
               
-              {/* Header: Authority Verification Pill */}
-              <div>
-                <div className="flex items-center justify-between gap-2 border-b border-[#D4AF37]/25 pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#E5C158] animate-pulse shadow-[0_0_8px_#E5C158]" />
-                    <span className="text-[10px] md:text-[11px] font-mono tracking-[0.2em] uppercase text-[#E5C158] font-bold">
-                      VERIFIED REVIEWS
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[9px] md:text-[10px] font-mono text-[#F4E8D1] font-semibold">
-                    <ShieldCheck size={11} className="text-[#E5C158]" />
-                    <span>5.0 STAR GUILD</span>
-                  </div>
-                </div>
-
-                {/* Rating Display */}
-                <div className="flex items-center justify-between mt-3">
-                  <div className="flex items-center gap-2">
-                    <div className="flex gap-0.5 text-[#F3C068]">
-                      {[...Array(5)].map((_, idx) => (
-                        <Star key={idx} size={14} fill="currentColor" className="drop-shadow-[0_0_4px_rgba(243,192,104,0.6)]" />
-                      ))}
-                    </div>
-                    <span className="text-xs font-mono font-bold text-white tracking-wider">5.0 / 5.0</span>
-                  </div>
-                  <span className="text-[9px] font-mono uppercase tracking-wider text-[#E5C158]/90 bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
-                    {testimonials[reviewIndex].tag}
+              {/* Header: Verified Review Pill & Guild Badge */}
+              <div className="flex items-center justify-between gap-2 border-b border-[#D4AF37]/25 pb-2.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#E5C158] animate-pulse shadow-[0_0_6px_#E5C158]" />
+                  <span className="text-[10px] font-mono tracking-[0.15em] uppercase text-[#E5C158] font-bold">
+                    VERIFIED REVIEWS
                   </span>
+                </div>
+                <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[9px] font-mono text-[#F4E8D1] font-semibold">
+                  <ShieldCheck size={11} className="text-[#E5C158]" />
+                  <span>5.0 GUILD</span>
                 </div>
               </div>
 
+              {/* Rating Display */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-0.5 text-[#F3C068]">
+                    {[...Array(5)].map((_, idx) => (
+                      <Star key={idx} size={13} fill="currentColor" className="drop-shadow-[0_0_3px_rgba(243,192,104,0.6)]" />
+                    ))}
+                  </div>
+                  <span className="text-xs font-mono font-bold text-white tracking-wider">5.0 / 5.0</span>
+                </div>
+                <span className="text-[9px] font-mono uppercase tracking-wider text-[#E5C158]/90 bg-[#E5C158]/15 px-2 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                  {testimonials[reviewIndex].tag}
+                </span>
+              </div>
+
               {/* Quote Area */}
-              <div className="my-3 relative flex flex-col justify-center min-h-[140px] md:min-h-[150px]">
-                <Quote className="text-[#D4AF37]/15 absolute -top-2 -right-1 w-12 h-12 pointer-events-none" />
+              <div className="relative min-h-[90px] flex flex-col justify-center">
+                <Quote className="text-[#D4AF37]/15 absolute -top-1 -right-1 w-9 h-9 pointer-events-none" />
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={reviewIndex}
-                    initial={{ opacity: 0, y: 10, filter: "blur(3px)" }}
+                    initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, y: -10, filter: "blur(3px)" }}
-                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    exit={{ opacity: 0, y: -6, filter: "blur(2px)" }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
                     className="flex flex-col justify-center"
                   >
-                    <p className="font-serif text-base md:text-lg text-white/95 italic leading-snug mb-3">
+                    <p className="font-serif text-sm md:text-[15px] text-white/95 italic leading-snug mb-2">
                       &quot;{testimonials[reviewIndex].quote}&quot;
                     </p>
-                    <div className="border-l-2 border-[#E5C158] pl-3 py-0.5">
+                    <div className="border-l-2 border-[#E5C158] pl-2.5 py-0.5">
                       <div className="flex items-center gap-1.5">
-                        <p className="font-sans font-bold text-xs md:text-sm text-white tracking-wide">{testimonials[reviewIndex].author}</p>
+                        <p className="font-sans font-bold text-xs sm:text-sm text-white tracking-wide">{testimonials[reviewIndex].author}</p>
                         <CheckCircle2 size={12} className="text-[#E5C158] shrink-0" />
                       </div>
-                      <p className="font-sans text-[10px] md:text-[11px] tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">{testimonials[reviewIndex].role}</p>
+                      <p className="font-sans text-[10px] tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">{testimonials[reviewIndex].role}</p>
                       <p className="font-mono text-[9px] text-white/50 tracking-tight mt-0.5">{testimonials[reviewIndex].credential}</p>
                     </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Footer Controls: Dots + Chevrons + VIP Session trigger */}
-              <div className="space-y-3 pt-3 border-t border-white/10 z-20">
+              {/* Controls + VIP Audition CTA */}
+              <div className="pt-2.5 border-t border-white/10 flex flex-col gap-2 z-20">
                 <div className="flex items-center justify-between">
                   {/* Progress dots */}
                   <div className="flex items-center gap-1.5">
@@ -473,7 +480,7 @@ function HomeContent() {
                           setReviewIndex(i);
                         }} 
                         aria-label={`Go to review ${i + 1}`}
-                        className={`h-[3px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-6 bg-[#E5C158]' : 'w-2 bg-white/20 hover:bg-white/40'}`} 
+                        className={`h-[3px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-5 bg-[#E5C158]' : 'w-2 bg-white/20 hover:bg-white/40'}`} 
                       />
                     ))}
                   </div>
@@ -485,35 +492,35 @@ function HomeContent() {
                         e.stopPropagation();
                         setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
                       }}
-                      className="w-7 h-7 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
+                      className="w-6 h-6 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
                       title="Previous Review"
                     >
-                      <ChevronLeft size={13} />
+                      <ChevronLeft size={12} />
                     </button>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setReviewIndex((prev) => (prev + 1) % testimonials.length);
                       }}
-                      className="w-7 h-7 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
+                      className="w-6 h-6 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
                       title="Next Review"
                     >
-                      <ChevronRight size={13} />
+                      <ChevronRight size={12} />
                     </button>
                   </div>
                 </div>
 
-                {/* Direct VIP Session Button inside sticky card */}
+                {/* Direct VIP Session Button */}
                 <button
                   onClick={() => {
                     setBookingProduct(PRODUCTS[0]);
                     setIsBookingModalOpen(true);
                   }}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#E5C158]/15 hover:bg-[#E5C158]/25 border border-[#E5C158]/50 text-[#F4E8D1] text-[10px] md:text-[11px] font-serif tracking-wider uppercase flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-[#E5C158]/15 hover:bg-[#E5C158]/25 border border-[#E5C158]/50 text-[#F4E8D1] text-[10px] font-serif tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all hover:scale-[1.01] cursor-pointer"
                 >
-                  <Sparkles size={12} className="text-[#E5C158]" />
-                  <span>Audition in Studio ($0 Pass)</span>
-                  <ArrowRight size={12} className="text-[#E5C158]" />
+                  <Sparkles size={11} className="text-[#E5C158]" />
+                  <span>Audition in Studio ($0 VIP Pass)</span>
+                  <ArrowRight size={11} className="text-[#E5C158]" />
                 </button>
               </div>
 
