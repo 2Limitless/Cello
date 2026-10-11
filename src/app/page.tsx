@@ -327,10 +327,10 @@ function HomeContent() {
         </div>
 
         {/* 70/30 Split Layout */}
-        <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-6 md:gap-8 items-start">
+        <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-6 md:gap-10 items-start">
           
-          {/* 70% LEFT: Scrollable Navigation Sections */}
-          <div className="w-full lg:w-[70%] flex flex-col gap-16 lg:gap-24 pb-12">
+          {/* 60% LEFT: Scrollable Navigation Sections */}
+          <div className="w-full lg:w-[62%] xl:w-[60%] flex flex-col gap-16 lg:gap-24 pb-12">
             
             {['Instruments & Sales', 'Luthier Services', 'The Workshop'].map((category, index) => (
               <div key={category} className="flex flex-col relative">
@@ -393,85 +393,85 @@ function HomeContent() {
             ))}
           </div>
 
-          {/* 30% RIGHT: High-Authority Interactive Reviews Pillar (Prominent & Non-stretching) */}
+          {/* 40% RIGHT: Big, High-Authority Virtuoso Review Monument (Sticky) */}
           <div 
-            className="w-full lg:w-[32%] xl:w-[30%] lg:sticky lg:top-24 self-start relative overflow-hidden rounded-[24px] md:rounded-[28px] border-2 border-[#D4AF37]/55 shadow-[0_20px_45px_rgba(0,0,0,0.6),0_0_35px_rgba(212,175,55,0.2)] bg-gradient-to-b from-[#25221D] via-[#1B1A17] to-[#12110F]"
+            className="w-full lg:w-[38%] xl:w-[40%] lg:sticky lg:top-24 self-start relative overflow-hidden rounded-[26px] md:rounded-[32px] border-2 border-[#D4AF37]/65 shadow-[0_25px_60px_rgba(0,0,0,0.7),0_0_40px_rgba(212,175,55,0.25)] bg-gradient-to-b from-[#26231E] via-[#1C1A17] to-[#12110F]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             {/* Top gold accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#E5C158] to-transparent z-20" />
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#E5C158] to-transparent z-20" />
 
             {/* Background texture & warm tone */}
             <Image src="/sheet_music.jpg" alt="Legacy" fill className="object-cover opacity-20 mix-blend-luminosity pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#12110F] via-[#1A1916]/95 to-[#24211D]/90 pointer-events-none" />
             
             {/* Ambient gold glow orb */}
-            <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#D4AF37]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-20 -right-20 w-56 h-56 bg-[#D4AF37]/25 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 p-6 md:p-7 flex flex-col gap-4">
+            <div className="relative z-10 p-7 md:p-9 lg:p-10 flex flex-col gap-5">
               
               {/* Header: Verified Review Pill & Guild Badge */}
-              <div className="flex items-center justify-between gap-2 border-b border-[#D4AF37]/25 pb-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E5C158] animate-pulse shadow-[0_0_8px_#E5C158]" />
-                  <span className="text-xs font-mono tracking-[0.2em] uppercase text-[#E5C158] font-bold">
+              <div className="flex items-center justify-between gap-3 border-b border-[#D4AF37]/30 pb-4">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#E5C158] animate-pulse shadow-[0_0_10px_#E5C158]" />
+                  <span className="text-xs md:text-sm font-mono tracking-[0.25em] uppercase text-[#E5C158] font-bold">
                     VERIFIED REVIEWS
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[10px] md:text-[11px] font-mono text-[#F4E8D1] font-semibold">
-                  <ShieldCheck size={13} className="text-[#E5C158]" />
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-xs font-mono text-[#F4E8D1] font-semibold">
+                  <ShieldCheck size={14} className="text-[#E5C158]" />
                   <span>5.0 GUILD</span>
                 </div>
               </div>
 
               {/* Rating Display */}
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-3">
                   <div className="flex gap-1 text-[#F3C068]">
                     {[...Array(5)].map((_, idx) => (
-                      <Star key={idx} size={16} fill="currentColor" className="drop-shadow-[0_0_5px_rgba(243,192,104,0.6)]" />
+                      <Star key={idx} size={18} fill="currentColor" className="drop-shadow-[0_0_6px_rgba(243,192,104,0.7)]" />
                     ))}
                   </div>
-                  <span className="text-sm font-mono font-bold text-white tracking-wider">5.0 / 5.0</span>
+                  <span className="text-base font-mono font-bold text-white tracking-wider">5.0 / 5.0</span>
                 </div>
-                <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-wider text-[#E5C158] bg-[#E5C158]/15 px-2.5 py-0.5 rounded border border-[#E5C158]/30 font-semibold">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#E5C158] bg-[#E5C158]/20 px-3 py-1 rounded-full border border-[#E5C158]/40 font-bold">
                   {testimonials[reviewIndex].tag}
                 </span>
               </div>
 
-              {/* Quote Area */}
-              <div className="relative min-h-[110px] flex flex-col justify-center my-1">
-                <Quote className="text-[#D4AF37]/15 absolute -top-2 -right-1 w-14 h-14 pointer-events-none" />
+              {/* Big Prominent Quote Area */}
+              <div className="relative min-h-[140px] flex flex-col justify-center my-2">
+                <Quote className="text-[#D4AF37]/15 absolute -top-4 -right-2 w-20 h-20 pointer-events-none" />
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={reviewIndex}
-                    initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
+                    initial={{ opacity: 0, y: 10, filter: "blur(3px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, y: -8, filter: "blur(3px)" }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    exit={{ opacity: 0, y: -10, filter: "blur(3px)" }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
                     className="flex flex-col justify-center"
                   >
-                    <p className="font-serif text-lg md:text-xl lg:text-[21px] text-white/95 italic leading-snug mb-3">
+                    <p className="font-serif text-xl md:text-2xl lg:text-[25px] xl:text-[27px] text-white font-light italic leading-snug mb-5">
                       &quot;{testimonials[reviewIndex].quote}&quot;
                     </p>
-                    <div className="border-l-2 border-[#E5C158] pl-3.5 py-0.5">
-                      <div className="flex items-center gap-2">
-                        <p className="font-sans font-bold text-sm md:text-base text-white tracking-wide">{testimonials[reviewIndex].author}</p>
-                        <CheckCircle2 size={14} className="text-[#E5C158] shrink-0" />
+                    <div className="border-l-4 border-[#E5C158] pl-4 py-1">
+                      <div className="flex items-center gap-2.5">
+                        <p className="font-sans font-bold text-base md:text-lg lg:text-xl text-white tracking-wide">{testimonials[reviewIndex].author}</p>
+                        <CheckCircle2 size={16} className="text-[#E5C158] shrink-0" />
                       </div>
-                      <p className="font-sans text-xs tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">{testimonials[reviewIndex].role}</p>
-                      <p className="font-mono text-[10px] text-white/55 tracking-tight mt-0.5">{testimonials[reviewIndex].credential}</p>
+                      <p className="font-sans text-xs md:text-sm tracking-wider uppercase text-[#E5C158] mt-1 font-semibold">{testimonials[reviewIndex].role}</p>
+                      <p className="font-mono text-xs text-white/60 tracking-tight mt-1">{testimonials[reviewIndex].credential}</p>
                     </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Controls + VIP Audition CTA */}
-              <div className="pt-3 border-t border-white/10 flex flex-col gap-3 z-20">
+              {/* Controls + Radiant VIP Audition CTA */}
+              <div className="pt-4 border-t border-white/10 flex flex-col gap-4 z-20">
                 <div className="flex items-center justify-between">
                   {/* Progress dots */}
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2">
                     {testimonials.map((_, i) => (
                       <button 
                         key={i} 
@@ -480,47 +480,47 @@ function HomeContent() {
                           setReviewIndex(i);
                         }} 
                         aria-label={`Go to review ${i + 1}`}
-                        className={`h-[3.5px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-7 bg-[#E5C158]' : 'w-2.5 bg-white/20 hover:bg-white/40'}`} 
+                        className={`h-[4px] transition-all duration-300 rounded-full cursor-pointer ${i === reviewIndex ? 'w-8 bg-[#E5C158]' : 'w-3 bg-white/25 hover:bg-white/50'}`} 
                       />
                     ))}
                   </div>
 
                   {/* Manual Arrows */}
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
                       }}
-                      className="w-8 h-8 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
+                      className="w-10 h-10 rounded-full border border-white/25 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
                       title="Previous Review"
                     >
-                      <ChevronLeft size={15} />
+                      <ChevronLeft size={16} />
                     </button>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setReviewIndex((prev) => (prev + 1) % testimonials.length);
                       }}
-                      className="w-8 h-8 rounded-full border border-white/20 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
+                      className="w-10 h-10 rounded-full border border-white/25 hover:border-[#E5C158] bg-white/5 hover:bg-[#E5C158]/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer"
                       title="Next Review"
                     >
-                      <ChevronRight size={15} />
+                      <ChevronRight size={16} />
                     </button>
                   </div>
                 </div>
 
-                {/* Direct VIP Session Button */}
+                {/* Direct Big VIP Session Button */}
                 <button
                   onClick={() => {
                     setBookingProduct(PRODUCTS[0]);
                     setIsBookingModalOpen(true);
                   }}
-                  className="w-full py-3 px-4 rounded-xl bg-[#E5C158]/15 hover:bg-[#E5C158]/25 border border-[#E5C158]/50 text-[#F4E8D1] text-xs font-serif font-semibold tracking-wider uppercase flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-sm"
+                  className="w-full py-4 px-6 rounded-2xl bg-[#E5C158] hover:bg-[#F3C068] text-[#1A1A17] text-xs md:text-sm font-serif font-bold tracking-wider uppercase shadow-[0_0_30px_rgba(229,193,88,0.4)] flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
                 >
-                  <Sparkles size={13} className="text-[#E5C158]" />
+                  <Sparkles size={15} />
                   <span>Audition in Studio ($0 VIP Pass)</span>
-                  <ArrowRight size={13} className="text-[#E5C158]" />
+                  <ArrowRight size={15} />
                 </button>
               </div>
 
