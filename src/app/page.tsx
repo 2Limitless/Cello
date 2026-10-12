@@ -320,17 +320,17 @@ function HomeContent() {
       </header>
 
       {/* The Asymmetric Split Hub */}
-      <section className={`w-full flex-1 flex flex-col pt-24 md:pt-32 px-4 md:px-12 pb-16 md:pb-24 transition-all duration-700 relative ${selectedIntent ? 'opacity-0 scale-95 pointer-events-none blur-md' : 'opacity-100 scale-100 blur-0'}`}>
+      <section className={`w-full flex-1 flex flex-col pt-14 sm:pt-20 md:pt-32 px-3 sm:px-6 md:px-12 pb-16 md:pb-24 transition-all duration-700 relative ${selectedIntent ? 'opacity-0 scale-95 pointer-events-none blur-md' : 'opacity-100 scale-100 blur-0'}`}>
         
         {/* Subtle Ambient Radial Highlight to enrich tonewood and contrast against white cards */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(155,126,88,0.07),transparent_70%)] pointer-events-none" />
         
-        <div className="text-left md:text-center mb-6 md:mb-12 pl-2 md:pl-0">
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">How may we assist you today?</h1>
+        <div className="text-left md:text-center mb-2.5 sm:mb-6 md:mb-12 pl-1 md:pl-0">
+          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">How may we assist you today?</h1>
         </div>
 
-        {/* Mobile Featured Review: Immediately visible upon arrival on mobile */}
-        <div className="lg:hidden w-full max-w-[1600px] mx-auto mb-8">
+        {/* Mobile Featured Review: Prominently displayed Google Review that fits alongside Bento boxes on screen */}
+        <div className="lg:hidden w-full max-w-[1600px] mx-auto mb-3.5 sm:mb-6 md:mb-8">
           <VirtuosoFolio
             testimonials={testimonials}
             reviewIndex={reviewIndex}
@@ -344,20 +344,20 @@ function HomeContent() {
         <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-6 md:gap-10 items-start">
           
           {/* 60% LEFT: Scrollable Navigation Sections */}
-          <div className="w-full lg:w-[62%] xl:w-[60%] flex flex-col gap-16 lg:gap-24 pb-12">
+          <div className="w-full lg:w-[62%] xl:w-[60%] flex flex-col gap-10 sm:gap-16 lg:gap-24 pb-12">
             
             {['Instruments & Sales', 'Luthier Services', 'The Workshop'].map((category, index) => (
               <div key={category} className="flex flex-col relative">
                 
-                <div className="flex flex-col mb-10 pl-2">
-                  <div className="flex items-center gap-4 text-[#9B7E58] mb-3">
-                    <span className="text-[10px] tracking-[0.3em] font-bold uppercase">Volume {String(index + 1).padStart(2, '0')}</span>
-                    <div className="h-[1px] w-16 bg-[#9B7E58]/50"></div>
+                <div className="flex flex-col mb-2.5 sm:mb-6 md:mb-10 pl-1 sm:pl-2">
+                  <div className="flex items-center gap-3 sm:gap-4 text-[#9B7E58] mb-1 sm:mb-3">
+                    <span className="text-[9px] sm:text-[10px] tracking-[0.3em] font-bold uppercase">Volume {String(index + 1).padStart(2, '0')}</span>
+                    <div className="h-[1px] w-12 sm:w-16 bg-[#9B7E58]/50"></div>
                   </div>
-                  <h2 className="font-serif text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">{category}</h2>
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">{category}</h2>
                 </div>
                 
-                <div className={`grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[250px]`}>
+                <div className={`grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 auto-rows-[135px] sm:auto-rows-[160px] md:auto-rows-[250px]`}>
                   {bentoItems.filter(i => i.category === category).map((item) => {
                     const Icon = item.icon;
                     const isLarge = item.rowSpan.includes('row-span-2');
