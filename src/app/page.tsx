@@ -222,14 +222,14 @@ function HomeContent() {
     }
   ];
 
-  // Auto-advance reviews
+  // Auto-advance reviews (resets timer smoothly on interaction)
   useEffect(() => {
     if (selectedIntent) return;
     const timer = setInterval(() => {
       setReviewIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(timer);
-  }, [selectedIntent, testimonials.length]);
+  }, [selectedIntent, reviewIndex, testimonials.length]);
 
   // Swipe handlers for the carousel
   const [touchStart, setTouchStart] = useState(0);
