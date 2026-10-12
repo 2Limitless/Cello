@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, CheckCircle2 } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, CheckCircle2, ShieldCheck, Quote } from "lucide-react";
 
 export interface Testimonial {
   quote: string;
@@ -29,112 +28,140 @@ export function VirtuosoFolio({
 }: VirtuosoFolioProps) {
   const current = testimonials[reviewIndex];
 
+  const getInitials = (name: string) => {
+    return name
+      .replace(/^(Prof\.|Dr\.|Mr\.|Ms\.)\s+/, "")
+      .split(" ")
+      .map((n) => n[0])
+      .filter(Boolean)
+      .slice(0, 2)
+      .join("");
+  };
+
   return (
     <div
-      className="w-full h-auto min-h-[340px] md:min-h-[380px] lg:h-[524px] lg:sticky lg:top-24 select-text flex flex-col"
+      className="w-full h-auto min-h-[360px] md:min-h-[400px] lg:h-[524px] lg:sticky lg:top-24 select-text flex flex-col"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Clean, Minimal Luxury Review Card with Exotic Leather Print Background */}
-      <div className="w-full h-full bg-[#12110E] text-white rounded-[24px] md:rounded-[30px] border border-[#D4AF37]/20 shadow-2xl p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden group">
+      {/* Editorial Luxury Atelier Review Card */}
+      <div className="w-full h-full bg-[#FCFBF8] text-[#1A1A17] rounded-[28px] md:rounded-[32px] border border-[#1A1A17]/10 hover:border-[#9B7E58]/35 shadow-[0_20px_50px_rgba(26,26,23,0.06)] hover:shadow-[0_25px_60px_rgba(26,26,23,0.1)] transition-all duration-500 p-6 sm:p-8 md:p-10 lg:p-11 flex flex-col justify-between relative overflow-hidden group">
         
-        {/* Weird Exotic Leather Print Texture Background */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
-          <Image
-            src="/leather_print_bg.jpg"
-            alt="Artisanal exotic leather print texture"
-            fill
-            sizes="(max-width: 768px) 100vw, 40vw"
-            className="object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out opacity-85"
-            priority
-          />
-          {/* Warm Dark Vignette & Texture Tint for contrast and elegance */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#12110E]/85 via-[#12110E]/65 to-[#12110E]/90 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-black/30" />
-          <div className="absolute inset-0 rounded-[24px] md:rounded-[30px] border border-white/10 pointer-events-none" />
-        </div>
-
-        {/* Top: 5 Stars & Minimal Verified Label */}
-        <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/15">
-          <div className="flex items-center gap-2">
+        {/* Top Header: 5 Gold Stars, 5.0 Rating, and Verified Patron Pill */}
+        <div className="flex items-center justify-between pb-5 border-b border-[#1A1A17]/8">
+          <div className="flex items-center gap-2.5">
             <div className="flex text-[#D4AF37] gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={15} fill="currentColor" />
+                <Star key={i} size={16} fill="currentColor" className="text-[#D4AF37]" />
               ))}
             </div>
-            <span className="font-mono text-xs font-semibold text-white/90 ml-1">5.0</span>
+            <span className="font-mono text-xs font-bold text-[#1A1A17] ml-0.5">5.0</span>
+            <span className="hidden sm:inline-block text-[11px] font-sans text-[#1A1A17]/40 tracking-wider">
+              · Patron Acclaim
+            </span>
           </div>
 
-          <span className="text-[10px] md:text-[11px] font-sans tracking-[0.2em] uppercase text-white/40">
-            Verified Patron
-          </span>
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9B7E58]/10 text-[#9B7E58] border border-[#9B7E58]/20">
+            <ShieldCheck size={13} className="shrink-0" />
+            <span className="text-[10px] md:text-[11px] font-sans font-semibold tracking-wider uppercase">
+              Verified Review
+            </span>
+          </div>
         </div>
 
-        {/* Center: The Quote (Spacious, Elegant, Breathing Room) */}
-        <div className="relative z-10 my-auto py-6 md:py-8">
-          <AnimatePresence mode="wait">
+        {/* Center: The Quote with Editorial Bronze Quote Mark */}
+        <div className="my-auto py-4 md:py-6 relative min-h-[140px] flex items-center">
+          <Quote 
+            size={52} 
+            className="text-[#9B7E58]/12 absolute -top-3 -left-2 -z-0 pointer-events-none" 
+          />
+          <AnimatePresence mode="sync">
             <motion.div
               key={reviewIndex}
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="relative z-10 w-full"
             >
-              <p className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[24px] xl:text-[26px] text-white font-light italic leading-relaxed md:leading-[1.5] tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+              <p className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[23px] xl:text-[25px] text-[#1A1A17] font-normal italic leading-relaxed md:leading-[1.55] tracking-tight">
                 &ldquo;{current.quote}&rdquo;
               </p>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Bottom: Author & Endless Looping Controls (Zero Numbers) */}
-        <div className="relative z-10 pt-5 border-t border-white/15 flex items-end justify-between gap-4">
+        {/* Bottom Bar: Patron Monogram Medallion, Title & Endless Circular Controls */}
+        <div className="pt-5 border-t border-[#1A1A17]/8 flex items-end justify-between gap-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={reviewIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, x: -6 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 6 }}
               transition={{ duration: 0.25 }}
-              className="flex flex-col"
+              className="flex items-center gap-3.5"
             >
-              <div className="flex items-center gap-1.5">
-                <h4 className="font-serif font-bold text-base md:text-lg text-white tracking-wide">
-                  {current.author}
-                </h4>
-                <CheckCircle2 size={14} className="text-[#9B7E58]" />
+              {/* Circular Gold Monogram Medallion */}
+              <div className="w-11 h-11 rounded-full bg-[#1A1A17] text-[#D4AF37] font-serif font-bold text-sm tracking-wider flex items-center justify-center border-2 border-[#D4AF37]/40 shadow-sm shrink-0 select-none">
+                {getInitials(current.author)}
               </div>
-              <p className="font-sans text-xs tracking-wider uppercase text-[#D4AF37] mt-0.5 font-medium">
-                {current.role}
-              </p>
+
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5">
+                  <h4 className="font-serif font-bold text-base md:text-lg text-[#1A1A17] tracking-wide">
+                    {current.author}
+                  </h4>
+                  <CheckCircle2 size={14} className="text-[#9B7E58]" />
+                </div>
+                <p className="font-sans text-xs tracking-wider uppercase text-[#9B7E58] font-semibold mt-0.5">
+                  {current.role}
+                </p>
+                {current.credential && (
+                  <p className="font-sans text-[11px] text-[#1A1A17]/50 mt-0.5 hidden sm:block">
+                    {current.credential}
+                  </p>
+                )}
+              </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Minimal Endless Arrows */}
+          {/* Minimalist Endless Arrow Controls (No Numbers) */}
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
               }}
-              className="w-9 h-9 rounded-full border border-white/20 hover:border-white hover:bg-white/10 text-white/70 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+              className="w-10 h-10 rounded-full border border-[#1A1A17]/15 bg-white hover:border-[#1A1A17] hover:bg-[#1A1A17] text-[#1A1A17] hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95 shadow-sm"
               title="Previous Review"
               aria-label="Previous Review"
             >
-              <ChevronLeft size={16} />
+              <ChevronLeft size={17} />
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setReviewIndex((prev) => (prev + 1) % testimonials.length);
               }}
-              className="w-9 h-9 rounded-full border border-white/20 hover:border-white hover:bg-white/10 text-white/70 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+              className="w-10 h-10 rounded-full border border-[#1A1A17]/15 bg-white hover:border-[#1A1A17] hover:bg-[#1A1A17] text-[#1A1A17] hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95 shadow-sm"
               title="Next Review"
               aria-label="Next Review"
             >
-              <ChevronRight size={16} />
+              <ChevronRight size={17} />
             </button>
           </div>
+        </div>
+
+        {/* Endless Loop Progress Accent Line at the very bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#9B7E58]/15 overflow-hidden">
+          <motion.div
+            key={reviewIndex}
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 7, ease: "linear" }}
+            className="h-full bg-[#9B7E58]/70"
+          />
         </div>
 
       </div>
