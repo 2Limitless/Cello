@@ -98,7 +98,7 @@ export function VirtuosoFolio({
       onTouchEnd={handleTouchEnd}
     >
       {/* Clean, Modern Google Reviews Card Widget */}
-      <div className="w-full h-full bg-white text-gray-900 rounded-[24px] md:rounded-[28px] border border-gray-200/90 shadow-[0_12px_36px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_44px_rgba(0,0,0,0.09)] transition-all duration-300 p-6 sm:p-7 md:p-8 flex flex-col justify-between relative overflow-hidden">
+      <div className="w-full h-full bg-white text-gray-900 rounded-[24px] md:rounded-[28px] border border-[#1A1A17]/12 shadow-[0_16px_45px_rgba(26,26,23,0.08),_0_2px_8px_rgba(26,26,23,0.04)] hover:shadow-[0_22px_55px_rgba(26,26,23,0.12)] transition-all duration-300 p-6 sm:p-7 md:p-8 flex flex-col justify-between relative overflow-hidden">
 
         {/* Top: Google Business Profile Header */}
         <div className="flex items-center justify-between pb-5 border-b border-gray-100">
