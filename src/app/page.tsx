@@ -742,7 +742,21 @@ function HomeContent() {
                   </p>
                   
                   <div className="max-w-3xl">
-                    {getModalContent(selectedItem.id)}
+                    {getModalContent(selectedItem.id, {
+                      onNavigateToBoutique: (category = 'all', instrumentType = 'all') => {
+                        setSelectedIntent(null);
+                        window.dispatchEvent(new CustomEvent('filter-boutique', { detail: { category, instrumentType } }));
+                        setTimeout(() => {
+                          const el = document.getElementById('boutique');
+                          el?.scrollIntoView({ behavior: 'smooth' });
+                        }, 250);
+                      },
+                      onOpenBooking: () => {
+                        setSelectedIntent(null);
+                        setIsBookingModalOpen(true);
+                      },
+                      onClose: () => setSelectedIntent(null)
+                    })}
                   </div>
                   
                   <div className="flex flex-col sm:flex-row gap-6 pb-8">

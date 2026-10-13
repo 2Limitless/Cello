@@ -1,68 +1,190 @@
 import React from 'react';
 import Image from 'next/image';
-import { Check, Star, ArrowRight, ShieldCheck, Clock, MapPin, Calendar, Wrench } from 'lucide-react';
+import { Check, Star, ArrowRight, ShieldCheck, Clock, MapPin, Calendar, Wrench, Music, ShoppingBag, Sparkles, Phone } from 'lucide-react';
 
-export const getModalContent = (id: string) => {
+export interface ModalContentOptions {
+  onNavigateToBoutique?: (category?: string, instrumentType?: string) => void;
+  onOpenBooking?: () => void;
+  onClose?: () => void;
+}
+
+export const getModalContent = (id: string, options?: ModalContentOptions) => {
+  const navigate = (category = 'all', instrumentType = 'all') => {
+    if (options?.onNavigateToBoutique) {
+      options.onNavigateToBoutique(category, instrumentType);
+    } else if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('filter-boutique', { detail: { category, instrumentType } }));
+      options?.onClose?.();
+      setTimeout(() => {
+        const el = document.getElementById('boutique');
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }, 250);
+    }
+  };
+
+  const openBooking = () => {
+    if (options?.onOpenBooking) {
+      options.onOpenBooking();
+    }
+  };
+
   switch (id) {
     case 'purchase':
       return (
-        <div className="mt-8 space-y-20 animate-fade-in">
-          {/* Editorial Intro */}
-          <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start border-t-2 border-[#1A1A17] pt-12">
-            <div className="md:w-1/4 text-sm md:text-base tracking-[0.2em] uppercase text-[#9B7E58] font-bold">
-              01 // Philosophy
+        <div className="mt-6 space-y-12 animate-fade-in">
+          {/* Quick Family Navigation */}
+          <div className="border-t-2 border-[#1A1A17] pt-8">
+            <div className="flex items-center gap-3 text-[#9B7E58] mb-3">
+              <span className="text-xs tracking-[0.25em] font-bold uppercase">01 // Quick Family Navigation</span>
+              <div className="h-[1px] w-12 bg-[#9B7E58]/50" />
             </div>
-            <div className="md:w-3/4">
-              <p className="font-serif text-3xl md:text-4xl lg:text-5xl leading-relaxed text-[#1A1A17]">
-                An instrument is not merely crafted; it is <span className="italic text-[#9B7E58]">awakened</span>. We believe the relationship between player and instrument is intensely intimate.
-              </p>
+            <h4 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#1A1A17] mb-3">
+              Select Your Instrument Family
+            </h4>
+            <p className="font-light text-base text-[#1A1A17]/70 max-w-xl">
+              Tap any category below to immediately browse our current in-shop inventory, hand-tuned and set up by Matthew Lane.
+            </p>
+          </div>
+
+          {/* 4 Interactive Category Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {[
+              {
+                title: "Violins",
+                badge: "Soloist & Conservatory",
+                desc: "Guarneri 1742 Tribute, Alessandro Moretti, Vuillaume 1865, and Sheng Conservatory.",
+                image: "/atelier/violin_moretti_front.jpg",
+                category: "instruments",
+                instrumentType: "violin"
+              },
+              {
+                title: "Violas",
+                badge: "Deep Resonance",
+                desc: "Gasparo da Salò Pattern, Ming Conservatory, and Aubert Mirecourt setup.",
+                image: "/atelier/viola_ming.jpg",
+                category: "instruments",
+                instrumentType: "viola"
+              },
+              {
+                title: "Cellos",
+                badge: "Montagnana & Strad",
+                desc: "Montagnana 1739 Pattern, Stradivari CS-10000, and Hof 8 Soloist models.",
+                image: "/atelier/cello_montagnana_cs4900.png",
+                category: "instruments",
+                instrumentType: "cello"
+              },
+              {
+                title: "Bows & Basses",
+                badge: "Concert Protection & Rig",
+                desc: "Pernambuco master bows, CS7400B Hybrid Bass, and luxury travel cases.",
+                image: "/atelier/shop_bows_display.jpg",
+                category: "bows",
+                instrumentType: "all"
+              }
+            ].map((card, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => navigate(card.category, card.instrumentType)}
+                className="group p-5 sm:p-6 bg-white border-2 border-[#1A1A17] text-left hover:-translate-y-1 transition-all duration-300 shadow-[5px_5px_0px_#1A1A17] hover:shadow-[7px_7px_0px_#9B7E58] flex flex-col justify-between cursor-pointer"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#9B7E58]">
+                      {card.badge}
+                    </span>
+                    <span className="w-7 h-7 rounded-full bg-[#1A1A17]/5 flex items-center justify-center text-[#1A1A17] group-hover:bg-[#9B7E58] group-hover:text-white transition-colors">
+                      <ArrowRight size={13} className="-rotate-45 group-hover:rotate-0 transition-transform" />
+                    </span>
+                  </div>
+                  <h5 className="font-serif text-2xl md:text-3xl text-[#1A1A17] group-hover:text-[#9B7E58] transition-colors mb-2">
+                    {card.title}
+                  </h5>
+                  <p className="text-xs sm:text-sm text-[#1A1A17]/70 font-light leading-relaxed">
+                    {card.desc}
+                  </p>
+                </div>
+                <div className="mt-5 pt-3 border-t border-[#1A1A17]/10 flex items-center justify-between text-xs font-bold text-[#1A1A17] uppercase tracking-wider">
+                  <span>Browse {card.title}</span>
+                  <span className="text-[#9B7E58] font-mono text-[11px]">View All →</span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* 3 Core Guarantees: Straight to the point */}
+          <div className="border-t-2 border-[#1A1A17] pt-8">
+            <div className="flex items-center gap-3 text-[#9B7E58] mb-3">
+              <span className="text-xs tracking-[0.25em] font-bold uppercase">02 // The Independent Standard</span>
+              <div className="h-[1px] w-12 bg-[#9B7E58]/50" />
+            </div>
+            <h4 className="font-serif text-2xl sm:text-3xl text-[#1A1A17] mb-6">
+              Why Musicians Choose Lane &amp; Edwards
+            </h4>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="p-6 bg-[#1A1A17] text-white space-y-2.5 shadow-xl">
+                <div className="w-10 h-10 rounded-full bg-[#9B7E58]/20 flex items-center justify-center text-[#9B7E58] mb-3">
+                  <Wrench size={18} />
+                </div>
+                <h6 className="font-serif text-xl text-white">Master Bench Setup</h6>
+                <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed">
+                  Every peg fitted, bridge hand-carved, and soundpost dialed to 0.1mm by Matthew Lane before leaving our shop.
+                </p>
+              </div>
+
+              <div className="p-6 bg-[#9B7E58] text-white space-y-2.5 shadow-xl">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white mb-3">
+                  <Calendar size={18} />
+                </div>
+                <h6 className="font-serif text-xl text-white">7-Day In-Home Trial</h6>
+                <p className="text-xs sm:text-sm text-white/90 font-light leading-relaxed">
+                  Take the instrument into your concert hall, teacher&apos;s studio, or orchestra with zero purchase commitment.
+                </p>
+              </div>
+
+              <div className="p-6 bg-white border-2 border-[#1A1A17] text-[#1A1A17] space-y-2.5 shadow-[5px_5px_0px_#1A1A17]">
+                <div className="w-10 h-10 rounded-full bg-[#1A1A17]/10 flex items-center justify-center text-[#1A1A17] mb-3">
+                  <ShieldCheck size={18} className="text-[#9B7E58]" />
+                </div>
+                <h6 className="font-serif text-xl text-[#1A1A17]">100% Lifetime Equity</h6>
+                <p className="text-xs sm:text-sm text-[#1A1A17]/70 font-light leading-relaxed">
+                  Every dollar invested follows your musical advancement forever when stepping up to your next master instrument.
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Staggered Tiers */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
-            
-            {/* Tier 1 - Stark Dark */}
-            <div className="lg:col-span-5 bg-[#1A1A17] text-white p-10 md:p-14 flex flex-col justify-between min-h-[400px] group overflow-hidden relative shadow-2xl">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#9B7E58]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000" />
-              <div className="relative z-10">
-                <div className="text-[#9B7E58] text-lg md:text-xl font-serif italic mb-4">The Spark</div>
-                <div className="text-5xl md:text-6xl font-serif mb-8 font-light">$350 - $700</div>
-              </div>
-              <p className="text-white/90 text-lg md:text-xl leading-relaxed relative z-10 font-light">Properly graduated and expertly set up. These instruments forgive beginner mistakes while offering a beautiful tone to inspire practice.</p>
-            </div>
-            
-            {/* Tier 2 - Rich Solid Gold */}
-            <div className="lg:col-span-7 bg-[#9B7E58] text-white p-10 md:p-14 flex flex-col justify-between min-h-[400px] shadow-2xl lg:mt-16 group relative overflow-hidden">
-              <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-y-1/2 translate-x-1/4 group-hover:scale-125 transition-transform duration-1000" />
-              <div className="relative z-10">
-                <div className="flex flex-wrap justify-between items-center gap-4 mb-4">
-                  <div className="text-white/80 text-lg md:text-xl font-serif italic">The Journey</div>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 border border-white/40 bg-white/10 backdrop-blur-sm text-white text-[11px] md:text-xs tracking-[0.25em] uppercase font-bold">
-                    <span className="w-1.5 h-1.5 bg-white" />
-                    Most Popular
-                  </div>
-                </div>
-                <div className="text-5xl md:text-6xl font-serif mb-8 font-light">$1k - $2k</div>
-              </div>
-              <div className="flex justify-between items-end relative z-10">
-                <p className="text-white/95 text-lg md:text-xl leading-relaxed max-w-md font-light">For the advancing student who demands a broader tonal palette and faster response. Hand-varnished European tonewoods.</p>
-                <Star className="text-white opacity-60 group-hover:opacity-100 transition-opacity" size={48} />
-              </div>
+          {/* Action Center Banner */}
+          <div className="p-6 sm:p-8 bg-[#FAF8F3] border-2 border-[#9B7E58] flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="space-y-1 text-center sm:text-left">
+              <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#9B7E58] block">
+                In-Shop Playing Sessions
+              </span>
+              <h5 className="font-serif text-2xl text-[#1A1A17]">
+                Ready to play test in person?
+              </h5>
+              <p className="text-xs text-[#1A1A17]/70 font-light">
+                Reserve an unhurried, private acoustic session with Matthew Lane at 315 Wallace Ave.
+              </p>
             </div>
 
-            {/* Tier 3 - Crisp White / High Contrast Border */}
-            <div className="lg:col-span-12 bg-white p-10 md:p-16 border-4 border-[#1A1A17] flex flex-col md:flex-row gap-12 items-start md:items-center justify-between shadow-[12px_12px_0px_#1A1A17]">
-              <div className="md:w-2/3">
-                <div className="text-[#9B7E58] text-lg md:text-xl font-serif italic mb-4">The Pinnacle</div>
-                <div className="text-5xl md:text-7xl font-serif text-[#1A1A17] mb-6 font-light">$2,500+</div>
-                <p className="text-[#1A1A17]/90 text-lg md:text-xl leading-relaxed font-light">Grade AAA master instruments. Singular works of art for the demanding professional. Includes rare contemporary makers and historical antiques.</p>
-              </div>
-              <div className="md:w-1/3 flex md:justify-end">
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-[#9B7E58] flex items-center justify-center text-[#9B7E58] hover:bg-[#9B7E58] hover:text-white transition-colors cursor-default shadow-lg">
-                  <span className="text-sm md:text-base uppercase tracking-[0.2em] font-bold">Inquire</span>
-                </div>
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+              <button
+                type="button"
+                onClick={openBooking}
+                className="px-6 py-3.5 bg-[#1A1A17] text-white text-xs uppercase tracking-wider font-bold hover:bg-[#9B7E58] transition-colors shadow-md cursor-pointer flex items-center gap-2"
+              >
+                <Calendar size={14} className="text-[#9B7E58]" />
+                Book Session
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate('instruments', 'all')}
+                className="px-6 py-3.5 border-2 border-[#1A1A17] text-[#1A1A17] text-xs uppercase tracking-wider font-bold hover:bg-[#1A1A17] hover:text-white transition-colors cursor-pointer"
+              >
+                View Catalog
+              </button>
             </div>
           </div>
         </div>
@@ -119,6 +241,30 @@ export const getModalContent = (id: string) => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Direct Action */}
+          <div className="p-6 sm:p-8 bg-[#FAF8F3] border-2 border-[#9B7E58] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#9B7E58] block">
+                Local Sizing &amp; Pickup
+              </span>
+              <h5 className="font-serif text-2xl text-[#1A1A17]">
+                Begin Your Child&apos;s Musical Journey
+              </h5>
+              <p className="text-xs text-[#1A1A17]/70 font-light mt-1">
+                Zero waiting. Visit 315 Wallace Ave for complimentary sizing with Matthew Lane.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <a
+                href="tel:5026905908"
+                className="px-6 py-3.5 bg-[#1A1A17] text-white text-xs uppercase tracking-wider font-bold hover:bg-[#9B7E58] transition-colors shadow-md flex items-center gap-2 cursor-pointer"
+              >
+                <Phone size={14} className="text-[#9B7E58]" />
+                Call (502) 690-5908
+              </a>
             </div>
           </div>
         </div>
@@ -431,32 +577,63 @@ export const getModalContent = (id: string) => {
 
     case 'accessories':
       return (
-        <div className="mt-8 space-y-16 animate-fade-in">
-          <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start border-t-2 border-[#1A1A17] pt-12">
-            <div className="md:w-1/4 text-sm md:text-base tracking-[0.2em] uppercase text-[#9B7E58] font-bold">
-              01 // Pairings
+        <div className="mt-6 space-y-10 animate-fade-in">
+          <div className="border-t-2 border-[#1A1A17] pt-8">
+            <div className="flex items-center gap-3 text-[#9B7E58] mb-3">
+              <span className="text-xs tracking-[0.25em] font-bold uppercase">01 // Quick Accessories Access</span>
+              <div className="h-[1px] w-12 bg-[#9B7E58]/50" />
             </div>
-            <div className="md:w-3/4">
-              <p className="font-serif text-3xl md:text-4xl lg:text-5xl leading-relaxed text-[#1A1A17]">
-                An extraordinary instrument demands extraordinary companions. Discover the <span className="italic text-[#9B7E58]">alchemy</span> of the perfect setup.
-              </p>
-            </div>
+            <h4 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#1A1A17] mb-3">
+              Concert Protection &amp; Fittings
+            </h4>
+            <p className="font-light text-base text-[#1A1A17]/70 max-w-xl">
+              Tap any category below to immediately browse our shop inventory.
+            </p>
           </div>
 
-          <div className="flex flex-col divide-y-2 divide-[#1A1A17]/10 border-y-2 border-[#1A1A17]/10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[
-              { title: "Strings", desc: "Explore tonal possibilities with Thomastik-Infeld Dominant Pro, Pirastro Evah Pirazzi Gold, and Larsen Magnacore. Professional string fitting and tension matching available." },
-              { title: "Suspension Cases", desc: "Protect your investment. Hand-selected luxury green velvet suspension cases, archtop hardwood cases, and travel shells vetted for Kentucky climate swings." },
-              { title: "Luthier Fittings", desc: "Solid carved maple Mach One shoulder rests, acoustic chinrests, and Core precision digital hygrometers that preserve delicate tonewoods." }
+              {
+                title: "Concert Strings",
+                badge: "Pirastro · Larsen · Dominant",
+                desc: "Evah Pirazzi Gold, Dominant Pro, Larsen Magnacore Arioso, and Spirocore cello strings.",
+                category: "strings"
+              },
+              {
+                title: "Suspension Cases",
+                badge: "Kentucky Climate Defense",
+                desc: "CC430 Luxury Green Velvet, CC398 Oblong Black, and CC4100 Cello Cases.",
+                category: "cases"
+              },
+              {
+                title: "Luthier Care",
+                badge: "Bespoke Fittings",
+                desc: "Solid carved maple Mach One shoulder rests, Leatherwood rosin, and Core digital hygrometers.",
+                category: "accessories"
+              }
             ].map((item, idx) => (
-              <div key={idx} className="flex flex-col md:flex-row md:items-center justify-between py-8 md:py-12 group hover:px-6 transition-all duration-300 cursor-default">
-                <div className="font-serif text-3xl md:text-4xl text-[#1A1A17] group-hover:text-[#9B7E58] transition-colors mb-3 md:mb-0 md:w-1/3">
-                  {item.title}
+              <button
+                key={idx}
+                type="button"
+                onClick={() => navigate(item.category, 'all')}
+                className="group p-6 bg-white border-2 border-[#1A1A17] text-left hover:-translate-y-1 transition-all duration-300 shadow-[5px_5px_0px_#1A1A17] hover:shadow-[7px_7px_0px_#9B7E58] flex flex-col justify-between cursor-pointer"
+              >
+                <div>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#9B7E58] block mb-2">
+                    {item.badge}
+                  </span>
+                  <h5 className="font-serif text-2xl text-[#1A1A17] group-hover:text-[#9B7E58] transition-colors mb-2">
+                    {item.title}
+                  </h5>
+                  <p className="text-xs text-[#1A1A17]/70 font-light leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
-                <div className="md:w-2/3 text-[#1A1A17]/80 text-base md:text-lg font-light leading-relaxed max-w-xl">
-                  {item.desc}
+                <div className="mt-6 pt-3 border-t border-[#1A1A17]/10 flex items-center justify-between text-xs font-bold text-[#1A1A17] uppercase tracking-wider">
+                  <span>Browse {item.title}</span>
+                  <span className="text-[#9B7E58]">→</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>

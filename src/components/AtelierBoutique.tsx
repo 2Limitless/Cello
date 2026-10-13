@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { Search, Plus, Eye, ShieldCheck, Check, Calendar, BookOpen } from 'lucide-react';
 import { PRODUCTS, Product } from '@/data/products';
@@ -21,6 +21,20 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory || 'all');
   const [activeInstrumentType, setActiveInstrumentType] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
+
+  useEffect(() => {
+    const handleFilterEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ category?: string; instrumentType?: string }>;
+      if (customEvent.detail?.category) {
+        setActiveCategory(customEvent.detail.category);
+      }
+      if (customEvent.detail?.instrumentType) {
+        setActiveInstrumentType(customEvent.detail.instrumentType);
+      }
+    };
+    window.addEventListener('filter-boutique', handleFilterEvent);
+    return () => window.removeEventListener('filter-boutique', handleFilterEvent);
+  }, []);
 
   const categories = [
     { id: 'all', label: 'All Acquisitions' },
