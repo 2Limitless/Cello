@@ -3,14 +3,16 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { Search, Plus, Eye, ShieldCheck, Check, Calendar, BookOpen } from 'lucide-react';
-import { PRODUCTS, Product } from '@/data/products';
+import { Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import { useSiteContent } from '@/context/SiteContentContext';
 
 interface AtelierBoutiqueProps {
   initialCategory?: string;
 }
 
 export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
+  const { products } = useSiteContent();
   const {
     setSelectedProduct,
     setBookingProduct,
@@ -53,7 +55,7 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
   ];
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       // Category filter
       if (activeCategory !== 'all' && product.category !== activeCategory) {
         return false;

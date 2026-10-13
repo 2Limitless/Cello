@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, Great_Vibes } from "next/font/google";
 import "./globals.css";
+import { SiteContentProvider } from "@/context/SiteContentContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,7 +34,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${greatVibes.variable} antialiased`}
       >
-        {children}
+        <SiteContentProvider>
+          {children}
+        </SiteContentProvider>
       </body>
     </html>
   );

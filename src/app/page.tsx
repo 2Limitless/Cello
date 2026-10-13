@@ -2,15 +2,33 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Music, PenTool, Wrench, ShieldCheck, ArrowRight, ArrowUp, X, Clock, MapPin, GraduationCap, History, BookOpen, ShoppingBag, Sparkles, Phone, Flame, Quote, CheckCircle2, Shield } from "lucide-react";
 import { getModalContent } from "./modalContent";
 import { CartProvider, useCart } from "@/context/CartContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 import { PRODUCTS } from "@/data/products";
 import { AtelierBoutique } from "@/components/AtelierBoutique";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { VIPBookingModal } from "@/components/VIPBookingModal";
 import { VirtuosoFolio } from "@/components/VirtuosoFolio";
+
+const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Music,
+  ShoppingBag,
+  GraduationCap,
+  ShieldCheck,
+  Wrench,
+  PenTool,
+  BookOpen,
+  History,
+  MapPin,
+  Sparkles,
+  Flame,
+  Shield,
+  Clock,
+};
 
 export default function Home() {
   return (
@@ -25,7 +43,11 @@ function HomeContent() {
   const [currentTime, setCurrentTime] = useState<string>("");
   const [reviewIndex, setReviewIndex] = useState(0);
 
+  const { content } = useSiteContent();
   const { setBookingProduct, setIsBookingModalOpen } = useCart();
+
+  const bentoItems = content.bentoItems || [];
+  const testimonials = content.testimonials || [];
 
   useEffect(() => {
     const updateTime = () => {
@@ -35,174 +57,6 @@ function HomeContent() {
     const clockTimer = setInterval(updateTime, 60000);
     return () => clearInterval(clockTimer);
   }, []);
-
-  const bentoItems = [
-    {
-      id: "purchase",
-      category: "Instruments & Sales",
-      title: "Find Your Instrument",
-      subtitle: "Master Luthier Bench Setup",
-      icon: Music,
-      image: "/atelier/violin_sch_flamed.jpg",
-      colSpan: "col-span-2",
-      rowSpan: "row-span-2",
-      description: "Discover master-crafted violins, violas, cellos, and basses. While corporate chains ship factory-pressed plywood in cardboard boxes, every instrument at our independent Louisville shop is personally inspected, carved, and acoustically tuned by hand for rich, effortless projection.",
-      action1: "View Collection",
-      action2: "Speak to Matt"
-    },
-    {
-      id: "accessories",
-      category: "Instruments & Sales",
-      title: "Strings & Cases",
-      subtitle: "Concert Protection",
-      icon: ShoppingBag,
-      image: "/atelier/case_cc430_luxury_green.png",
-      colSpan: "col-span-1",
-      rowSpan: "row-span-1",
-      description: "Protect and optimize your voice. Hand-selected luxury suspension cases, Pirastro, Larsen, and Thomastik-Infeld strings, and bespoke carved tonewood fittings.",
-      action1: "Browse Catalog",
-      action2: "Fittings"
-    },
-    {
-      id: "rental",
-      category: "Instruments & Sales",
-      title: "Student Rentals",
-      subtitle: "The 100% Equity Promise",
-      icon: GraduationCap,
-      image: "/atelier/workshop_bench_tools.jpg",
-      colSpan: "col-span-1",
-      rowSpan: "row-span-1",
-      description: "We reject the disposable rental racket. Area students receive genuine, shop-graduated tonewood instruments with all setup work done in-house. 100% of first-year rental equity applies toward owning a master instrument.",
-      action1: "Start Rental",
-      action2: "School Programs"
-    },
-    {
-      id: "guarantee",
-      category: "Instruments & Sales",
-      title: "The Guarantee",
-      subtitle: "The Craftsman's Guarantee · 100% Equity",
-      icon: ShieldCheck,
-      image: "/atelier/antique_maker_signature.jpg",
-      colSpan: "col-span-2",
-      rowSpan: "row-span-1",
-      description: "The big-box conglomerates profit off student depreciation. We stake our livelihood on your growth: 100% of your investment follows you forever when you step up to your next master instrument.",
-      action1: "Read Policies",
-      action2: "Appraisals"
-    },
-    {
-      id: "repair",
-      category: "Luthier Services",
-      title: "Restoration & Repair",
-      subtitle: "Purist Benchwork · Since 1976",
-      icon: Wrench,
-      image: "/atelier/matt_luthier_bench.jpg",
-      colSpan: "col-span-1",
-      rowSpan: "row-span-1",
-      description: "No factory assembly lines. No outsourced regional depots. Complete restoration, precision soundpost adjustment, and acoustic bench setup executed directly by Matthew Lane at our Wallace Ave workbench.",
-      action1: "Schedule Consult",
-      action2: "Pricing Guide"
-    },
-    {
-      id: "rehair",
-      category: "Luthier Services",
-      title: "Bow Services",
-      subtitle: "Master Rehairs & Balance",
-      icon: PenTool,
-      image: "/atelier/shop_bows_display.jpg",
-      colSpan: "col-span-1",
-      rowSpan: "row-span-1",
-      description: "Precision bow rehairs using select unbleached Mongolian stallion hair. Hand-tied, individually combed, and balanced for lightning bite, seamless string crossing, and acoustic clarity.",
-      action1: "Drop-off Info",
-      action2: "Hair Selection"
-    },
-    {
-      id: "instruction",
-      category: "Luthier Services",
-      title: "Private Instruction",
-      subtitle: "The Oral Tradition",
-      icon: BookOpen,
-      image: "/atelier/instruction_pedagogy.jpg",
-      colSpan: "col-span-2",
-      rowSpan: "row-span-1",
-      description: "Connect with Louisville's foremost pedagogues, concertmasters, and Suzuki specialists. Mentoring young artists from their first posture to youth orchestra auditions and conservatory stages.",
-      action1: "Meet the Faculty",
-      action2: "Rates & Schedules"
-    },
-    {
-      id: "legacy",
-      category: "The Workshop",
-      title: "Our Story",
-      subtitle: "Two Generations · One Unbroken Line",
-      icon: History,
-      image: "/atelier/matt_and_mark_legacy.jpg",
-      colSpan: "col-span-2",
-      rowSpan: "row-span-1",
-      description: "Founded by Mark Edwards (1952-2026), our shop was built on fifty years of pure devotion to tone. Fit for his first violin here as a young boy in 1988, Matthew Lane worked twenty years at Mark's bench. Today, Matt holds the line: an independent luthier whose hand-carved plates and acoustic truth prove that real craftsmanship outlives every corporate trend.",
-      action1: "Read The Story",
-      action2: "Meet the Luthiers"
-    },
-    {
-      id: "contact",
-      category: "The Workshop",
-      title: "Visit Us",
-      subtitle: "Historic St. Matthews · Louisville, KY",
-      icon: MapPin,
-      image: "/atelier/storefront_wallace.png",
-      colSpan: "col-span-2",
-      rowSpan: "row-span-1",
-      description: "Located at 315 Wallace Ave, Louisville, KY 40207. Step into the scent of seasoned spruce, maple shavings, and rosin. Book an in-person acoustic audition or consult directly with Matthew Lane.",
-      action1: "Book on Vagaro",
-      action2: "Call Us"
-    }
-  ];
-
-  const testimonials = [
-    {
-      quote: "The only luthier in the region I trust with my 1734 Guarneri. Matthew's bridge calibration unlocked acoustic richness and projection that fills Whitney Hall effortlessly.",
-      author: "Elena Rostova",
-      signature: "Elena Rostova",
-      role: "Principal Cellist, Louisville Orchestra",
-      credential: "Verified Patron · 1734 Guarneri Cello Calibration",
-      tag: "Principal Soloist",
-      year: "Patron Since 2018"
-    },
-    {
-      quote: "They found a radiant voice in the tonewood I never knew existed. After Lane & Edwards dressed the fingerboard and cut a French bridge, tonal response increased tenfold.",
-      author: "Marcus Chen",
-      signature: "Marcus Chen",
-      role: "Concertmaster & International Soloist",
-      credential: "Verified Patron · Master Violin Setup",
-      tag: "Concertmaster",
-      year: "Patron Since 2014"
-    },
-    {
-      quote: "Every serious cello and violin student in my studio acquires their instrument through Lane & Edwards. Their 100% equity trade-in policy gives families complete peace of mind.",
-      author: "Prof. Edward Lin",
-      signature: "Edward Lin",
-      role: "String Department Chair, Conservatory",
-      credential: "Verified Educator · Juilliard & Eastman Repertoire",
-      tag: "Conservatory Chair",
-      year: "Patron Since 2008"
-    },
-    {
-      quote: "I shipped my 1920 French viola across the country specifically for Matthew to carve a custom soundpost. The balance across the C and A strings is now pure velvet.",
-      author: "Sarah Jenkins",
-      signature: "Sarah Jenkins",
-      role: "Grammy-Nominated Chamber Musician",
-      credential: "Verified Patron · Soundpost Optimization",
-      tag: "Chamber Soloist",
-      year: "Patron Since 2021"
-    },
-    {
-      quote: "Simply unmatched craftsmanship, integrity, and warmth. Finding this level of Parisian and Cremonese atelier standards in St. Matthews is an extraordinary treasure for Kentucky.",
-      author: "David Alessi",
-      signature: "David Alessi",
-      role: "Juilliard Alumnus & Principal Violist",
-      credential: "Verified Patron · Pernambuco Bow Calibration",
-      tag: "Recording Artist",
-      year: "Patron Since 2016"
-    }
-  ];
 
   // Auto-advance reviews (resets timer smoothly on interaction)
   useEffect(() => {
@@ -283,11 +137,20 @@ function HomeContent() {
       {/* Header */}
       <header className="absolute top-0 left-0 w-full px-4 sm:px-6 md:px-12 py-3.5 sm:py-5 md:py-8 z-40 flex justify-between items-center text-[10px] tracking-[0.2em] uppercase text-[#1A1A17]">
         <div className="flex flex-col">
-          <span className="font-bold tracking-[0.2em] sm:tracking-widest text-[#1A1A17] text-xs sm:text-sm">LANE & EDWARDS</span>
-          <span className="text-[7.5px] sm:text-[9px] tracking-[0.25em] text-[#9B7E58] font-medium hidden sm:block">EST. 1976 · LUTHIER ATELIER</span>
+          <span className="font-bold tracking-[0.2em] sm:tracking-widest text-[#1A1A17] text-xs sm:text-sm">{content.workshop.shopName}</span>
+          <span className="text-[7.5px] sm:text-[9px] tracking-[0.25em] text-[#9B7E58] font-medium hidden sm:block">{content.workshop.tagline}</span>
         </div>
         
         <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
+          <Link
+            href="/portal"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 border border-[#D4AF37]/60 bg-[#D4AF37]/10 hover:bg-[#D4AF37] text-[#7A5B32] hover:text-[#1A1A17] transition-all cursor-pointer shadow-xs text-[9px] sm:text-[10px] font-bold"
+            title="Master Atelier Portal"
+          >
+            <Sparkles size={11} className="text-[#D4AF37] group-hover:text-[#1A1A17] shrink-0" />
+            <span>Portal</span>
+          </Link>
+
           <button 
             onClick={() => {
               const el = document.getElementById('the-story');
@@ -311,15 +174,15 @@ function HomeContent() {
           </button>
           
           <a
-            href="tel:5026905908"
+            href={`tel:${content.workshop.phone}`}
             className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 bg-[#1A1A17] text-white hover:bg-[#9B7E58] transition-colors cursor-pointer shadow-md text-[9px] sm:text-[10px]"
           >
             <Phone size={11} className="text-[#9B7E58] shrink-0" />
-            <span className="hidden sm:inline font-mono">(502) 690-5908</span>
+            <span className="hidden sm:inline font-mono">{content.workshop.phoneFormatted}</span>
             <span className="sm:hidden font-mono">Call</span>
           </a>
 
-          <span className="hidden lg:flex items-center gap-1.5 text-[#1A1A17]/50 text-[10px]"><MapPin size={11} /> Louisville, KY</span>
+          <span className="hidden lg:flex items-center gap-1.5 text-[#1A1A17]/50 text-[10px]"><MapPin size={11} /> {content.workshop.cityState}</span>
           <span className="hidden md:flex items-center gap-1.5 text-[#1A1A17]/50 text-[10px]"><Clock size={11} /> {currentTime || "..."}</span>
         </div>
       </header>
@@ -335,15 +198,14 @@ function HomeContent() {
           <div className="inline-flex items-center justify-center gap-2 sm:gap-3.5 px-3.5 sm:px-4 py-1 sm:py-1.5 mb-3 sm:mb-4 rounded-full border border-[#9B7E58]/30 bg-[#FAF8F2]/90 shadow-[0_2px_8px_rgba(155,126,88,0.06)]">
             <span className="text-[#9B7E58] text-[9px] sm:text-[11px] leading-none">✦</span>
             <span className="text-[8.5px] sm:text-[10.5px] uppercase tracking-[0.18em] sm:tracking-[0.26em] font-bold text-[#7A5B32]">
-              <span className="sm:hidden">Independent Workshop · Handcrafted Since 1976</span>
-              <span className="hidden sm:inline">Independent Luthier Workshop · Handcrafted Tone Since 1976</span>
+              {content.announcementBadge}
             </span>
             <span className="text-[#9B7E58] text-[9px] sm:text-[11px] leading-none">✦</span>
           </div>
           
-          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">How may we assist your sound today?</h1>
+          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">{content.heroTitle}</h1>
           <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#1A1A17]/70 mt-2 max-w-2xl mx-auto font-light leading-relaxed">
-            Every bridge carved by hand. Every plate graduated for acoustic truth. Built with devotion no factory can buy.
+            {content.heroSubtitle}
           </p>
         </div>
 
@@ -377,7 +239,7 @@ function HomeContent() {
                 
                 <div className={`grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 auto-rows-[135px] sm:auto-rows-[160px] md:auto-rows-[250px]`}>
                   {bentoItems.filter(i => i.category === category).map((item) => {
-                    const Icon = item.icon;
+                    const Icon = ICON_MAP[item.iconName] || Music;
                     const isLarge = item.rowSpan.includes('row-span-2');
                     return (
                       <motion.button
@@ -492,15 +354,15 @@ function HomeContent() {
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-16 pb-10 border-b border-[#FAF9F5]/10">
             <div>
               <div className="flex items-center gap-4 text-[#D4AF37] mb-3">
-                <span className="text-[11px] tracking-[0.35em] font-bold uppercase">Volume 05 // The Wallace Avenue Chronicle</span>
+                <span className="text-[11px] tracking-[0.35em] font-bold uppercase">{content.story.volumeTag}</span>
                 <div className="h-[1px] w-20 bg-[#D4AF37]" />
               </div>
               <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#FAF9F5] tracking-tight">
-                The Craft That Refused to Yield
+                {content.story.headline}
               </h2>
             </div>
             <p className="font-serif italic text-lg sm:text-xl text-[#FAF9F5]/70 max-w-xl font-light">
-              How a boy fitted for a rental in 1988 grew into a master luthier who held his ground when conglomerates circled—preserving what automated factories can never replicate: acoustic truth.
+              {content.story.subtitle}
             </p>
           </div>
 
@@ -511,57 +373,53 @@ function HomeContent() {
             <div className="lg:col-span-7 flex flex-col bg-[#1A1A17] border-2 border-[#FAF9F5]/15 p-8 lg:p-10 shadow-2xl relative">
               <div className="flex items-center gap-3 mb-6">
                 <span className="px-3 py-1 bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-widest font-bold">
-                  The Louisville Chronicle
+                  {content.story.benchBadge}
                 </span>
                 <span className="text-xs text-[#FAF9F5]/40 uppercase tracking-wider font-mono">
-                  315 Wallace Ave · 1988 — Today
+                  {content.story.benchSubtext}
                 </span>
               </div>
 
               {/* Bench Image with Badge */}
               <div className="relative w-full h-[320px] sm:h-[400px] border border-[#FAF9F5]/20 overflow-hidden mb-8 group">
                 <Image
-                  src="/atelier/matt_repair_work.jpg"
-                  alt="Matthew Lane graduating an instrument plate at the bench"
+                  src={content.story.benchImage}
+                  alt={content.story.benchTitle}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 text-white">
                   <div>
-                    <p className="font-serif text-lg font-bold">Matthew Lane at the Bench</p>
-                    <p className="text-xs text-white/70">Hand-graduating plate thickness to 0.1mm acoustic tolerance</p>
+                    <p className="font-serif text-lg font-bold">{content.story.benchTitle}</p>
+                    <p className="text-xs text-white/70">{content.story.benchSubtitle}</p>
                   </div>
                   <span className="text-[10px] uppercase tracking-widest px-2.5 py-1 bg-black/60 border border-white/20 backdrop-blur-sm">
-                    No CNC Machines
+                    {content.story.benchPill}
                   </span>
                 </div>
               </div>
 
               {/* Story Narrative */}
               <div className="space-y-4 font-serif text-[#FAF9F5]/85 text-base sm:text-lg leading-relaxed">
-                <p>
-                  In <strong className="text-white font-sans font-semibold">1988</strong>, a nine-year-old boy stepped into Mark Edwards Violins on Wallace Avenue. Mark carefully fitted him for his very first rental violin. That boy was <strong className="text-[#D4AF37] font-sans font-semibold">Matthew Lane</strong>.
-                </p>
-                <p className="text-sm sm:text-base font-sans text-[#FAF9F5]/70 leading-relaxed">
-                  Most students eventually set their instruments down. Matt never did. In 2005, he returned to the shop not as a customer, but as Mark&apos;s dedicated apprentice. For over two decades, the two worked shoulder-to-shoulder, preserving the exact hand-carving, varnishing, and acoustic arching disciplines handed down through Cremona and Paris.
-                </p>
-                <p className="text-sm sm:text-base font-sans text-[#FAF9F5]/70 leading-relaxed">
-                  When Mark Edwards passed in early 2026, corporate music chains and private-equity retail aggregators circled with acquisition offers. Matt refused every inquiry. Instead, he renewed the craftsman&apos;s sacred promise: <em className="text-white">every violin, viola, and cello that leaves this door will be personally tuned and set up by hand, backed by 100% lifetime equity, and built with an integrity no assembly line could ever buy.</em>
-                </p>
+                {content.story.paragraphs.map((p, idx) => (
+                  <p key={idx} className={idx === 0 ? "" : "text-sm sm:text-base font-sans text-[#FAF9F5]/70 leading-relaxed"}>
+                    {p}
+                  </p>
+                ))}
               </div>
 
               {/* Action Buttons */}
               <div className="mt-8 pt-6 border-t border-[#FAF9F5]/10 flex flex-wrap gap-4">
                 <button
                   onClick={() => setSelectedIntent('legacy')}
-                  className="px-6 py-3 bg-[#D4AF37] hover:bg-[#c49f2e] text-[#1A1A17] font-bold text-xs uppercase tracking-widest transition-all shadow-[4px_4px_0px_#FAF9F5]"
+                  className="px-6 py-3 bg-[#D4AF37] hover:bg-[#c49f2e] text-[#1A1A17] font-bold text-xs uppercase tracking-widest transition-all shadow-[4px_4px_0px_#FAF9F5] cursor-pointer"
                 >
                   Read Workshop Archive
                 </button>
                 <button
                   onClick={() => setSelectedIntent('repair')}
-                  className="px-6 py-3 bg-transparent hover:bg-white/10 text-[#FAF9F5] border border-[#FAF9F5]/40 font-bold text-xs uppercase tracking-widest transition-all"
+                  className="px-6 py-3 bg-transparent hover:bg-white/10 text-[#FAF9F5] border border-[#FAF9F5]/40 font-bold text-xs uppercase tracking-widest transition-all cursor-pointer"
                 >
                   Consult Master Luthier
                 </button>
@@ -578,10 +436,10 @@ function HomeContent() {
                   <span className="text-[11px] font-mono uppercase tracking-[0.2em] font-bold">Tenet 01</span>
                 </div>
                 <h3 className="font-serif text-2xl text-white font-medium">
-                  The Hand vs. The 10,000-Box Factory
+                  {content.story.tenet1.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#FAF9F5]/70 leading-relaxed font-sans">
-                  Corporate distributors order shipping containers of mass-pressed plywood instruments drowned in thick polyurethane that suffocates resonance. At Lane &amp; Edwards, every bridge is carved by hand, every soundpost is positioned to 0.1mm, and every spruce plate is graduated with micro finger planes until the wood breathes like a cathedral.
+                  {content.story.tenet1.text}
                 </p>
               </div>
 
@@ -592,10 +450,10 @@ function HomeContent() {
                   <span className="text-[11px] font-mono uppercase tracking-[0.2em] font-bold">Tenet 02</span>
                 </div>
                 <h3 className="font-serif text-2xl text-white font-medium">
-                  The 100% Equity Shield
+                  {content.story.tenet2.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#FAF9F5]/70 leading-relaxed font-sans">
-                  The mass-retail model thrives on planned obsolescence and steep depreciation—where families lose 80% of their investment on disposable student instruments. At Lane &amp; Edwards, 100% of your rental and instrument payments transfer directly toward future master acquisitions. We protect your family&apos;s musical journey for life.
+                  {content.story.tenet2.text}
                 </p>
               </div>
 
@@ -606,22 +464,22 @@ function HomeContent() {
                   <span className="text-[11px] font-mono uppercase tracking-[0.2em] font-bold">Tenet 03</span>
                 </div>
                 <h3 className="font-serif text-2xl text-white font-medium">
-                  Two Decades of Master Mentorship
+                  {content.story.tenet3.title}
                 </h3>
                 <div className="relative w-full h-44 border border-[#FAF9F5]/20 overflow-hidden my-1">
                   <Image
-                    src="/atelier/matt_and_mark_portrait.jpg"
-                    alt="Mark Edwards and Matthew Lane in the Louisville workshop"
+                    src={content.story.tenet3.image}
+                    alt={content.story.tenet3.caption}
                     fill
                     className="object-cover filter contrast-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   <span className="absolute bottom-2 left-3 text-[10px] font-mono uppercase tracking-widest text-[#D4AF37]">
-                    Mark Edwards (1952–2026) &amp; Matthew Lane
+                    {content.story.tenet3.caption}
                   </span>
                 </div>
                 <p className="text-xs text-[#FAF9F5]/70 leading-relaxed font-sans">
-                  Conglomerates have automated factories, quarterly investor calls, and overseas assembly lines. This workshop has razor-sharp French gouges, Balkan maple seasoned across generations, and an ear tuned over forty years of devotion. When the bow meets the string, true tone speaks for itself.
+                  {content.story.tenet3.text}
                 </p>
               </div>
 
@@ -634,12 +492,12 @@ function HomeContent() {
             <Quote className="absolute right-6 top-6 text-[#D4AF37]/10 w-24 h-24 pointer-events-none" />
             <div className="max-w-4xl relative z-10">
               <p className="font-serif italic text-xl sm:text-2xl lg:text-3xl text-white leading-relaxed mb-6 font-light">
-                &ldquo;A violin is not a commodity SKU in a corporate distribution center. It is three hundred years of living geometry held under sixty pounds of string tension, waiting for a human hand to awaken its voice. We answer only to the player, the teacher, and the music.&rdquo;
+                &ldquo;{content.story.masterQuote.quote}&rdquo;
               </p>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-[#FAF9F5]/15">
                 <div>
-                  <p className="font-serif text-base font-bold text-[#D4AF37] tracking-wider uppercase">Matthew Lane</p>
-                  <p className="text-xs text-[#FAF9F5]/60 font-mono">Master Luthier &amp; Proprietor · Lane &amp; Edwards Violins</p>
+                  <p className="font-serif text-base font-bold text-[#D4AF37] tracking-wider uppercase">{content.story.masterQuote.author}</p>
+                  <p className="text-xs text-[#FAF9F5]/60 font-mono">{content.story.masterQuote.role}</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <button
@@ -664,13 +522,19 @@ function HomeContent() {
       <footer className="w-full bg-[#1A1A17] text-white py-12 px-6 border-t-2 border-[#9B7E58]/30">
         <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-white/50">
           <div className="flex items-center gap-4">
-            <span className="font-serif text-base tracking-widest text-white">LANE & EDWARDS</span>
+            <span className="font-serif text-base tracking-widest text-white">{content.workshop.shopName}</span>
             <span>·</span>
-            <span>315 Wallace Ave, Louisville, KY</span>
+            <span>{content.workshop.address}</span>
           </div>
 
-          <div className="flex items-center gap-4 text-white/50">
+          <div className="flex items-center gap-6 text-white/50">
             <span>© 1976 – 2026 Lane &amp; Edwards Violins. All rights reserved.</span>
+            <Link
+              href="/portal"
+              className="text-[#D4AF37] hover:text-white transition-colors flex items-center gap-1.5 font-mono text-[11px] font-semibold"
+            >
+              <span>✦ Master Luthier Portal</span>
+            </Link>
           </div>
         </div>
       </footer>
@@ -718,7 +582,10 @@ function HomeContent() {
                 
                 <div className="flex items-center gap-4 mb-10">
                   <motion.div layoutId={`icon-${selectedItem.id}`} className="w-16 h-16 rounded-full flex items-center justify-center border shrink-0 bg-[#1A1A17]/5 border-[#1A1A17]/10 text-[#9B7E58]">
-                    <selectedItem.icon size={28} />
+                    {(() => {
+                      const ModalIcon = ICON_MAP[selectedItem.iconName] || Music;
+                      return <ModalIcon size={28} />;
+                    })()}
                   </motion.div>
                 </div>
                 
