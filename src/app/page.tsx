@@ -55,7 +55,20 @@ function HomeContent() {
     };
     updateTime();
     const clockTimer = setInterval(updateTime, 60000);
-    return () => clearInterval(clockTimer);
+
+    // Secret shortcut for Matthew: Ctrl+Shift+A or Cmd+Shift+A opens the portal
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        window.location.href = '/portal';
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearInterval(clockTimer);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   // Auto-advance reviews (resets timer smoothly on interaction)
@@ -142,15 +155,6 @@ function HomeContent() {
         </div>
         
         <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
-          <Link
-            href="/portal"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 border border-[#D4AF37]/60 bg-[#D4AF37]/10 hover:bg-[#D4AF37] text-[#7A5B32] hover:text-[#1A1A17] transition-all cursor-pointer shadow-xs text-[9px] sm:text-[10px] font-bold"
-            title="Master Atelier Portal"
-          >
-            <Sparkles size={11} className="text-[#D4AF37] group-hover:text-[#1A1A17] shrink-0" />
-            <span>Portal</span>
-          </Link>
-
           <button 
             onClick={() => {
               const el = document.getElementById('the-story');
@@ -527,13 +531,14 @@ function HomeContent() {
             <span>{content.workshop.address}</span>
           </div>
 
-          <div className="flex items-center gap-6 text-white/50">
+          <div className="flex items-center gap-4 text-white/50">
             <span>© 1976 – 2026 Lane &amp; Edwards Violins. All rights reserved.</span>
             <Link
               href="/portal"
-              className="text-[#D4AF37] hover:text-white transition-colors flex items-center gap-1.5 font-mono text-[11px] font-semibold"
+              className="text-white/20 hover:text-[#9B7E58] transition-colors text-[9px] font-mono tracking-widest uppercase hover:underline ml-1"
+              title="Proprietor Studio"
             >
-              <span>✦ Master Luthier Portal</span>
+              [atelier]
             </Link>
           </div>
         </div>

@@ -5,7 +5,29 @@ import { VIPBooking } from '@/context/CartContext';
 
 const DB_PATH = path.join(process.cwd(), 'src', 'data', 'bookings.json');
 
-function readBookings(): VIPBooking[] {
+const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+async function readBookings(): Promise<VIPBooking[]> {
+  // 1. Try Vercel KV first
+  if (KV_URL && KV_TOKEN) {
+    try {
+      const res = await fetch(`${KV_URL}/get/vip_bookings`, {
+        headers: { Authorization: `Bearer ${KV_TOKEN}` },
+        cache: 'no-store'
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.result) {
+          return typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed reading bookings from KV:', e);
+    }
+  }
+
+  // 2. Fall back to local file
   try {
     if (fs.existsSync(DB_PATH)) {
       const data = fs.readFileSync(DB_PATH, 'utf-8');
@@ -17,7 +39,24 @@ function readBookings(): VIPBooking[] {
   return [];
 }
 
-function writeBookings(bookings: VIPBooking[]) {
+async function writeBookings(bookings: VIPBooking[]) {
+  // 1. Save to Vercel KV if available
+  if (KV_URL && KV_TOKEN) {
+    try {
+      await fetch(`${KV_URL}/set/vip_bookings`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${KV_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(JSON.stringify(bookings))
+      });
+    } catch (e) {
+      console.warn('Failed writing bookings to KV:', e);
+    }
+  }
+
+  // 2. Also try writing local file with safe catch for Vercel read-only fs
   try {
     const dir = path.dirname(DB_PATH);
     if (!fs.existsSync(dir)) {
@@ -25,12 +64,12 @@ function writeBookings(bookings: VIPBooking[]) {
     }
     fs.writeFileSync(DB_PATH, JSON.stringify(bookings, null, 2), 'utf-8');
   } catch (err) {
-    console.error('Failed writing bookings database:', err);
+    // Graceful catch for read-only Vercel filesystem
   }
 }
 
 export async function GET() {
-  const bookings = readBookings();
+  const bookings = await readBookings();
   return NextResponse.json({ success: true, bookings });
 }
 
@@ -71,9 +110,9 @@ export async function POST(req: Request) {
       createdAt: new Date().toISOString(),
     };
 
-    const current = readBookings();
+    const current = await readBookings();
     const updated = [newBooking, ...current];
-    writeBookings(updated);
+    await writeBookings(updated);
 
     return NextResponse.json({ success: true, booking: newBooking });
   } catch (err) {
@@ -87,9 +126,9 @@ export async function PATCH(req: Request) {
     const body = await req.json();
     const { id, status } = body;
 
-    const current = readBookings();
+    const current = await readBookings();
     const updated = current.map(b => (b.id === id ? { ...b, status } : b));
-    writeBookings(updated);
+    await writeBookings(updated);
 
     return NextResponse.json({ success: true, bookings: updated });
   } catch (err) {
@@ -107,9 +146,9 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ success: false, error: 'ID required' }, { status: 400 });
     }
 
-    const current = readBookings();
+    const current = await readBookings();
     const updated = current.filter(b => b.id !== id);
-    writeBookings(updated);
+    await writeBookings(updated);
 
     return NextResponse.json({ success: true, bookings: updated });
   } catch (err) {
