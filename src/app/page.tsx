@@ -281,19 +281,22 @@ function HomeContent() {
       <div className="pointer-events-none fixed inset-0 z-[999] opacity-[0.03] mix-blend-difference" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }} />
 
       {/* Header */}
-      <header className="absolute top-0 left-0 w-full p-6 md:p-8 md:px-12 z-40 flex justify-between items-center text-[10px] tracking-[0.2em] uppercase text-[#1A1A17]">
-        <span className="font-bold tracking-widest text-[#1A1A17] text-xs">LANE & EDWARDS</span>
+      <header className="absolute top-0 left-0 w-full px-4 sm:px-6 md:px-12 py-3.5 sm:py-5 md:py-8 z-40 flex justify-between items-center text-[10px] tracking-[0.2em] uppercase text-[#1A1A17]">
+        <div className="flex flex-col">
+          <span className="font-bold tracking-[0.2em] sm:tracking-widest text-[#1A1A17] text-xs sm:text-sm">LANE & EDWARDS</span>
+          <span className="text-[7.5px] sm:text-[9px] tracking-[0.25em] text-[#9B7E58] font-medium hidden sm:block">EST. 1976 · LUTHIER ATELIER</span>
+        </div>
         
-        <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
           <button 
             onClick={() => {
               const el = document.getElementById('the-story');
               el?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-[#1A1A17] text-[#1A1A17] hover:bg-[#1A1A17] hover:text-white transition-all cursor-pointer shadow-sm"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 border border-[#1A1A17]/30 hover:border-[#1A1A17] text-[#1A1A17] hover:bg-[#1A1A17] hover:text-white transition-all cursor-pointer shadow-xs text-[9px] sm:text-[10px]"
           >
-            <BookOpen size={13} className="text-[#9B7E58]" />
-            <span className="font-bold">The Story</span>
+            <BookOpen size={11} className="text-[#9B7E58] shrink-0" />
+            <span className="font-bold"><span className="hidden xs:inline">The </span>Story</span>
           </button>
 
           <button 
@@ -301,39 +304,45 @@ function HomeContent() {
               const el = document.getElementById('boutique');
               el?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-[#9B7E58] text-[#1A1A17] hover:bg-[#9B7E58] hover:text-white transition-all cursor-pointer shadow-sm"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 border border-[#9B7E58] text-[#1A1A17] hover:bg-[#9B7E58] hover:text-white transition-all cursor-pointer shadow-xs text-[9px] sm:text-[10px]"
           >
-            <Sparkles size={13} className="text-[#9B7E58]" />
+            <Sparkles size={11} className="text-[#9B7E58] shrink-0" />
             <span className="font-bold">Collection</span>
           </button>
           
           <a
             href="tel:5026905908"
-            className="flex items-center gap-2 px-3.5 py-1.5 bg-[#1A1A17] text-white hover:bg-[#9B7E58] transition-colors cursor-pointer shadow-md"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 bg-[#1A1A17] text-white hover:bg-[#9B7E58] transition-colors cursor-pointer shadow-md text-[9px] sm:text-[10px]"
           >
-            <Phone size={13} className="text-[#9B7E58]" />
+            <Phone size={11} className="text-[#9B7E58] shrink-0" />
             <span className="hidden sm:inline font-mono">(502) 690-5908</span>
             <span className="sm:hidden font-mono">Call</span>
           </a>
 
-          <span className="hidden lg:flex items-center gap-2 text-[#1A1A17]/50"><MapPin size={12} /> Louisville, KY</span>
-          <span className="hidden md:flex items-center gap-2 text-[#1A1A17]/50"><Clock size={12} /> {currentTime || "..."}</span>
+          <span className="hidden lg:flex items-center gap-1.5 text-[#1A1A17]/50 text-[10px]"><MapPin size={11} /> Louisville, KY</span>
+          <span className="hidden md:flex items-center gap-1.5 text-[#1A1A17]/50 text-[10px]"><Clock size={11} /> {currentTime || "..."}</span>
         </div>
       </header>
 
       {/* The Asymmetric Split Hub */}
-      <section className={`w-full flex-1 flex flex-col pt-14 sm:pt-20 md:pt-32 px-3 sm:px-6 md:px-12 pb-16 md:pb-24 transition-all duration-700 relative ${selectedIntent ? 'opacity-0 scale-95 pointer-events-none blur-md' : 'opacity-100 scale-100 blur-0'}`}>
+      <section className={`w-full flex-1 flex flex-col pt-20 sm:pt-24 md:pt-36 px-3 sm:px-6 md:px-12 pb-16 md:pb-24 transition-all duration-700 relative ${selectedIntent ? 'opacity-0 scale-95 pointer-events-none blur-md' : 'opacity-100 scale-100 blur-0'}`}>
         
         {/* Subtle Ambient Radial Highlight to enrich tonewood and contrast against white cards */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(155,126,88,0.07),transparent_70%)] pointer-events-none" />
         
-        <div className="text-left md:text-center mb-4 sm:mb-6 md:mb-12 pl-1 md:pl-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-[#9B7E58]/10 border border-[#9B7E58]/30 text-[#9B7E58] text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#9B7E58] animate-pulse" />
-            <span>Independent Luthier Workshop · Handcrafted Tone Since 1976</span>
+        <div className="text-center mb-4 sm:mb-6 md:mb-12 max-w-4xl mx-auto px-2">
+          {/* Refined Atelier Heritage Hallmark */}
+          <div className="inline-flex items-center justify-center gap-2 sm:gap-3.5 px-3.5 sm:px-4 py-1 sm:py-1.5 mb-3 sm:mb-4 rounded-full border border-[#9B7E58]/30 bg-[#FAF8F2]/90 shadow-[0_2px_8px_rgba(155,126,88,0.06)]">
+            <span className="text-[#9B7E58] text-[9px] sm:text-[11px] leading-none">✦</span>
+            <span className="text-[8.5px] sm:text-[10.5px] uppercase tracking-[0.18em] sm:tracking-[0.26em] font-bold text-[#7A5B32]">
+              <span className="sm:hidden">Independent Workshop · Handcrafted Since 1976</span>
+              <span className="hidden sm:inline">Independent Luthier Workshop · Handcrafted Tone Since 1976</span>
+            </span>
+            <span className="text-[#9B7E58] text-[9px] sm:text-[11px] leading-none">✦</span>
           </div>
+          
           <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1A1A17] tracking-tight">How may we assist your sound today?</h1>
-          <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#1A1A17]/70 mt-2 max-w-2xl mx-auto font-light">
+          <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#1A1A17]/70 mt-2 max-w-2xl mx-auto font-light leading-relaxed">
             Every bridge carved by hand. Every plate graduated for acoustic truth. Built with devotion no factory can buy.
           </p>
         </div>
