@@ -66,7 +66,6 @@ export default function AtelierPortalPage() {
 
   // Active Tab
   const [activeTab, setActiveTab] = useState<PortalTab>('bento');
-  const [splitPreview, setSplitPreview] = useState(false);
 
   // Image Swapper State
   const [swapperOpen, setSwapperOpen] = useState(false);
@@ -345,19 +344,6 @@ export default function AtelierPortalPage() {
               All Content Live {lastSaved && `(${lastSaved})`}
             </span>
           )}
-
-          {/* Split Preview Toggle */}
-          <button
-            onClick={() => setSplitPreview(!splitPreview)}
-            className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
-              splitPreview
-                ? 'bg-[#D4AF37] text-[#1A1A17] border-[#D4AF37]'
-                : 'bg-white/5 border-white/20 text-white hover:bg-white/10'
-            }`}
-          >
-            <Eye size={13} />
-            <span>{splitPreview ? 'Close Split View' : 'Live Split Preview'}</span>
-          </button>
         </div>
 
         {/* Right Action Buttons */}
@@ -396,9 +382,9 @@ export default function AtelierPortalPage() {
       </header>
 
       {/* Main Body */}
-      <div className={`flex-1 flex flex-col ${splitPreview ? 'lg:flex-row' : ''} overflow-hidden`}>
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Editor Column */}
-        <div className={`flex-1 flex flex-col overflow-y-auto ${splitPreview ? 'lg:w-1/2 lg:border-r-2 lg:border-[#1A1A17]/20' : 'w-full max-w-[1500px] mx-auto'}`}>
+        <div className="flex-1 flex flex-col overflow-y-auto w-full max-w-[1500px] mx-auto">
           {/* Tabs Navigation */}
           <div className="bg-[#FAF9F5] border-b border-[#1A1A17]/10 px-4 sm:px-8 pt-4 flex items-center gap-2 overflow-x-auto no-scrollbar">
             {[
@@ -1820,23 +1806,6 @@ export default function AtelierPortalPage() {
             {activeTab === 'bookings' && <PortalBookingsInbox />}
           </div>
         </div>
-
-        {/* Live Split Preview Column (Shown when splitPreview is true) */}
-        {splitPreview && (
-          <div className="w-full lg:w-1/2 h-[500px] lg:h-auto bg-[#1A1A17] flex flex-col border-t-2 lg:border-t-0 border-[#1A1A17]">
-            <div className="px-4 py-2 bg-[#24231E] text-white flex items-center justify-between text-xs border-b border-white/10">
-              <span className="font-mono text-[#D4AF37] text-[10px] uppercase font-bold flex items-center gap-1.5">
-                <Eye size={12} /> Live Storefront Viewport
-              </span>
-              <span className="text-[10px] text-white/50">Auto-refreshes with published changes</span>
-            </div>
-            <iframe
-              src="/"
-              className="w-full flex-1 border-0 bg-white"
-              title="Storefront Preview"
-            />
-          </div>
-        )}
       </div>
 
       {/* Image Swapper Modal */}
