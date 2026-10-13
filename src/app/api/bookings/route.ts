@@ -52,8 +52,6 @@ export async function POST(req: Request) {
 
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
     const id = `PASS-LE-${randomDigits}`;
-    const commissionRate = 0.05;
-    const commissionAmount = Math.round(Number(productPrice) * commissionRate * 100) / 100;
 
     const newBooking: VIPBooking = {
       id,
@@ -67,8 +65,8 @@ export async function POST(req: Request) {
       productId,
       productName,
       productPrice: Number(productPrice),
-      commissionRate,
-      commissionAmount,
+      commissionRate: 0,
+      commissionAmount: 0,
       status: 'scheduled',
       createdAt: new Date().toISOString(),
     };

@@ -218,7 +218,7 @@ export function BoutiqueCart() {
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 size={14} className="text-[#9B7E58]" />
-                      <span>Certified Luthier Voicing</span>
+                      <span>Master Luthier Bench Setup</span>
                     </div>
                   </div>
                 </>

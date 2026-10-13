@@ -89,13 +89,11 @@ interface CartContextType {
   setCheckoutState: (state: 'idle' | 'checkout' | 'trial' | 'confirmed') => void;
   lastOrderNumber: string;
   setLastOrderNumber: (num: string) => void;
-  // VIP In-Shop Playing Sessions & 5% Commission
+  // VIP In-Shop Playing Sessions
   bookingProduct: Product | null;
   setBookingProduct: (product: Product | null) => void;
   isBookingModalOpen: boolean;
   setIsBookingModalOpen: (open: boolean) => void;
-  isLedgerOpen: boolean;
-  setIsLedgerOpen: (open: boolean) => void;
   vipBookings: VIPBooking[];
   addVIPBooking: (booking: Omit<VIPBooking, 'id' | 'createdAt' | 'commissionRate' | 'commissionAmount' | 'status'>) => VIPBooking;
   updateBookingStatus: (id: string, status: VIPBookingStatus) => void;
@@ -160,10 +158,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // VIP Booking and Commission Ledger state
+  // VIP Booking in-shop acoustic trials
   const [bookingProduct, setBookingProduct] = useState<Product | null>(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [isLedgerOpen, setIsLedgerOpen] = useState(false);
 
   const [vipBookings, setVipBookings] = useState<VIPBooking[]>(() => {
     if (typeof window !== 'undefined') {
@@ -319,8 +316,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setBookingProduct,
         isBookingModalOpen,
         setIsBookingModalOpen,
-        isLedgerOpen,
-        setIsLedgerOpen,
         vipBookings,
         addVIPBooking,
         updateBookingStatus,

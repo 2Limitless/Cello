@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { Search, Plus, Eye, ShieldCheck, Check, Calendar } from 'lucide-react';
+import { Search, Plus, Eye, ShieldCheck, Check, Calendar, BookOpen } from 'lucide-react';
 import { PRODUCTS, Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 
@@ -94,6 +94,17 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full lg:w-auto">
+            <button
+              onClick={() => {
+                const el = document.getElementById('the-story');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-6 py-4 bg-white border-2 border-[#1A1A17] text-[#1A1A17] uppercase tracking-[0.2em] text-xs font-bold shadow-[4px_4px_0px_#1A1A17] hover:bg-[#1A1A17] hover:text-white transition-all flex items-center gap-3 cursor-pointer"
+            >
+              <BookOpen size={15} className="text-[#9B7E58]" />
+              <span>Our Story &amp; Ethos</span>
+            </button>
+
             <div className="px-6 py-4 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold shadow-xl flex items-center gap-3">
               <Calendar size={15} className="text-[#9B7E58]" />
               <span>Acoustic Trials by Appointment</span>
