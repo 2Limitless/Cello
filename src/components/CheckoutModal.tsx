@@ -139,7 +139,7 @@ export function CheckoutModal() {
                   <div>
                     <span className="text-xs text-[#1A1A17]/60">Total Acquisition:</span>
                     <div className="font-serif text-2xl font-bold text-[#1A1A17]">
-                      ${total.toLocaleString()}
+                      ${total.toFixed(2)}
                     </div>
                   </div>
                   <div className="text-right text-xs">
@@ -295,7 +295,7 @@ export function CheckoutModal() {
                     <span>Engraving Atelier Record...</span>
                   ) : (
                     <>
-                      <span>{isTrial ? "Confirm 7-Day In-Home Trial" : `Authorize Acquisition — $${total.toLocaleString()}`}</span>
+                      <span>{isTrial ? "Confirm 7-Day In-Home Trial" : `Authorize Acquisition — $${total.toFixed(2)}`}</span>
                       <ArrowRight size={16} />
                     </>
                   )}

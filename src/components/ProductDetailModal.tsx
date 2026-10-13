@@ -67,7 +67,7 @@ export function ProductDetailModal() {
                 {selectedProduct.origin}
               </p>
               <h4 className="font-serif text-3xl md:text-4xl text-white mt-1">
-                ${selectedProduct.price.toLocaleString()}
+                ${selectedProduct.price.toFixed(2)}
               </h4>
             </div>
           </div>

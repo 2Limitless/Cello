@@ -62,7 +62,7 @@ export function VIPBookingModal() {
   // Pre-filled SMS Message for Matt Lane
   const workshopPhone = "5026905908"; // (502) 690-5908
   const smsMessage = createdBooking
-    ? `Hello Matt! I reserved an in-shop playing session for the ${createdBooking.productName} ($${createdBooking.productPrice.toLocaleString()}). My VIP Pass ID is ${createdBooking.id}. Musician: ${createdBooking.customerName}, Phone: ${createdBooking.customerPhone}, Requested: ${createdBooking.preferredDate} at ${createdBooking.preferredTime}. Looking forward to testing it at 315 Wallace Ave!`
+    ? `Hello Matt! I reserved an in-shop playing session for the ${createdBooking.productName} ($${createdBooking.productPrice.toFixed(2)}). My VIP Pass ID is ${createdBooking.id}. Musician: ${createdBooking.customerName}, Phone: ${createdBooking.customerPhone}, Requested: ${createdBooking.preferredDate} at ${createdBooking.preferredTime}. Looking forward to testing it at 315 Wallace Ave!`
     : '';
 
   // Cross-platform SMS URI (?&body works on both iOS and Android)
@@ -145,7 +145,7 @@ export function VIPBookingModal() {
                       <div className="pt-3 border-t border-[#1A1A17]/10 flex justify-between items-baseline">
                         <span className="text-xs uppercase tracking-wider text-[#1A1A17]/60 font-bold">Appraised Value</span>
                         <span className="font-serif text-2xl font-bold text-[#1A1A17]">
-                          ${bookingProduct.price.toLocaleString()}
+                          ${bookingProduct.price.toFixed(2)}
                         </span>
                       </div>
                     </div>
@@ -374,7 +374,7 @@ export function VIPBookingModal() {
                       <div>
                         <span className="text-[10px] uppercase tracking-wider text-white/50 block">Instrument Held</span>
                         <p className="font-serif text-xl text-white mt-0.5">{createdBooking.productName}</p>
-                        <p className="text-xs text-[#9B7E58] font-bold mt-0.5">${createdBooking.productPrice.toLocaleString()}</p>
+                        <p className="text-xs text-[#9B7E58] font-bold mt-0.5">${createdBooking.productPrice.toFixed(2)}</p>
                       </div>
 
                       <div>

@@ -150,7 +150,7 @@ export function BoutiqueCart() {
                             </div>
 
                             <span className="font-serif text-xl font-medium text-[#1A1A17]">
-                              ${(product.price * quantity).toLocaleString()}
+                              ${(product.price * quantity).toFixed(2)}
                             </span>
                           </div>
                         </div>
@@ -231,7 +231,7 @@ export function BoutiqueCart() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-[#1A1A17]/70">
                     <span>Acquisitions Subtotal</span>
-                    <span className="font-mono text-[#1A1A17]">${subtotal.toLocaleString()}</span>
+                    <span className="font-mono text-[#1A1A17]">${subtotal.toFixed(2)}</span>
                   </div>
 
                   {hasTradeIn && (
@@ -249,7 +249,7 @@ export function BoutiqueCart() {
                   <div className="flex justify-between items-baseline pt-3 border-t border-[#1A1A17]/10">
                     <span className="font-serif text-2xl text-[#1A1A17]">Final Investment</span>
                     <span className="font-serif text-3xl md:text-4xl font-bold text-[#1A1A17]">
-                      ${total.toLocaleString()}
+                      ${total.toFixed(2)}
                     </span>
                   </div>
                 </div>

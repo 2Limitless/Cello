@@ -104,10 +104,10 @@ export const getModalContent = (id: string) => {
             </div>
             <div className="divide-y-2 divide-[#1A1A17]/10 border-y-2 border-[#1A1A17]/10">
               {[
-                { title: "Violin / Viola", size: "Up to 13\" (3/4 Size)", price: "$19" },
-                { title: "Adult Violin / Viola", size: "14\" or Larger", price: "$29" },
-                { title: "Student Cello", size: "Up to 3/4 Size", price: "$38" },
-                { title: "Full Size Cello", size: "Professional Setup", price: "$59" },
+                { title: "Violin / Viola", size: "Up to 13\" (3/4 Size)", price: "$0.00" },
+                { title: "Adult Violin / Viola", size: "14\" or Larger", price: "$0.00" },
+                { title: "Student Cello", size: "Up to 3/4 Size", price: "$0.00" },
+                { title: "Full Size Cello", size: "Professional Setup", price: "$0.00" },
               ].map((item, idx) => (
                 <div key={idx} className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-10 group hover:pl-8 transition-all duration-500 cursor-default">
                   <div>

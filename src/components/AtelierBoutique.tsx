@@ -274,7 +274,7 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                       <div>
                         <span className="text-[10px] tracking-widest uppercase text-[#1A1A17]/50 block font-bold">Investment</span>
                         <span className="font-serif text-3xl font-bold text-[#1A1A17]">
-                          ${product.price.toLocaleString()}
+                          ${product.price.toFixed(2)}
                         </span>
                       </div>
 

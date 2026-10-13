@@ -40,9 +40,9 @@ const DEFAULT_BOOKINGS: VIPBooking[] = [
     notes: "Testing against personal 19th c. German violin for orchestra season.",
     productId: "guarneri-1742-replica",
     productName: "Guarneri del Gesù 'Il Cannone' Tribute",
-    productPrice: 4850,
-    commissionRate: 0.05,
-    commissionAmount: 242.50,
+    productPrice: 0.00,
+    commissionRate: 0.00,
+    commissionAmount: 0.00,
     status: "acquired",
     createdAt: "2026-10-08T14:20:00Z"
   },
@@ -57,9 +57,9 @@ const DEFAULT_BOOKINGS: VIPBooking[] = [
     notes: "Auditioning for Louisville Youth Orchestra principal cello seat.",
     productId: "montagnana-cello-soloist",
     productName: "Domenico Montagnana 1739 Pattern Cello",
-    productPrice: 6200,
-    commissionRate: 0.05,
-    commissionAmount: 310.00,
+    productPrice: 0.00,
+    commissionRate: 0.00,
+    commissionAmount: 0.00,
     status: "scheduled",
     createdAt: "2026-10-10T10:15:00Z"
   }
