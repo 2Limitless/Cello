@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: var(--font-playfair);
+  --font-serif: var(--font-cormorant);
+  --font-book: var(--font-eb-garamond);
   --font-sans: var(--font-inter);
-  --font-script: var(--font-script);
+  --font-script: var(--font-caveat);
+  --font-formal-script: var(--font-script);
+  --font-roman: var(--font-cinzel);
 }
 
 :root {
-  --background: #FAF9F5;
-  --foreground: #1A1A17;
+  --background: #F5EFE4;
+  --foreground: #22160E;
+  --amber-warm: #C68628;
+  --walnut-deep: #2A190E;
+  --spruce-tone: #8C5E2D;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-book), Georgia, serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
+.font-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.font-book {
+  font-family: var(--font-eb-garamond), Georgia, serif;
+}
+
+.font-roman {
+  font-family: var(--font-cinzel), serif;
+}
+
 .font-script {
+  font-family: var(--font-caveat), cursive;
+}
+
+.font-formal-script {
   font-family: var(--font-script), cursive;
+}
+
+/* Warm Parchment & Atelier Craft Styling */
+.parchment-sheet {
+  background: radial-gradient(circle at 50% 0%, #FFFDF9 0%, #FAF5EA 60%, #F3ECE0 100%);
+  border: 1px solid rgba(140, 98, 45, 0.22);
+  box-shadow: 0 4px 20px rgba(55, 30, 10, 0.05), inset 0 0 40px rgba(210, 175, 130, 0.12);
+}
+
+.parchment-card {
+  background: #FAF5EA;
+  border: 1px solid rgba(140, 98, 45, 0.2);
+  box-shadow: 0 6px 20px rgba(60, 35, 15, 0.06);
+}
+
+.craftsman-border-double {
+  border: 3px double rgba(140, 98, 45, 0.35);
 }
 
 /* Hide scrollbar for editorial layouts */

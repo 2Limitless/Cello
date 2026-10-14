@@ -36,7 +36,17 @@ export async function GET() {
         const productsRow = data.find((row) => row.id === 'site_products');
 
         if (contentRow?.data) {
-          content = { ...DEFAULT_SITE_CONTENT, ...contentRow.data };
+          content = {
+            ...DEFAULT_SITE_CONTENT,
+            ...contentRow.data,
+            story: {
+              ...DEFAULT_SITE_CONTENT.story,
+              ...(contentRow.data.story || {}),
+              tenet1: { ...DEFAULT_SITE_CONTENT.story.tenet1, ...(contentRow.data.story?.tenet1 || {}) },
+              tenet2: { ...DEFAULT_SITE_CONTENT.story.tenet2, ...(contentRow.data.story?.tenet2 || {}) },
+              tenet3: { ...DEFAULT_SITE_CONTENT.story.tenet3, ...(contentRow.data.story?.tenet3 || {}) },
+            }
+          };
           loadedFromSupabase = true;
         }
 

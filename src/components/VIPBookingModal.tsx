@@ -96,55 +96,55 @@ export function VIPBookingModal() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 280 }}
-          className="relative z-10 w-full max-w-4xl max-h-[94vh] bg-[#FAF9F5] border-4 border-[#1A1A17] shadow-2xl flex flex-col overflow-hidden md:rounded-[32px]"
+          className="relative z-10 w-full max-w-4xl max-h-[94vh] bg-[#FAF5EA] border-2 border-[#8C6239]/35 shadow-2xl flex flex-col overflow-hidden md:rounded-[30px]"
         >
           {/* Top Bar Header */}
-          <div className="bg-[#1A1A17] text-white px-6 py-4 flex items-center justify-between border-b-2 border-[#9B7E58] shrink-0">
+          <div className="bg-[#24160C] text-[#FAF5EA] px-6 py-4 flex items-center justify-between border-b-2 border-[#8C6239]/30 shrink-0">
             <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#9B7E58] animate-pulse" />
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#9B7E58] font-bold">
-                Louisville Workshop // Private Playing Session
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C68628] animate-pulse" />
+              <span className="font-serif text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
+                ✦ Louisville Workshop · Private Playing Session
               </span>
             </div>
             <button
               onClick={handleClose}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#9B7E58] text-white flex items-center justify-center transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#8C6239] text-white flex items-center justify-center transition-colors cursor-pointer"
             >
               <X size={16} />
             </button>
           </div>
 
           {/* Modal Body */}
-          <div className="p-6 md:p-10 overflow-y-auto no-scrollbar flex-1">
+          <div className="p-6 md:p-10 overflow-y-auto no-scrollbar flex-1 bg-[#FAF5EA] text-[#22160E]">
             {step === 'form' ? (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 {/* Left Column: Instrument Card & Value Proposition */}
                 <div className="lg:col-span-5 space-y-6">
-                  <div className="bg-white border-2 border-[#1A1A17] shadow-[6px_6px_0px_#1A1A17] overflow-hidden">
-                    <div className="relative aspect-[4/3] w-full bg-[#1A1A17]">
+                  <div className="bg-[#FAF4E6] border-2 border-[#8C6239]/30 shadow-[0_8px_24px_rgba(70,40,15,0.06)] rounded-[18px] overflow-hidden">
+                    <div className="relative aspect-[4/3] w-full bg-[#1A0E05]">
                       <Image
                         src={bookingProduct.image}
                         alt={bookingProduct.name}
                         fill
                         className="object-cover"
                       />
-                      <div className="absolute top-3 left-3 bg-[#1A1A17] text-[#9B7E58] text-[10px] tracking-widest uppercase font-bold px-2.5 py-1 border border-[#9B7E58]">
+                      <div className="absolute top-3 left-3 bg-[#1A0E05]/80 text-[#D4AF37] text-[10px] tracking-widest uppercase font-serif font-bold px-3 py-1 border border-[#D4AF37]/40 rounded-full">
                         Held for You
                       </div>
                     </div>
                     <div className="p-5 space-y-2">
-                      <span className="text-[10px] uppercase tracking-widest text-[#9B7E58] font-bold block">
+                      <span className="text-[10px] uppercase font-serif tracking-widest text-[#8C6239] font-bold block">
                         Master Instrument
                       </span>
-                      <h4 className="font-serif text-2xl text-[#1A1A17] leading-snug">
+                      <h4 className="font-serif text-2xl text-[#1E1107] leading-snug font-medium">
                         {bookingProduct.name}
                       </h4>
-                      <p className="font-serif italic text-xs text-[#1A1A17]/70">
+                      <p className="font-serif italic text-xs text-[#8C6239]">
                         {bookingProduct.subtitle}
                       </p>
-                      <div className="pt-3 border-t border-[#1A1A17]/10 flex justify-between items-baseline">
-                        <span className="text-xs uppercase tracking-wider text-[#1A1A17]/60 font-bold">Appraised Value</span>
-                        <span className="font-serif text-2xl font-bold text-[#1A1A17]">
+                      <div className="pt-3 border-t border-[#8C6239]/15 flex justify-between items-baseline">
+                        <span className="text-xs uppercase font-serif tracking-wider text-[#7C542A] font-bold">Appraised Value</span>
+                        <span className="font-serif text-2xl font-bold text-[#1E1107]">
                           ${bookingProduct.price.toFixed(2)}
                         </span>
                       </div>
@@ -152,12 +152,12 @@ export function VIPBookingModal() {
                   </div>
 
                   {/* Free Trial Reassurance Box */}
-                  <div className="bg-[#FAF9F5] border-2 border-[#9B7E58] p-5 space-y-3">
-                    <div className="flex items-center gap-2 text-[#9B7E58] font-bold text-xs uppercase tracking-widest">
-                      <Sparkles size={16} />
-                      <span>$0 Deposit // Zero Obligation</span>
+                  <div className="bg-[#FAF4E6] border border-[#8C6239]/30 p-5 space-y-3 rounded-[16px]">
+                    <div className="flex items-center gap-2 text-[#8C6239] font-serif font-bold text-xs uppercase tracking-widest">
+                      <Sparkles size={16} className="text-[#C68628]" />
+                      <span>$0 Deposit · Zero Obligation</span>
                     </div>
-                    <p className="text-xs text-[#1A1A17]/80 leading-relaxed font-light">
+                    <p className="text-xs text-[#4A2D13] leading-relaxed font-book">
                       Fine instruments must be felt under the ear and balanced in the hand. We prepare the instrument with optimal bridge cut and string tension prior to your arrival at our Louisville atelier.
                     </p>
                     <div className="flex items-start gap-2 pt-2 text-[11px] text-[#1A1A17]/70">

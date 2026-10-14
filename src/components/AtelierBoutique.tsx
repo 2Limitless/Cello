@@ -92,19 +92,19 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
 
 
   return (
-    <section id="boutique" className="w-full bg-[#FAF9F5] text-[#1A1A17] pt-12 pb-24 border-t-4 border-[#1A1A17]">
+    <section id="boutique" className="w-full bg-[#F6F0E5] text-[#22160E] pt-14 pb-28 border-t-4 border-[#8C6239]/40 relative">
       <div className="max-w-[1600px] mx-auto px-4 md:px-12">
         {/* Editorial Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16 pb-12 border-b-2 border-[#1A1A17]">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16 pb-12 border-b-2 border-[#8C6239]/25">
           <div>
-            <div className="flex items-center gap-4 text-[#9B7E58] mb-3">
-              <span className="text-[11px] tracking-[0.3em] font-bold uppercase">Volume 04 // Private Acquisitions</span>
-              <div className="h-[1px] w-20 bg-[#9B7E58]" />
+            <div className="flex items-center gap-4 text-[#8C6239] mb-3">
+              <span className="text-[11px] tracking-[0.3em] font-serif font-bold uppercase">Volume IV · Master Instrument Collection</span>
+              <div className="h-[1.5px] w-20 bg-gradient-to-r from-[#C68628] to-transparent" />
             </div>
-            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-[#1A1A17] tracking-tight">
+            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-[#1E1107] tracking-tight font-medium">
               The Atelier Boutique
             </h2>
-            <p className="font-serif italic text-xl md:text-2xl text-[#1A1A17]/80 mt-4 max-w-2xl font-light">
+            <p className="font-book italic text-xl md:text-2xl text-[#6D4721] mt-4 max-w-2xl font-light">
               Master instruments, pernambuco bows, and concert fittings—rigorously vetted and acoustically balanced in our Louisville workshop.
             </p>
           </div>
@@ -115,14 +115,14 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                 const el = document.getElementById('the-story');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 py-4 bg-white border-2 border-[#1A1A17] text-[#1A1A17] uppercase tracking-[0.2em] text-xs font-bold shadow-[4px_4px_0px_#1A1A17] hover:bg-[#1A1A17] hover:text-white transition-all flex items-center gap-3 cursor-pointer"
+              className="px-6 py-4 bg-[#FAF5EA] border-2 border-[#8C6239]/35 text-[#2A190E] font-serif text-xs uppercase tracking-widest font-bold shadow-[4px_4px_0px_#8C6239] hover:bg-[#8C6239] hover:text-[#FAF5EA] transition-all flex items-center gap-3 cursor-pointer rounded-lg"
             >
-              <BookOpen size={15} className="text-[#9B7E58]" />
+              <BookOpen size={15} className="text-[#8C6239]" />
               <span>Our Story &amp; Ethos</span>
             </button>
 
-            <div className="px-6 py-4 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold shadow-xl flex items-center gap-3">
-              <Calendar size={15} className="text-[#9B7E58]" />
+            <div className="px-6 py-4 bg-[#2A190E] text-[#FAF5EA] font-serif text-xs uppercase tracking-widest font-bold shadow-xl flex items-center gap-3 rounded-lg border border-[#8C6239]/30">
+              <Calendar size={15} className="text-[#C68628]" />
               <span>Acoustic Trials by Appointment</span>
             </div>
           </div>
@@ -134,18 +134,18 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
           <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
             {/* Search Input */}
             <div className="relative flex-1 max-w-md">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1A1A17]/40" />
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8C6239]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by maker, tonewood, or model..."
-                className="w-full pl-12 pr-4 py-3.5 bg-white border-2 border-[#1A1A17] text-sm outline-none focus:border-[#9B7E58] shadow-[4px_4px_0px_#1A1A17] transition-all"
+                className="w-full pl-12 pr-4 py-3.5 bg-[#FAF5EA] border-2 border-[#8C6239]/30 text-[#22160E] rounded-xl text-sm font-book outline-none focus:border-[#C68628] shadow-[0_2px_10px_rgba(70,40,15,0.04)] transition-all placeholder:text-[#8C6239]/60"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#1A1A17]/50 hover:text-[#1A1A17]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-serif font-bold text-[#8C6239] hover:text-[#1E1107]"
                 >
                   Clear
                 </button>
@@ -154,11 +154,11 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
 
             {/* Sort Dropdown */}
             <div className="flex items-center gap-3 self-end md:self-auto">
-              <span className="text-xs uppercase tracking-widest text-[#1A1A17]/60 font-bold hidden sm:inline">Sort:</span>
+              <span className="text-xs uppercase font-serif tracking-widest text-[#7C542A] font-bold hidden sm:inline">Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'featured' | 'price-asc' | 'price-desc')}
-                className="bg-white border-2 border-[#1A1A17] px-4 py-3 text-xs uppercase tracking-wider font-bold shadow-[4px_4px_0px_#1A1A17] outline-none cursor-pointer"
+                className="bg-[#FAF5EA] border-2 border-[#8C6239]/30 text-[#22160E] px-4 py-3 text-xs uppercase font-serif tracking-wider font-bold rounded-xl shadow-xs outline-none cursor-pointer"
               >
                 <option value="featured">Featured Curation</option>
                 <option value="price-desc">Price: High to Low</option>
@@ -168,17 +168,17 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
           </div>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap gap-2 pt-2 border-t border-[#1A1A17]/10">
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-[#8C6239]/15">
             {categories.map((cat) => {
               const isActive = activeCategory === cat.id;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-5 py-2.5 text-xs uppercase tracking-[0.15em] font-bold transition-all cursor-pointer ${
+                  className={`px-5 py-2 text-xs uppercase font-serif tracking-[0.15em] font-bold rounded-full transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-[#1A1A17] text-white shadow-[4px_4px_0px_#9B7E58]'
-                      : 'bg-white border border-[#1A1A17]/20 text-[#1A1A17] hover:border-[#1A1A17]'
+                      ? 'bg-[#2A190E] text-[#FAF5EA] shadow-md border border-[#8C6239]'
+                      : 'bg-[#FAF5EA] border border-[#8C6239]/25 text-[#5C3818] hover:border-[#8C6239]'
                   }`}
                 >
                   {cat.label}
@@ -190,16 +190,16 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
           {/* Instrument Family Secondary Filters (when on All or Instruments or Bows) */}
           {(activeCategory === 'all' || activeCategory === 'instruments' || activeCategory === 'bows') && (
             <div className="flex items-center gap-3 text-xs">
-              <span className="text-[11px] uppercase tracking-wider font-bold text-[#9B7E58]">Filter Family:</span>
+              <span className="text-[11px] uppercase font-serif tracking-wider font-bold text-[#8C6239]">Filter Family:</span>
               <div className="flex gap-2">
                 {instrumentTypes.map((t) => (
                   <button
                     key={t.id}
                     onClick={() => setActiveInstrumentType(t.id)}
-                    className={`px-3 py-1 text-[11px] uppercase tracking-wider font-bold transition-colors cursor-pointer ${
+                    className={`px-3 py-1 text-[11px] uppercase font-serif tracking-wider font-bold transition-colors cursor-pointer rounded-full ${
                       activeInstrumentType === t.id
-                        ? 'bg-[#9B7E58] text-white'
-                        : 'text-[#1A1A17]/70 hover:text-[#1A1A17] underline underline-offset-4'
+                        ? 'bg-[#C68628] text-white shadow-xs'
+                        : 'text-[#7C542A] hover:text-[#1E1107] underline underline-offset-4'
                     }`}
                   >
                     {t.label}
@@ -212,9 +212,9 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
 
         {/* Product Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="py-24 text-center border-2 border-dashed border-[#1A1A17]/20 p-12">
-            <h4 className="font-serif text-3xl text-[#1A1A17] mb-3">No matching acquisitions found</h4>
-            <p className="text-[#1A1A17]/60 max-w-md mx-auto text-sm mb-6">
+          <div className="py-24 text-center border-2 border-dashed border-[#8C6239]/30 p-12 rounded-[20px] bg-[#FAF5EA]/50">
+            <h4 className="font-serif text-3xl text-[#22160E] mb-3">No matching acquisitions found</h4>
+            <p className="text-[#7C542A] max-w-md mx-auto text-sm mb-6 font-book">
               Our workshop curates fine instruments continuously. Contact our luthiers to request a custom acquisition or adjustment.
             </p>
             <button
@@ -223,7 +223,7 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                 setActiveCategory('all');
                 setActiveInstrumentType('all');
               }}
-              className="px-6 py-3 bg-[#1A1A17] text-white uppercase text-xs tracking-widest font-bold"
+              className="px-6 py-3 bg-[#2A190E] text-[#FAF5EA] uppercase font-serif text-xs tracking-widest font-bold rounded-lg"
             >
               Reset Filters
             </button>
@@ -235,7 +235,7 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                 <div
                   key={product.id}
                   onClick={() => setSelectedProduct(product)}
-                  className="group bg-white border-2 border-[#1A1A17] shadow-[8px_8px_0px_#1A1A17] flex flex-col justify-between overflow-hidden cursor-pointer hover:-translate-y-1 transition-all duration-300"
+                  className="group bg-[#FAF5EA] border-2 border-[#8C6239]/25 shadow-[0_12px_32px_rgba(65,35,12,0.07)] rounded-[22px] flex flex-col justify-between overflow-hidden cursor-pointer hover:-translate-y-1.5 hover:border-[#8C6239]/50 hover:shadow-[0_18px_40px_rgba(65,35,12,0.12)] transition-all duration-300"
                 >
                   {/* Image container */}
                   <div className="relative aspect-[4/3] w-full bg-[#1A1A17] overflow-hidden border-b-2 border-[#1A1A17]">
@@ -273,23 +273,23 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between space-y-6">
                     <div>
                       <div className="flex justify-between items-start gap-4">
-                        <h4 className="font-serif text-2xl md:text-3xl text-[#1A1A17] leading-tight group-hover:text-[#9B7E58] transition-colors">
+                        <h4 className="font-serif text-2xl md:text-3xl text-[#1E1107] font-medium leading-tight group-hover:text-[#C68628] transition-colors">
                           {product.name}
                         </h4>
                       </div>
-                      <p className="font-serif italic text-sm text-[#9B7E58] mt-1">
+                      <p className="font-serif italic text-sm text-[#8C6239] mt-1">
                         {product.subtitle}
                       </p>
-                      <p className="text-[#1A1A17]/70 text-sm leading-relaxed mt-4 font-light line-clamp-2">
+                      <p className="font-book text-[#4A2D13]/80 text-sm leading-relaxed mt-4 font-normal line-clamp-2">
                         {product.shortDesc}
                       </p>
                     </div>
 
                     {/* Card Footer: Price & Add to Bag */}
-                    <div className="pt-6 border-t-2 border-[#1A1A17]/10 flex justify-between items-center">
+                    <div className="pt-6 border-t border-[#8C6239]/15 flex justify-between items-center">
                       <div>
-                        <span className="text-[10px] tracking-widest uppercase text-[#1A1A17]/50 block font-bold">Investment</span>
-                        <span className="font-serif text-3xl font-bold text-[#1A1A17]">
+                        <span className="text-[10px] tracking-widest uppercase text-[#7C542A] block font-serif font-bold">Acquisition</span>
+                        <span className="font-serif text-3xl font-bold text-[#1E1107]">
                           ${product.price.toFixed(2)}
                         </span>
                       </div>
@@ -301,10 +301,10 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                             setBookingProduct(product);
                             setIsBookingModalOpen(true);
                           }}
-                          className="px-5 py-3.5 bg-[#1A1A17] text-white hover:bg-[#9B7E58] uppercase tracking-[0.15em] text-[11px] font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                          className="px-5 py-3 bg-[#2A190E] text-[#FAF5EA] hover:bg-[#8C6239] uppercase tracking-[0.15em] text-[11px] font-serif font-bold rounded-full transition-all shadow-md flex items-center gap-2 cursor-pointer"
                         >
-                          <Calendar size={13} className="text-[#9B7E58]" />
-                          <span>Reserve Studio Trial</span>
+                          <Calendar size={13} className="text-[#C68628]" />
+                          <span>Reserve Trial</span>
                         </button>
                       ) : (
                         <button
@@ -312,7 +312,7 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                             e.stopPropagation();
                             setSelectedProduct(product);
                           }}
-                          className="px-5 py-3.5 bg-white border-2 border-[#1A1A17] text-[#1A1A17] hover:bg-[#1A1A17] hover:text-white uppercase tracking-[0.15em] text-[11px] font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer"
+                          className="px-5 py-3 bg-[#FAF5EA] border border-[#8C6239]/35 text-[#2A190E] hover:bg-[#8C6239] hover:text-white uppercase tracking-[0.15em] text-[11px] font-serif font-bold rounded-full transition-all shadow-xs flex items-center gap-2 cursor-pointer"
                         >
                           <Eye size={13} />
                           <span>Examine Specs</span>
@@ -327,17 +327,17 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
         )}
 
         {/* 100% Equity Banner */}
-        <div className="mt-20 bg-[#1A1A17] text-white p-10 md:p-16 border-4 border-[#9B7E58] relative overflow-hidden shadow-2xl">
-          <ShieldCheck size={360} className="absolute -bottom-20 -right-20 text-white/[0.03] pointer-events-none" />
+        <div className="mt-20 bg-[#1F1309] text-[#FAF5EA] p-10 md:p-16 border-2 border-[#8C6239]/40 rounded-[24px] relative overflow-hidden shadow-2xl">
+          <ShieldCheck size={360} className="absolute -bottom-20 -right-20 text-[#C68628]/[0.05] pointer-events-none" />
           <div className="relative z-10 max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#9B7E58] mb-4 block">
-              The Lane & Edwards Guarantee
+            <span className="text-xs uppercase font-serif tracking-[0.3em] font-bold text-[#D4AF37] mb-4 block">
+              ✦ The Lane &amp; Edwards Guarantee
             </span>
-            <h3 className="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight">
-              Every instrument you acquire protects <span className="italic text-[#9B7E58]">100% of your equity</span>.
+            <h3 className="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight font-medium">
+              Every instrument you acquire protects <span className="italic text-[#D4AF37]">100% of your equity</span>.
             </h3>
-            <p className="text-white/80 text-base md:text-lg leading-relaxed font-light mb-8">
-              When you or your student are ready to advance to a master instrument, every dollar paid towards your current Lane & Edwards instrument is credited directly toward your new voice. Lutherie should nurture your artistic journey, not diminish it.
+            <p className="font-book text-[#FAF5EA]/85 text-base md:text-lg leading-relaxed font-light mb-8">
+              When you or your student are ready to advance to a master instrument, every dollar paid towards your current Lane &amp; Edwards instrument is credited directly toward your new voice. Lutherie should nurture your artistic journey, not diminish it.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
@@ -346,7 +346,7 @@ export function AtelierBoutique({ initialCategory }: AtelierBoutiqueProps) {
                   const el = document.getElementById('boutique');
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-8 py-4 bg-[#9B7E58] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-white hover:text-[#1A1A17] transition-colors cursor-pointer"
+                className="px-8 py-4 bg-[#C68628] hover:bg-[#b0741e] text-[#1E1107] font-serif uppercase tracking-[0.2em] text-xs font-bold rounded-full transition-colors cursor-pointer shadow-lg"
               >
                 Browse Master Instruments
               </button>

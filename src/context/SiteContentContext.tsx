@@ -44,7 +44,17 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
         if (res.ok) {
           const data = await res.json();
           if (data.success && isMounted) {
-            const loadedContent = data.content ? { ...DEFAULT_SITE_CONTENT, ...data.content } : DEFAULT_SITE_CONTENT;
+            const loadedContent = data.content ? {
+              ...DEFAULT_SITE_CONTENT,
+              ...data.content,
+              story: {
+                ...DEFAULT_SITE_CONTENT.story,
+                ...(data.content.story || {}),
+                tenet1: { ...DEFAULT_SITE_CONTENT.story.tenet1, ...(data.content.story?.tenet1 || {}) },
+                tenet2: { ...DEFAULT_SITE_CONTENT.story.tenet2, ...(data.content.story?.tenet2 || {}) },
+                tenet3: { ...DEFAULT_SITE_CONTENT.story.tenet3, ...(data.content.story?.tenet3 || {}) },
+              }
+            } : DEFAULT_SITE_CONTENT;
             const loadedProducts = data.products && data.products.length > 0 ? data.products : PRODUCTS;
             setContent(loadedContent);
             setProducts(loadedProducts);
@@ -65,8 +75,19 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
         const localProducts = localStorage.getItem(LOCAL_STORAGE_PRODUCTS_KEY);
         if (localContent && isMounted) {
           const parsed = JSON.parse(localContent);
-          setContent(parsed);
-          setSavedContent(parsed);
+          const merged = {
+            ...DEFAULT_SITE_CONTENT,
+            ...parsed,
+            story: {
+              ...DEFAULT_SITE_CONTENT.story,
+              ...(parsed.story || {}),
+              tenet1: { ...DEFAULT_SITE_CONTENT.story.tenet1, ...(parsed.story?.tenet1 || {}) },
+              tenet2: { ...DEFAULT_SITE_CONTENT.story.tenet2, ...(parsed.story?.tenet2 || {}) },
+              tenet3: { ...DEFAULT_SITE_CONTENT.story.tenet3, ...(parsed.story?.tenet3 || {}) },
+            }
+          };
+          setContent(merged);
+          setSavedContent(merged);
         }
         if (localProducts && isMounted) {
           const parsed = JSON.parse(localProducts);

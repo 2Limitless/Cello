@@ -97,46 +97,54 @@ export function VirtuosoFolio({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Clean, Modern Google Reviews Card Widget */}
-      <div className="w-full h-full bg-white text-gray-900 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] border border-[#1A1A17]/12 shadow-[0_12px_35px_rgba(26,26,23,0.07),_0_2px_8px_rgba(26,26,23,0.03)] hover:shadow-[0_18px_45px_rgba(26,26,23,0.1)] transition-all duration-300 p-4 sm:p-6 lg:p-8 flex flex-col justify-between relative overflow-hidden">
+    <div
+      className="w-full h-auto min-h-[200px] sm:min-h-[240px] lg:h-[524px] lg:sticky lg:top-24 select-text flex flex-col"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Warm Craftsman Atelier Guestbook & Google Reviews Widget */}
+      <div className="w-full h-full bg-[#FCF9F2] text-[#2A190E] rounded-[22px] sm:rounded-[26px] md:rounded-[30px] border-2 border-[#8C6239]/25 shadow-[0_14px_40px_rgba(60,35,15,0.08),_0_2px_8px_rgba(60,35,15,0.04)] hover:shadow-[0_20px_50px_rgba(60,35,15,0.12)] transition-all duration-300 p-5 sm:p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden">
+        
+        {/* Subtle Warm Parchment Watermark & Grain */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,134,40,0.06),transparent_60%)] pointer-events-none" />
 
-        {/* Top: Google Business Profile Header */}
-        <div className="flex items-center justify-between pb-3 sm:pb-4 lg:pb-5 border-b border-gray-100">
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white border border-gray-200 shadow-xs flex items-center justify-center shrink-0">
+        {/* Top: Workshop Guestbook & Google Verified Header */}
+        <div className="flex items-center justify-between pb-3.5 sm:pb-4 lg:pb-5 border-b border-[#8C6239]/15 relative z-10">
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#FAF5EA] border border-[#8C6239]/30 shadow-xs flex items-center justify-center shrink-0">
               <GoogleGIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1 sm:gap-1.5">
-                <span className="font-sans font-semibold text-xs sm:text-sm lg:text-base text-gray-900 leading-tight">
-                  Lane & Edwards Violins
+                <span className="font-serif font-bold text-sm sm:text-base lg:text-lg text-[#1E120A] tracking-tight">
+                  Lane &amp; Edwards Violins
                 </span>
-                <CheckCircle2 size={13} className="text-[#1A73E8] shrink-0" />
+                <CheckCircle2 size={14} className="text-[#8C6239] shrink-0" />
               </div>
-              <div className="flex items-center gap-1 sm:gap-1.5 mt-0.5">
-                <span className="font-sans font-bold text-[11px] sm:text-xs text-gray-900">5.0</span>
-                <div className="flex text-[#FBBC04] gap-0.5">
+              <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5">
+                <span className="font-serif font-bold text-xs sm:text-sm text-[#7C542A]">5.0</span>
+                <div className="flex text-[#C68628] gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={11} fill="currentColor" className="text-[#FBBC04]" />
+                    <Star key={i} size={11} fill="currentColor" className="text-[#C68628]" />
                   ))}
                 </div>
-                <span className="font-sans text-[10px] sm:text-xs text-gray-500">
-                  (48 Google reviews)
+                <span className="font-serif text-[11px] sm:text-xs text-[#7C542A]/70">
+                  (48 Patron Reviews)
                 </span>
               </div>
             </div>
           </div>
 
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-blue-50 text-[#1A73E8] border border-blue-100 text-[10px] sm:text-[11px] font-medium tracking-tight">
-            Verified Business
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#8C6239]/10 text-[#7C542A] border border-[#8C6239]/20 text-[10px] sm:text-[11px] font-medium tracking-wide">
+            ✦ Guestbook
           </span>
         </div>
 
         {/* Middle: Active Reviewer Info & Content */}
-        <div className="my-auto py-2.5 sm:py-4 lg:py-5 flex flex-col justify-center">
+        <div className="my-auto py-3 sm:py-5 lg:py-6 flex flex-col justify-center relative z-10">
           
-          {/* Reviewer Google Profile Row */}
-          <div className="relative h-9 sm:h-10 lg:h-12 w-full flex items-center overflow-hidden mb-1.5 sm:mb-2.5 lg:mb-3">
+          {/* Reviewer Profile Row */}
+          <div className="relative h-10 sm:h-11 lg:h-12 w-full flex items-center overflow-hidden mb-2 sm:mb-3">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={reviewIndex}
@@ -144,23 +152,23 @@ export function VirtuosoFolio({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25, ease: "easeInOut" }}
-                className="flex items-center gap-2.5 sm:gap-3 w-full"
+                className="flex items-center gap-2.5 sm:gap-3.5 w-full"
               >
-                {/* Google Avatar Circle */}
+                {/* Avatar Stamp Circle */}
                 <div
-                  className={`w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full ${meta.avatarBg} text-white font-sans font-semibold text-xs sm:text-sm flex items-center justify-center shrink-0 shadow-xs`}
+                  className={`w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full ${meta.avatarBg} text-white font-serif font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 shadow-sm border border-white/30`}
                 >
                   {getInitials(current.author)}
                 </div>
 
                 <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <span className="font-sans font-semibold text-xs sm:text-sm lg:text-base text-gray-900 truncate">
+                    <span className="font-serif font-bold text-sm sm:text-base lg:text-lg text-[#1E120A] truncate">
                       {current.author}
                     </span>
                   </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-500">
-                    <span className="text-[#E37400] font-medium truncate">{meta.badge}</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10.5px] sm:text-xs text-[#7C542A]/80 font-serif">
+                    <span className="text-[#A35D22] font-medium truncate">{meta.badge}</span>
                     <span>·</span>
                     <span className="shrink-0">{meta.timeAgo}</span>
                   </div>
@@ -169,20 +177,20 @@ export function VirtuosoFolio({
             </AnimatePresence>
           </div>
 
-          {/* 5 Stars Rating & Patron Role Pill */}
-          <div className="flex items-center gap-2 mb-1.5 sm:mb-2 lg:mb-3">
-            <div className="flex text-[#FBBC04] gap-0.5">
+          {/* 5 Stars Rating & Patron Credential Pill */}
+          <div className="flex items-center gap-2 mb-2 sm:mb-3">
+            <div className="flex text-[#C68628] gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={13} fill="currentColor" className="text-[#FBBC04]" />
+                <Star key={i} size={13} fill="currentColor" className="text-[#C68628]" />
               ))}
             </div>
-            <span className="text-[10px] sm:text-[11px] font-sans font-medium px-2 py-0.5 rounded-md bg-gray-100 text-gray-700 truncate max-w-[200px] sm:max-w-[260px]">
+            <span className="text-[10px] sm:text-[11px] font-serif italic px-2.5 py-0.5 rounded-md bg-[#FAF4E6] text-[#7C542A] border border-[#8C6239]/20 truncate max-w-[220px] sm:max-w-[280px]">
               {current.role}
             </span>
           </div>
 
-          {/* Review Body (PopLayout = 100% Zero Layout Jumps) */}
-          <div className="relative w-full min-h-[58px] sm:min-h-[75px] lg:min-h-[130px] flex items-center">
+          {/* Review Body (Warm Bookish Serif) */}
+          <div className="relative w-full min-h-[64px] sm:min-h-[85px] lg:min-h-[135px] flex items-center">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={reviewIndex}
@@ -192,7 +200,7 @@ export function VirtuosoFolio({
                 transition={{ duration: 0.25, ease: "easeInOut" }}
                 className="w-full"
               >
-                <p className="font-sans text-xs sm:text-sm lg:text-base text-gray-800 leading-relaxed font-normal">
+                <p className="font-book text-sm sm:text-base lg:text-lg text-[#2A190E] leading-relaxed italic font-normal">
                   &ldquo;{current.quote}&rdquo;
                 </p>
               </motion.div>
@@ -201,21 +209,21 @@ export function VirtuosoFolio({
 
         </div>
 
-        {/* Bottom Bar: Google Footer & Material Arrow Navigation */}
-        <div className="pt-2.5 sm:pt-3.5 lg:pt-4 border-t border-gray-100 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-gray-500">
+        {/* Bottom Bar: Google Footer & Warm Craft Arrows */}
+        <div className="pt-3 sm:pt-4 border-t border-[#8C6239]/15 flex items-center justify-between gap-4 relative z-10">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#7C542A]/80 font-serif">
             <GoogleGIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-            <span className="font-sans">Posted on Google Maps</span>
+            <span>Verified Google Review · Louisville, KY</span>
           </div>
 
-          {/* Minimalist Google Material Circular Arrows */}
+          {/* Antique Ivory & Brass Navigation Buttons */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
               }}
-              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-gray-200 bg-white hover:bg-gray-100 hover:border-gray-300 text-gray-700 transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
+              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-[#8C6239]/30 bg-[#FAF4E6] hover:bg-[#8C6239] hover:text-white text-[#7C542A] transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
               title="Previous Review"
               aria-label="Previous Review"
             >
@@ -226,7 +234,7 @@ export function VirtuosoFolio({
                 e.stopPropagation();
                 setReviewIndex((prev) => (prev + 1) % testimonials.length);
               }}
-              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-gray-200 bg-white hover:bg-gray-100 hover:border-gray-300 text-gray-700 transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
+              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-[#8C6239]/30 bg-[#FAF4E6] hover:bg-[#8C6239] hover:text-white text-[#7C542A] transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
               title="Next Review"
               aria-label="Next Review"
             >
@@ -235,18 +243,19 @@ export function VirtuosoFolio({
           </div>
         </div>
 
-        {/* Subtle Google Blue Live Progress Bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gray-100 overflow-hidden">
+        {/* Warm Amber Progress Bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#8C6239]/10 overflow-hidden">
           <motion.div
             key={reviewIndex}
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 7, ease: "linear" }}
-            className="h-full bg-[#1A73E8]"
+            className="h-full bg-gradient-to-r from-[#8C6239] to-[#C68628]"
           />
         </div>
 
       </div>
+    </div>
     </div>
   );
 }

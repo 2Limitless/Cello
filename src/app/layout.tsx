@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Great_Vibes } from "next/font/google";
+import { Inter, Cormorant_Garamond, EB_Garamond, Cinzel, Caveat, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import { SiteContentProvider } from "@/context/SiteContentContext";
 
@@ -8,9 +8,30 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+});
+
+const ebGaramond = EB_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-eb-garamond",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cinzel",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-caveat",
 });
 
 const greatVibes = Great_Vibes({
@@ -32,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} ${greatVibes.variable} antialiased`}
+        className={`${inter.variable} ${cormorant.variable} ${ebGaramond.variable} ${cinzel.variable} ${caveat.variable} ${greatVibes.variable} antialiased`}
       >
         <SiteContentProvider>
           {children}
