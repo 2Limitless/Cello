@@ -1,30 +1,62 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { VIPBooking } from '@/context/CartContext';
+import { VIPBooking, VIPBookingStatus } from '@/context/CartContext';
+import { supabaseAdmin } from '@/lib/supabase';
 
 const DB_PATH = path.join(process.cwd(), 'src', 'data', 'bookings.json');
 
-const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+interface SupabaseBookingRow {
+  id: string;
+  customer_name: string;
+  customer_phone: string;
+  customer_email?: string | null;
+  musician_level?: string | null;
+  preferred_date?: string | null;
+  preferred_time?: string | null;
+  notes?: string | null;
+  product_id?: string | null;
+  product_name?: string | null;
+  product_price?: number | null;
+  commission_rate?: number | null;
+  commission_amount?: number | null;
+  status: string;
+  created_at: string;
+}
+
+function mapRowToBooking(row: SupabaseBookingRow): VIPBooking {
+  return {
+    id: row.id,
+    customerName: row.customer_name,
+    customerPhone: row.customer_phone,
+    customerEmail: row.customer_email || '',
+    musicianLevel: row.musician_level || 'General',
+    preferredDate: row.preferred_date || 'Flexible',
+    preferredTime: row.preferred_time || 'Flexible',
+    notes: row.notes || '',
+    productId: row.product_id || '',
+    productName: row.product_name || 'Instrument Consultation',
+    productPrice: Number(row.product_price) || 0,
+    commissionRate: 0,
+    commissionAmount: 0,
+    status: (row.status as VIPBookingStatus) || 'scheduled',
+    createdAt: row.created_at,
+  };
+}
 
 async function readBookings(): Promise<VIPBooking[]> {
-  // 1. Try Vercel KV first
-  if (KV_URL && KV_TOKEN) {
-    try {
-      const res = await fetch(`${KV_URL}/get/vip_bookings`, {
-        headers: { Authorization: `Bearer ${KV_TOKEN}` },
-        cache: 'no-store'
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data.result) {
-          return typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
-        }
-      }
-    } catch (e) {
-      console.warn('Failed reading bookings from KV:', e);
+  // 1. Try reading from Supabase
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('vip_bookings')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (!error && data && data.length > 0) {
+      return (data as SupabaseBookingRow[]).map(mapRowToBooking);
     }
+  } catch (err) {
+    console.warn('Supabase bookings read skipped:', err);
   }
 
   // 2. Fall back to local file
@@ -34,29 +66,12 @@ async function readBookings(): Promise<VIPBooking[]> {
       return JSON.parse(data);
     }
   } catch (err) {
-    console.error('Failed reading bookings database:', err);
+    console.error('Failed reading local bookings database:', err);
   }
   return [];
 }
 
-async function writeBookings(bookings: VIPBooking[]) {
-  // 1. Save to Vercel KV if available
-  if (KV_URL && KV_TOKEN) {
-    try {
-      await fetch(`${KV_URL}/set/vip_bookings`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${KV_TOKEN}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(JSON.stringify(bookings))
-      });
-    } catch (e) {
-      console.warn('Failed writing bookings to KV:', e);
-    }
-  }
-
-  // 2. Also try writing local file with safe catch for Vercel read-only fs
+async function writeLocalBookings(bookings: VIPBooking[]) {
   try {
     const dir = path.dirname(DB_PATH);
     if (!fs.existsSync(dir)) {
@@ -64,7 +79,7 @@ async function writeBookings(bookings: VIPBooking[]) {
     }
     fs.writeFileSync(DB_PATH, JSON.stringify(bookings, null, 2), 'utf-8');
   } catch (err) {
-    // Graceful catch for read-only Vercel filesystem
+    // Safe on Vercel
   }
 }
 
@@ -91,6 +106,7 @@ export async function POST(req: Request) {
 
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
     const id = `PASS-LE-${randomDigits}`;
+    const createdAt = new Date().toISOString();
 
     const newBooking: VIPBooking = {
       id,
@@ -101,18 +117,42 @@ export async function POST(req: Request) {
       preferredDate: preferredDate || 'Flexible',
       preferredTime: preferredTime || 'Flexible',
       notes: notes || '',
-      productId,
-      productName,
-      productPrice: Number(productPrice),
+      productId: productId || '',
+      productName: productName || 'Instrument Consultation',
+      productPrice: Number(productPrice) || 0,
       commissionRate: 0,
       commissionAmount: 0,
       status: 'scheduled',
-      createdAt: new Date().toISOString(),
+      createdAt,
     };
 
+    // 1. Save to Supabase Cloud Database
+    try {
+      await supabaseAdmin.from('vip_bookings').insert([
+        {
+          id,
+          customer_name: customerName,
+          customer_phone: customerPhone,
+          customer_email: customerEmail || null,
+          musician_level: musicianLevel || null,
+          preferred_date: preferredDate || null,
+          preferred_time: preferredTime || null,
+          notes: notes || null,
+          product_id: productId || null,
+          product_name: productName || null,
+          product_price: Number(productPrice) || 0,
+          status: 'scheduled',
+          created_at: createdAt,
+        },
+      ]);
+    } catch (supaErr) {
+      console.warn('Supabase booking insert error:', supaErr);
+    }
+
+    // 2. Also save to local file
     const current = await readBookings();
-    const updated = [newBooking, ...current];
-    await writeBookings(updated);
+    const updated = [newBooking, ...current.filter((b) => b.id !== id)];
+    await writeLocalBookings(updated);
 
     return NextResponse.json({ success: true, booking: newBooking });
   } catch (err) {
@@ -126,9 +166,20 @@ export async function PATCH(req: Request) {
     const body = await req.json();
     const { id, status } = body;
 
+    // 1. Update in Supabase
+    try {
+      await supabaseAdmin
+        .from('vip_bookings')
+        .update({ status })
+        .eq('id', id);
+    } catch (e) {
+      console.warn('Supabase booking status update error:', e);
+    }
+
+    // 2. Update local file
     const current = await readBookings();
-    const updated = current.map(b => (b.id === id ? { ...b, status } : b));
-    await writeBookings(updated);
+    const updated = current.map((b) => (b.id === id ? { ...b, status } : b));
+    await writeLocalBookings(updated);
 
     return NextResponse.json({ success: true, bookings: updated });
   } catch (err) {
@@ -146,9 +197,17 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ success: false, error: 'ID required' }, { status: 400 });
     }
 
+    // 1. Delete in Supabase
+    try {
+      await supabaseAdmin.from('vip_bookings').delete().eq('id', id);
+    } catch (e) {
+      console.warn('Supabase booking delete error:', e);
+    }
+
+    // 2. Delete in local file
     const current = await readBookings();
-    const updated = current.filter(b => b.id !== id);
-    await writeBookings(updated);
+    const updated = current.filter((b) => b.id !== id);
+    await writeLocalBookings(updated);
 
     return NextResponse.json({ success: true, bookings: updated });
   } catch (err) {
