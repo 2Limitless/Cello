@@ -20,8 +20,8 @@ interface SiteContentContextType {
   discardChanges: () => void;
 }
 
-const LOCAL_STORAGE_CONTENT_KEY = 'lane_edwards_portal_content_v1';
-const LOCAL_STORAGE_PRODUCTS_KEY = 'lane_edwards_portal_products_v1';
+const LOCAL_STORAGE_CONTENT_KEY = 'lane_edwards_portal_content_v2';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'lane_edwards_portal_products_v2';
 
 const SiteContentContext = createContext<SiteContentContextType | undefined>(undefined);
 

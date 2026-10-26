@@ -41,8 +41,8 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Lane & Edwards | Master Luthiers",
-  description: "Find your truest voice.",
+  title: "Lane & Edwards Violins | Fine Violins, Violas, Cellos, and Basses",
+  description: "Fine Violins, Violas, Cellos, and Basses - Since 2016. Located in our historic home at 3606 College Dr, Jeffersontown, KY.",
 };
 
 export default function RootLayout({

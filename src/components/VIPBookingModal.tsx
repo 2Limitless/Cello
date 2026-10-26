@@ -62,7 +62,7 @@ export function VIPBookingModal() {
   // Pre-filled SMS Message for Matt Lane
   const workshopPhone = "5026905908"; // (502) 690-5908
   const smsMessage = createdBooking
-    ? `Hello Matt! I reserved an in-shop playing session for the ${createdBooking.productName} ($${createdBooking.productPrice.toFixed(2)}). My VIP Pass ID is ${createdBooking.id}. Musician: ${createdBooking.customerName}, Phone: ${createdBooking.customerPhone}, Requested: ${createdBooking.preferredDate} at ${createdBooking.preferredTime}. Looking forward to testing it at 315 Wallace Ave!`
+    ? `Hello Matt! I reserved an in-shop playing session for ${createdBooking.productName}. My VIP Pass ID is ${createdBooking.id}. Musician: ${createdBooking.customerName}, Phone: ${createdBooking.customerPhone}, Requested: ${createdBooking.preferredDate} at ${createdBooking.preferredTime}. Looking forward to testing it at 3606 College Dr, Jeffersontown!`
     : '';
 
   // Cross-platform SMS URI (?&body works on both iOS and Android)
@@ -152,17 +152,17 @@ export function VIPBookingModal() {
                   </div>
 
                   {/* Free Trial Reassurance Box */}
-                  <div className="bg-[#FAF4E6] border border-[#8C6239]/30 p-5 space-y-3 rounded-[16px]">
-                    <div className="flex items-center gap-2 text-[#8C6239] font-serif font-bold text-xs uppercase tracking-widest">
-                      <Sparkles size={16} className="text-[#C68628]" />
+                  <div className="bg-[#FAF7F0] border border-[#c2a15a]/40 p-5 space-y-3 rounded-[16px]">
+                    <div className="flex items-center gap-2 text-[#003152] font-serif font-bold text-xs uppercase tracking-widest">
+                      <Sparkles size={16} className="text-[#c2a15a]" />
                       <span>$0 Deposit · Zero Obligation</span>
                     </div>
-                    <p className="text-xs text-[#4A2D13] leading-relaxed font-book">
-                      Fine instruments must be felt under the ear and balanced in the hand. We prepare the instrument with optimal bridge cut and string tension prior to your arrival at our Louisville atelier.
+                    <p className="text-xs text-[#3e444b] leading-relaxed font-book">
+                      Fine instruments must be felt under the ear and balanced in the hand. We prepare the instrument with optimal bridge cut and string tension prior to your arrival at our historic Jeffersontown shop.
                     </p>
-                    <div className="flex items-start gap-2 pt-2 text-[11px] text-[#1A1A17]/70">
-                      <MapPin size={14} className="text-[#9B7E58] shrink-0 mt-0.5" />
-                      <span>315 Wallace Ave, Louisville, KY 40207 (Historic St. Matthews)</span>
+                    <div className="flex items-start gap-2 pt-2 text-[11px] text-[#003152]">
+                      <MapPin size={14} className="text-[#c2a15a] shrink-0 mt-0.5" />
+                      <span>3606 College Dr, Jeffersontown, KY 40299 (National Historic Registry)</span>
                     </div>
                   </div>
                 </div>
@@ -385,8 +385,8 @@ export function VIPBookingModal() {
 
                       <div>
                         <span className="text-[10px] uppercase tracking-wider text-white/50 block">Workshop Location</span>
-                        <p className="font-medium text-white mt-0.5">315 Wallace Ave</p>
-                        <p className="text-xs text-white/70">Louisville, KY 40207</p>
+                        <p className="font-medium text-white mt-0.5">3606 College Dr</p>
+                        <p className="text-xs text-white/70">Jeffersontown, KY 40299</p>
                       </div>
                     </div>
 

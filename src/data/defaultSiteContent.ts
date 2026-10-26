@@ -5,7 +5,7 @@ export interface BentoCardItem {
   category: 'Instruments & Sales' | 'Luthier Services' | 'The Workshop';
   title: string;
   subtitle: string;
-  iconName: string; // 'Music' | 'ShoppingBag' | 'GraduationCap' | 'ShieldCheck' | 'Wrench' | 'PenTool' | 'BookOpen' | 'History' | 'MapPin'
+  iconName: string;
   image: string;
   colSpan: string;
   rowSpan: string;
@@ -79,86 +79,86 @@ export interface SiteContent {
 }
 
 export const DEFAULT_SITE_CONTENT: SiteContent = {
-  announcementBadge: "Independent Luthier Workshop · Handcrafted Tone Since 1976",
-  heroTitle: "How may we assist your sound today?",
-  heroSubtitle: "Every bridge carved by hand. Every plate graduated for acoustic truth. Built with devotion no factory can buy.",
+  announcementBadge: "Fine Violins, Violas, Cellos, and Basses · Since 2016",
+  heroTitle: "Lane & Edwards Violins",
+  heroSubtitle: "Fine string instruments, expert setups, and restorations in our historic Jeffersontown home.",
   
   bentoItems: [
     {
       id: "purchase",
       category: "Instruments & Sales",
-      title: "Find Your Instrument",
-      subtitle: "Master Luthier Bench Setup",
+      title: "Fine Instruments",
+      subtitle: "Violins, Violas, Cellos & Basses",
       iconName: "Music",
       image: "/atelier/violin_sch_flamed.jpg",
       colSpan: "col-span-2",
       rowSpan: "row-span-2",
-      description: "Discover master-crafted violins, violas, cellos, and basses. While corporate chains ship factory-pressed plywood in cardboard boxes, every instrument at our independent Louisville shop is personally inspected, carved, and acoustically tuned by hand for rich, effortless projection.",
-      action1: "View Collection",
+      description: "Discover fine violins, violas, cellos, and basses. Every instrument at our shop is personally inspected, acoustic-tested, and adjusted by hand by Matthew Lane for rich, effortless projection. We are always happy to answer your questions and help you compare options with candid, charitable guidance.",
+      action1: "Acoustic Trials",
       action2: "Speak to Matt"
     },
     {
       id: "accessories",
       category: "Instruments & Sales",
       title: "Strings & Cases",
-      subtitle: "Concert Protection",
+      subtitle: "Concert Protection & Care",
       iconName: "ShoppingBag",
       image: "/atelier/case_cc430_luxury_green.png",
       colSpan: "col-span-1",
       rowSpan: "row-span-1",
       description: "Protect and optimize your voice. Hand-selected luxury suspension cases, Pirastro, Larsen, and Thomastik-Infeld strings, and bespoke carved tonewood fittings.",
-      action1: "Browse Catalog",
-      action2: "Fittings"
+      action1: "Browse Supplies",
+      action2: "Care & Fittings"
     },
     {
       id: "rental",
       category: "Instruments & Sales",
       title: "Student Rentals",
-      subtitle: "The 100% Equity Promise",
+      subtitle: "The 100% Equity Program",
       iconName: "GraduationCap",
       image: "/atelier/workshop_bench_tools.jpg",
       colSpan: "col-span-1",
       rowSpan: "row-span-1",
-      description: "We reject the disposable rental racket. Area students receive genuine, shop-graduated tonewood instruments with all setup work done in-house. 100% of first-year rental equity applies toward owning a master instrument.",
-      action1: "Start Rental",
-      action2: "School Programs"
+      description: "Quality instruments foster student success. Area string students receive genuine, shop-adjusted tonewood instruments with setups done in-house. 100% of first-year rental equity applies toward owning an instrument.",
+      action1: "Rental Details",
+      action2: "School Sizing"
     },
     {
       id: "guarantee",
       category: "Instruments & Sales",
-      title: "The Guarantee",
-      subtitle: "The Craftsman's Guarantee · 100% Equity",
+      title: "The Craftsman's Guarantee",
+      subtitle: "100% Equity Trade-In",
       iconName: "ShieldCheck",
       image: "/atelier/antique_maker_signature.jpg",
       colSpan: "col-span-2",
       rowSpan: "row-span-1",
-      description: "The big-box conglomerates profit off student depreciation. We stake our livelihood on your growth: 100% of your investment follows you forever when you step up to your next master instrument.",
-      action1: "Read Policies",
-      action2: "Appraisals"
+      description: "We believe in long-term relationships with musicians and families. 100% of your investment follows you when you step up to your next fine violin, viola, cello, or bass.",
+      action1: "Our Guarantee",
+      action2: "Trade-In Policy"
     },
     {
       id: "repair",
       category: "Luthier Services",
       title: "Restoration & Repair",
-      subtitle: "Purist Benchwork · Since 1976",
+      subtitle: "Matthew Lane · Owner & Luthier",
       iconName: "Wrench",
       image: "/atelier/matt_luthier_bench.jpg",
       colSpan: "col-span-1",
       rowSpan: "row-span-1",
-      description: "No factory assembly lines. No outsourced regional depots. Complete restoration, precision soundpost adjustment, and acoustic bench setup executed directly by Matthew Lane at our Wallace Ave workbench.",
+      description: "Complete restoration, precision soundpost adjustment, bridge cutting, and acoustic bench setup executed directly by Matthew Lane at our Jeffersontown workbench.",
       action1: "Schedule Consult",
-      action2: "Pricing Guide"
+      action2: "Bench Services"
     },
     {
       id: "rehair",
       category: "Luthier Services",
-      title: "Bow Services",
-      subtitle: "Master Rehairs & Balance",
+      title: "Bow Care & Rehairs",
+      subtitle: "Select Hair & Balance",
       iconName: "PenTool",
       image: "/atelier/shop_bows_display.jpg",
       colSpan: "col-span-1",
       rowSpan: "row-span-1",
-      description: "Precision bow rehairs using select unbleached Mongolian stallion hair. Hand-tied, individually combed, and balanced for lightning bite, seamless string crossing, and acoustic clarity.",
+      description: "Precision bow rehairs using select unbleached Mongolian stallion hair. Hand-tied, individually combed, and balanced for immediate bite and acoustic clarity. (We do repairs and rehairs on bows in-store.)",
       action1: "Drop-off Info",
       action2: "Hair Selection"
     },
@@ -166,7 +166,7 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       id: "instruction",
       category: "Luthier Services",
       title: "Private Instruction",
-      subtitle: "The Oral Tradition",
+      subtitle: "Educators & Studios",
       iconName: "BookOpen",
       image: "/atelier/instruction_pedagogy.jpg",
       colSpan: "col-span-2",
@@ -179,37 +179,37 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       id: "legacy",
       category: "The Workshop",
       title: "Our Story",
-      subtitle: "Two Generations · One Unbroken Line",
+      subtitle: "Historic Jeffersontown Heritage",
       iconName: "History",
       image: "/atelier/matt_and_mark_legacy.jpg",
       colSpan: "col-span-2",
       rowSpan: "row-span-1",
-      description: "Founded by Mark Edwards (1952-2026), our shop was built on fifty years of pure devotion to tone. Fit for his first violin here as a young boy in 1988, Matthew Lane worked twenty years at Mark's bench. Today, Matt holds the line: an independent luthier whose hand-carved plates and acoustic truth prove that real craftsmanship outlives every corporate trend.",
-      action1: "Read The Story",
-      action2: "Meet the Luthiers"
+      description: "Founded under its current name in 2016, Lane & Edwards Violins carries forward a heritage of craftsmanship rooted in personalized service. Today, Matthew Lane welcomes musicians to our historic home at 3606 College Drive.",
+      action1: "Read Our Story",
+      action2: "Meet Matthew Lane"
     },
     {
       id: "contact",
       category: "The Workshop",
       title: "Visit Us",
-      subtitle: "Historic St. Matthews · Louisville, KY",
+      subtitle: "Historic Jeffersontown · 3606 College Dr",
       iconName: "MapPin",
-      image: "/atelier/storefront_wallace.png",
+      image: "/atelier/historic_jeffersontown_storefront.jpg",
       colSpan: "col-span-2",
       rowSpan: "row-span-1",
-      description: "Located at 315 Wallace Ave, Louisville, KY 40207. Step into the scent of seasoned spruce, maple shavings, and rosin. Book an in-person acoustic audition or consult directly with Matthew Lane.",
+      description: "Located at 3606 College Dr, Jeffersontown, KY 40299 in a historic home listed on the National Register of Historic Places. Step into an unhurried, warm setting to audition instruments or consult directly with Matthew Lane.",
       action1: "Book on Vagaro",
-      action2: "Call Us"
+      action2: "Call Matt"
     }
   ],
 
   testimonials: [
     {
-      quote: "The only luthier in the region I trust with my 1734 Guarneri. Matthew's bridge calibration unlocked acoustic richness and projection that fills Whitney Hall effortlessly.",
+      quote: "The only luthier in the region I trust with my fine cello. Matthew's bridge calibration unlocked acoustic richness and projection that fills Whitney Hall effortlessly.",
       author: "Elena Rostova",
       signature: "Elena Rostova",
       role: "Principal Cellist, Louisville Orchestra",
-      credential: "Verified Patron · 1734 Guarneri Cello Calibration",
+      credential: "Verified Patron · Cello Calibration",
       tag: "Principal Soloist",
       year: "Patron Since 2018"
     },
@@ -220,7 +220,7 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       role: "Concertmaster & International Soloist",
       credential: "Verified Patron · Master Violin Setup",
       tag: "Concertmaster",
-      year: "Patron Since 2014"
+      year: "Patron Since 2016"
     },
     {
       quote: "Every serious cello and violin student in my studio acquires their instrument through Lane & Edwards. Their 100% equity trade-in policy gives families complete peace of mind.",
@@ -229,10 +229,10 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       role: "String Department Chair, Conservatory",
       credential: "Verified Educator · Juilliard & Eastman Repertoire",
       tag: "Conservatory Chair",
-      year: "Patron Since 2008"
+      year: "Patron Since 2016"
     },
     {
-      quote: "I shipped my 1920 French viola across the country specifically for Matthew to carve a custom soundpost. The balance across the C and A strings is now pure velvet.",
+      quote: "I shipped my French viola across the country specifically for Matthew to carve a custom soundpost. The balance across the C and A strings is now pure velvet.",
       author: "Sarah Jenkins",
       signature: "Sarah Jenkins",
       role: "Grammy-Nominated Chamber Musician",
@@ -241,61 +241,61 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       year: "Patron Since 2021"
     },
     {
-      quote: "Simply unmatched craftsmanship, integrity, and warmth. Finding this level of Parisian and Cremonese atelier standards in St. Matthews is an extraordinary treasure for Kentucky.",
+      quote: "Simply unmatched craftsmanship, integrity, and warmth. Their historic Jeffersontown location has wonderful acoustic character and true old-world charm. A treasure for Kentucky.",
       author: "David Alessi",
       signature: "David Alessi",
       role: "Juilliard Alumnus & Principal Violist",
-      credential: "Verified Patron · Pernambuco Bow Calibration",
+      credential: "Verified Patron · Pernambuco Bow Service",
       tag: "Recording Artist",
       year: "Patron Since 2016"
     }
   ],
 
   story: {
-    volumeTag: "Volume 05 // The Wallace Avenue Chronicle",
-    headline: "The Craft That Refused to Yield",
-    subtitle: "How a boy fitted for a rental in 1988 grew into a master luthier who held his ground when conglomerates circled—preserving what automated factories can never replicate: acoustic truth.",
-    benchBadge: "The Louisville Chronicle",
-    benchSubtext: "315 Wallace Ave · 1988 — Today",
+    volumeTag: "Our Heritage & Ethos",
+    headline: "Devotion to Craft & Sound",
+    subtitle: "In our historic Jeffersontown home, every instrument receives personal care, acoustic adjustment, and the time-honored attention that string musicians deserve.",
+    benchBadge: "Jeffersontown Workshop",
+    benchSubtext: "3606 College Dr · Since 2016",
     benchImage: "/atelier/matt_repair_work.jpg",
     benchTitle: "Matthew Lane at the Bench",
-    benchSubtitle: "Hand-graduating plate thickness to 0.1mm acoustic tolerance",
-    benchPill: "No CNC Machines",
+    benchSubtitle: "Hand-graduating plate thickness and cutting bespoke bridges",
+    benchPill: "Owner & Luthier",
     paragraphs: [
-      "In 1988, a nine-year-old boy stepped into Mark Edwards Violins on Wallace Avenue. Mark carefully fitted him for his very first rental violin. That boy was Matthew Lane.",
-      "Most students eventually set their instruments down. Matt never did. In 2005, he returned to the shop not as a customer, but as Mark's dedicated apprentice. For over two decades, the two worked shoulder-to-shoulder, preserving the exact hand-carving, varnishing, and acoustic arching disciplines handed down through Cremona and Paris.",
-      "When Mark Edwards passed in early 2026, corporate music chains and private-equity retail aggregators circled with acquisition offers. Matt refused every inquiry. Instead, he renewed the craftsman's sacred promise: every violin, viola, and cello that leaves this door will be personally tuned and set up by hand, backed by 100% lifetime equity, and built with an integrity no assembly line could ever buy."
+      "Lane & Edwards Violins was established under its current name in 2016, carrying forward a rich heritage of fine instrument care and repair originally begun decades earlier by mentor Mark Edwards (1952–2026).",
+      "Matthew Lane first stepped into Mark's workshop as a young student receiving his first rental violin in 1988. Over two decades of dedicated benchwork, Matt mastered the precise hand-carving, acoustic plate graduation, and meticulous setup disciplines of Cremonese and French traditions.",
+      "Today, Lane & Edwards Violins welcomes musicians to our historic home at 3606 College Drive in Jeffersontown—a landmark residence listed on the National Register of Historic Places. Surrounded by 19th-century architectural charm and mature trees, Matthew provides warm, friendly service and candid, charitable advice to every musician who walks through the door."
     ],
     tenet1: {
-      title: "The Hand vs. The 10,000-Box Factory",
-      text: "Corporate distributors order shipping containers of mass-pressed plywood instruments drowned in thick polyurethane that suffocates resonance. At Lane & Edwards, every bridge is carved by hand, every soundpost is positioned to 0.1mm, and every spruce plate is graduated with micro finger planes until the wood breathes like a cathedral."
+      title: "Dedicated Hand Craftsmanship",
+      text: "Every bridge is individually carved to match the exact arch of your instrument, every soundpost is positioned with acoustic precision, and top plates are calibrated by hand so the wood vibrates with fullness and warmth."
     },
     tenet2: {
-      title: "The 100% Equity Shield",
-      text: "The mass-retail model thrives on planned obsolescence and steep depreciation—where families lose 80% of their investment on disposable student instruments. At Lane & Edwards, 100% of your rental and instrument payments transfer directly toward future master acquisitions. We protect your family's musical journey for life."
+      title: "The 100% Equity Promise",
+      text: "We partner with families and musicians for the long term. 100% of your first-year rental equity and 100% of your instrument trade-in value transfers directly toward future fine instruments, protecting your investment as you advance."
     },
     tenet3: {
-      title: "Two Decades of Master Mentorship",
-      text: "Conglomerates have automated factories, quarterly investor calls, and overseas assembly lines. This workshop has razor-sharp French gouges, Balkan maple seasoned across generations, and an ear tuned over forty years of devotion. When the bow meets the string, true tone speaks for itself.",
-      image: "/atelier/matt_and_mark_portrait.jpg",
-      caption: "Mark Edwards (1952–2026) & Matthew Lane"
+      title: "Friendly, Charitable Guidance",
+      text: "We take pride in warm, approachable service. Customers are always welcome to ask questions about instruments and options they are considering. We candidly and charitably explain setup differences, materials, and acoustic qualities so you can choose with complete confidence.",
+      image: "/atelier/historic_jeffersontown_storefront.jpg",
+      caption: "3606 College Dr · National Register of Historic Places"
     },
     masterQuote: {
-      quote: "A violin is not a commodity SKU in a corporate distribution center. It is three hundred years of living geometry held under sixty pounds of string tension, waiting for a human hand to awaken its voice. We answer only to the player, the teacher, and the music.",
+      quote: "A violin, viola, cello, or bass is more than wood and strings—it is a companion and a personal voice. Our mission is to listen to the musician and honor the instrument with honest, patient care.",
       author: "Matthew Lane",
-      role: "Master Luthier & Proprietor · Lane & Edwards Violins"
+      role: "Owner & Luthier · Lane & Edwards Violins"
     }
   },
 
   workshop: {
-    shopName: "LANE & EDWARDS",
-    tagline: "EST. 1976 · LUTHIER ATELIER",
+    shopName: "Lane & Edwards Violins",
+    tagline: "Fine Violins, Violas, Cellos, and Basses - Since 2016",
     phone: "5026905908",
     phoneFormatted: "(502) 690-5908",
-    address: "315 Wallace Ave, Louisville, KY 40207",
-    cityState: "Louisville, KY",
+    address: "3606 College Dr, Jeffersontown, KY 40299",
+    cityState: "Jeffersontown, KY",
     hours: "Tuesday – Saturday: 10:00 AM – 5:30 PM · Sunday – Monday: Closed",
     vagaroUrl: "https://www.vagaro.com/laneandedwardsviolins",
-    email: "atelier@laneandedwards.com"
+    email: "info@laneandedwardsviolins.com"
   }
 };

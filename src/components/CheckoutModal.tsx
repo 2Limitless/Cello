@@ -113,37 +113,37 @@ export function CheckoutModal() {
                     <span className="text-[#1A1A17]/60">Recipient:</span>
                     <span className="font-medium">{fullName || "Patron of the Arts"}</span>
                   </div>
-                  <div className="flex justify-between border-b border-[#1A1A17]/10 pb-2">
-                    <span className="text-[#1A1A17]/60">Dispatch:</span>
+                  <div className="flex justify-between border-b border-[#003152]/10 pb-2">
+                    <span className="text-[#1c2024]/60">Dispatch:</span>
                     <span className="font-medium">
-                      {deliveryMethod === 'courier' ? "Insured White Glove Courier" : "Workshop Pickup (315 Wallace Ave)"}
+                      {deliveryMethod === 'courier' ? "Insured White Glove Courier" : "Shop Pickup (3606 College Dr)"}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#1A1A17]/60">Trade-In Guarantee:</span>
+                    <span className="text-[#1c2024]/60">Trade-In Guarantee:</span>
                     <span className="font-medium text-emerald-800">100% Lifetime Equity Active</span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => setCheckoutState('idle')}
-                  className="px-10 py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors cursor-pointer shadow-xl"
+                  className="px-10 py-4 bg-[#003152] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#c2a15a] hover:text-[#001f35] transition-colors cursor-pointer shadow-md rounded-full font-serif"
                 >
-                  Return to Atelier
+                  Return to Shop
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Order Highlights Pill */}
-                <div className="p-4 bg-white border-2 border-[#1A1A17] flex justify-between items-center">
+                <div className="p-4 bg-white border border-[#c2a15a]/40 rounded-xl flex justify-between items-center shadow-xs">
                   <div>
-                    <span className="text-xs text-[#1A1A17]/60">Total Acquisition:</span>
-                    <div className="font-serif text-2xl font-bold text-[#1A1A17]">
+                    <span className="text-xs text-[#3e444b]">Total Acquisition:</span>
+                    <div className="font-serif text-2xl font-bold text-[#003152]">
                       ${total.toFixed(2)}
                     </div>
                   </div>
                   <div className="text-right text-xs">
-                    <span className="text-[#9B7E58] font-bold block">{items.length} Curated Item(s)</span>
+                    <span className="text-[#c2a15a] font-bold block">{items.length} Item(s)</span>
                     {hasTradeIn && (
                       <span className="text-emerald-800 block">-${tradeInValue.toLocaleString()} Equity Applied</span>
                     )}
@@ -152,13 +152,13 @@ export function CheckoutModal() {
 
                 {/* Form fields */}
                 <div className="space-y-4">
-                  <h5 className="font-serif text-xl text-[#1A1A17] border-b border-[#1A1A17]/10 pb-2">
-                    1 // Patron Details
+                  <h5 className="font-serif text-xl text-[#003152] border-b border-[#c2a15a]/20 pb-2 font-medium">
+                    Patron Details
                   </h5>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#1A1A17]/70">
+                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#3e444b]">
                         Full Name *
                       </label>
                       <input
@@ -167,11 +167,11 @@ export function CheckoutModal() {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Elena Rostova"
-                        className="w-full p-3 bg-white border border-[#1A1A17]/30 focus:border-[#9B7E58] outline-none text-sm"
+                        className="w-full p-3 bg-white border border-[#c2a15a]/40 focus:border-[#003152] outline-none text-sm rounded-lg"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#1A1A17]/70">
+                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#3e444b]">
                         Email Address *
                       </label>
                       <input
@@ -180,14 +180,14 @@ export function CheckoutModal() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="elena@conservatory.edu"
-                        className="w-full p-3 bg-white border border-[#1A1A17]/30 focus:border-[#9B7E58] outline-none text-sm"
+                        className="w-full p-3 bg-white border border-[#c2a15a]/40 focus:border-[#003152] outline-none text-sm rounded-lg"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#1A1A17]/70">
+                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#3e444b]">
                         Phone Number *
                       </label>
                       <input
@@ -196,17 +196,17 @@ export function CheckoutModal() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="(502) 555-0199"
-                        className="w-full p-3 bg-white border border-[#1A1A17]/30 focus:border-[#9B7E58] outline-none text-sm"
+                        className="w-full p-3 bg-white border border-[#c2a15a]/40 focus:border-[#003152] outline-none text-sm rounded-lg"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#1A1A17]/70">
+                      <label className="block text-xs uppercase tracking-wider font-bold mb-1 text-[#3e444b]">
                         Musician Discipline
                       </label>
                       <select
                         value={musicianRole}
                         onChange={(e) => setMusicianRole(e.target.value)}
-                        className="w-full p-3 bg-white border border-[#1A1A17]/30 focus:border-[#9B7E58] outline-none text-sm"
+                        className="w-full p-3 bg-white border border-[#c2a15a]/40 focus:border-[#003152] outline-none text-sm rounded-lg"
                       >
                         <option>Orchestral Professional</option>
                         <option>Soloist / Conservatory</option>
@@ -220,42 +220,42 @@ export function CheckoutModal() {
 
                 {/* Delivery Preference */}
                 <div className="space-y-4">
-                  <h5 className="font-serif text-xl text-[#1A1A17] border-b border-[#1A1A17]/10 pb-2">
-                    2 // Delivery & Transit
+                  <h5 className="font-serif text-xl text-[#003152] border-b border-[#c2a15a]/20 pb-2 font-medium">
+                    Delivery &amp; Transit
                   </h5>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div
                       onClick={() => setDeliveryMethod('courier')}
-                      className={`p-4 border-2 cursor-pointer transition-all ${
+                      className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
                         deliveryMethod === 'courier'
-                          ? 'border-[#1A1A17] bg-white shadow-[4px_4px_0px_#1A1A17]'
-                          : 'border-[#1A1A17]/20 bg-[#FAF9F5]'
+                          ? 'border-[#003152] bg-white shadow-md'
+                          : 'border-[#c2a15a]/25 bg-[#FAF7F0]'
                       }`}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <Truck size={18} className="text-[#9B7E58]" />
-                        <span className="font-bold text-sm">Insured Courier Delivery</span>
+                        <Truck size={18} className="text-[#c2a15a]" />
+                        <span className="font-bold text-sm text-[#003152]">Insured Courier Delivery</span>
                       </div>
-                      <p className="text-xs text-[#1A1A17]/70">
-                        Climate-sealed thermal container sent via FedEx Priority Express. Complimentary.
+                      <p className="text-xs text-[#3e444b]">
+                        Climate-sealed thermal container sent via Priority Express. Complimentary.
                       </p>
                     </div>
 
                     <div
                       onClick={() => setDeliveryMethod('pickup')}
-                      className={`p-4 border-2 cursor-pointer transition-all ${
+                      className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
                         deliveryMethod === 'pickup'
-                          ? 'border-[#1A1A17] bg-white shadow-[4px_4px_0px_#1A1A17]'
-                          : 'border-[#1A1A17]/20 bg-[#FAF9F5]'
+                          ? 'border-[#003152] bg-white shadow-md'
+                          : 'border-[#c2a15a]/25 bg-[#FAF7F0]'
                       }`}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <MapPin size={18} className="text-[#9B7E58]" />
-                        <span className="font-bold text-sm">In-Workshop Pickup</span>
+                        <MapPin size={18} className="text-[#c2a15a]" />
+                        <span className="font-bold text-sm text-[#003152]">In-Shop Pickup</span>
                       </div>
-                      <p className="text-xs text-[#1A1A17]/70">
-                        315 Wallace Ave, Louisville KY. Play-test with a master luthier in attendance.
+                      <p className="text-xs text-[#3e444b]">
+                        3606 College Dr, Jeffersontown KY. Collect in person at our historic home shop.
                       </p>
                     </div>
                   </div>

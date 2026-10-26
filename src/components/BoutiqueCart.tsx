@@ -49,8 +49,8 @@ export function BoutiqueCart() {
             {/* Header */}
             <div className="p-8 border-b-2 border-[#1A1A17] flex justify-between items-center bg-[#FAF9F5]">
               <div>
-                <span className="text-[11px] tracking-[0.25em] uppercase font-bold text-[#9B7E58]">
-                  Volume IV // Boutique Bag
+                <span className="text-[11px] tracking-[0.25em] uppercase font-bold text-[#c2a15a]">
+                  Workshop Supplies Bag
                 </span>
                 <h3 className="font-serif text-3xl md:text-4xl mt-1 text-[#1A1A17]">
                   Your Selection
@@ -69,7 +69,7 @@ export function BoutiqueCart() {
             <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 no-scrollbar">
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center p-8">
-                  <div className="w-20 h-20 rounded-full border-2 border-dashed border-[#1A1A17]/20 flex items-center justify-center mb-6 text-[#9B7E58]">
+                  <div className="w-20 h-20 rounded-full border-2 border-dashed border-[#1A1A17]/20 flex items-center justify-center mb-6 text-[#c2a15a]">
                     <Sparkles size={32} />
                   </div>
                   <h4 className="font-serif text-2xl text-[#1A1A17] mb-2">Your Bag is Empty</h4>
@@ -78,7 +78,7 @@ export function BoutiqueCart() {
                   </p>
                   <button
                     onClick={() => setIsCartOpen(false)}
-                    className="px-8 py-4 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-lg cursor-pointer"
+                    className="px-8 py-4 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#c2a15a] transition-colors shadow-lg cursor-pointer"
                   >
                     Explore Boutique
                   </button>
@@ -114,7 +114,7 @@ export function BoutiqueCart() {
                                   setSelectedProduct(product);
                                   setIsCartOpen(false);
                                 }}
-                                className="font-serif text-lg md:text-xl text-[#1A1A17] leading-snug hover:text-[#9B7E58] transition-colors cursor-pointer"
+                                className="font-serif text-lg md:text-xl text-[#1A1A17] leading-snug hover:text-[#c2a15a] transition-colors cursor-pointer"
                               >
                                 {product.name}
                               </h5>
@@ -126,7 +126,7 @@ export function BoutiqueCart() {
                                 <Trash2 size={16} />
                               </button>
                             </div>
-                            <p className="text-[11px] uppercase tracking-[0.15em] text-[#9B7E58] font-semibold mt-1">
+                            <p className="text-[11px] uppercase tracking-[0.15em] text-[#c2a15a] font-semibold mt-1">
                               {product.origin}
                             </p>
                           </div>
@@ -159,10 +159,10 @@ export function BoutiqueCart() {
                   </div>
 
                   {/* 100% Trade-In Equity Estimator */}
-                  <div className="bg-[#9B7E58]/10 border-2 border-[#9B7E58] p-5">
+                  <div className="bg-[#c2a15a]/10 border-2 border-[#c2a15a] p-5">
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex gap-3">
-                        <ShieldCheck size={24} className="text-[#9B7E58] shrink-0 mt-0.5" />
+                        <ShieldCheck size={24} className="text-[#c2a15a] shrink-0 mt-0.5" />
                         <div>
                           <h6 className="font-serif text-lg text-[#1A1A17] leading-tight font-medium">
                             Apply 100% Trade-In Credit
@@ -176,7 +176,7 @@ export function BoutiqueCart() {
                         type="checkbox"
                         checked={hasTradeIn}
                         onChange={(e) => setHasTradeIn(e.target.checked)}
-                        className="w-5 h-5 accent-[#9B7E58] cursor-pointer mt-1"
+                        className="w-5 h-5 accent-[#c2a15a] cursor-pointer mt-1"
                       />
                     </div>
 
@@ -184,11 +184,11 @@ export function BoutiqueCart() {
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
-                        className="mt-4 pt-4 border-t border-[#9B7E58]/30 space-y-3"
+                        className="mt-4 pt-4 border-t border-[#c2a15a]/30 space-y-3"
                       >
                         <div className="flex justify-between items-center text-xs">
                           <span className="font-medium text-[#1A1A17]">Previous Instrument Value:</span>
-                          <span className="font-mono font-bold text-base text-[#9B7E58]">
+                          <span className="font-mono font-bold text-base text-[#c2a15a]">
                             ${tradeInValue.toLocaleString()}
                           </span>
                         </div>
@@ -199,7 +199,7 @@ export function BoutiqueCart() {
                           step="100"
                           value={tradeInValue}
                           onChange={(e) => setTradeInValue(Number(e.target.value))}
-                          className="w-full accent-[#9B7E58] cursor-pointer"
+                          className="w-full accent-[#c2a15a] cursor-pointer"
                         />
                         <div className="flex justify-between text-[10px] text-[#1A1A17]/50 uppercase tracking-widest font-mono">
                           <span>$300 (Spark)</span>
@@ -213,11 +213,11 @@ export function BoutiqueCart() {
                   {/* Reassurance Badges */}
                   <div className="grid grid-cols-2 gap-3 text-[11px] text-[#1A1A17]/70 py-2">
                     <div className="flex items-center gap-2">
-                      <Truck size={14} className="text-[#9B7E58]" />
+                      <Truck size={14} className="text-[#c2a15a]" />
                       <span>Insured White Glove Courier</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-[#9B7E58]" />
+                      <CheckCircle2 size={14} className="text-[#c2a15a]" />
                       <span>Master Luthier Bench Setup</span>
                     </div>
                   </div>
@@ -235,7 +235,7 @@ export function BoutiqueCart() {
                   </div>
 
                   {hasTradeIn && (
-                    <div className="flex justify-between text-[#9B7E58] font-medium">
+                    <div className="flex justify-between text-[#c2a15a] font-medium">
                       <span>100% Trade-In Equity Credit</span>
                       <span className="font-mono">-${tradeInValue.toLocaleString()}</span>
                     </div>
@@ -261,7 +261,7 @@ export function BoutiqueCart() {
                       setIsCartOpen(false);
                       setCheckoutState('checkout');
                     }}
-                    className="w-full py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#9B7E58] transition-colors shadow-xl flex items-center justify-center gap-3 group cursor-pointer"
+                    className="w-full py-5 bg-[#1A1A17] text-white uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#c2a15a] transition-colors shadow-xl flex items-center justify-center gap-3 group cursor-pointer"
                   >
                     <span>Proceed to Acquisition</span>
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

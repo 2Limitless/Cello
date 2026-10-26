@@ -19,7 +19,7 @@ const COPY_TEMPLATES = [
   },
   {
     title: "100% Equity & Independent Promise",
-    text: "Free of corporate assembly-line compromises. Personally set up, acoustic-tested, and tonally optimized by master luthier Matthew Lane. Every dollar invested follows you forward with 100% lifetime trade-in equity toward your next master acquisition.",
+    text: "Artisan-calibrated for expressive nuance. Personally set up, acoustic-tested, and tonally optimized by master luthier Matthew Lane. Every dollar invested follows you forward with 100% lifetime trade-in equity toward your next master acquisition.",
   },
   {
     title: "Bespoke French & Belgian Setup",

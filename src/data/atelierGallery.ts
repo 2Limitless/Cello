@@ -218,10 +218,10 @@ export const ATELIER_GALLERY: GalleryImage[] = [
     description: "Mentorship forged over twenty years of shoulder-to-shoulder craftsmanship"
   },
   {
-    src: "/atelier/storefront_wallace.png",
-    name: "315 Wallace Ave Atelier Storefront",
+    src: "/atelier/historic_jeffersontown_storefront.jpg",
+    name: "3606 College Dr Historic Home",
     category: "legacy-store",
-    description: "Historic St. Matthews workshop home in Louisville, Kentucky"
+    description: "Historic Jeffersontown home on the National Register of Historic Places"
   },
   {
     src: "/atelier/antique_maker_signature.jpg",

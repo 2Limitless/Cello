@@ -102,40 +102,40 @@ export function VirtuosoFolio({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Warm Craftsman Atelier Guestbook & Google Reviews Widget */}
-      <div className="w-full h-full bg-[#FCF9F2] text-[#2A190E] rounded-[22px] sm:rounded-[26px] md:rounded-[30px] border-2 border-[#8C6239]/25 shadow-[0_14px_40px_rgba(60,35,15,0.08),_0_2px_8px_rgba(60,35,15,0.04)] hover:shadow-[0_20px_50px_rgba(60,35,15,0.12)] transition-all duration-300 p-5 sm:p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden">
+      {/* Guestbook & Google Reviews Widget */}
+      <div className="w-full h-full bg-white text-[#1c2024] rounded-[22px] sm:rounded-[26px] md:rounded-[30px] border border-[#c2a15a]/40 shadow-[0_10px_35px_rgba(0,49,82,0.06)] hover:shadow-[0_16px_45px_rgba(0,49,82,0.1)] transition-all duration-300 p-5 sm:p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden">
         
-        {/* Subtle Warm Parchment Watermark & Grain */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,134,40,0.06),transparent_60%)] pointer-events-none" />
+        {/* Subtle Watermark */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(194,161,90,0.08),transparent_60%)] pointer-events-none" />
 
         {/* Top: Workshop Guestbook & Google Verified Header */}
-        <div className="flex items-center justify-between pb-3.5 sm:pb-4 lg:pb-5 border-b border-[#8C6239]/15 relative z-10">
+        <div className="flex items-center justify-between pb-3.5 sm:pb-4 lg:pb-5 border-b border-[#c2a15a]/20 relative z-10">
           <div className="flex items-center gap-2.5 sm:gap-3.5">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#FAF5EA] border border-[#8C6239]/30 shadow-xs flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#FAF7F0] border border-[#c2a15a]/30 shadow-xs flex items-center justify-center shrink-0">
               <GoogleGIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1 sm:gap-1.5">
-                <span className="font-serif font-bold text-sm sm:text-base lg:text-lg text-[#1E120A] tracking-tight">
+                <span className="font-serif font-bold text-sm sm:text-base lg:text-lg text-[#003152] tracking-tight">
                   Lane &amp; Edwards Violins
                 </span>
-                <CheckCircle2 size={14} className="text-[#8C6239] shrink-0" />
+                <CheckCircle2 size={14} className="text-[#c2a15a] shrink-0" />
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5">
-                <span className="font-serif font-bold text-xs sm:text-sm text-[#7C542A]">5.0</span>
-                <div className="flex text-[#C68628] gap-0.5">
+                <span className="font-serif font-bold text-xs sm:text-sm text-[#003152]">5.0</span>
+                <div className="flex text-[#c2a15a] gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={11} fill="currentColor" className="text-[#C68628]" />
+                    <Star key={i} size={11} fill="currentColor" className="text-[#c2a15a]" />
                   ))}
                 </div>
-                <span className="font-serif text-[11px] sm:text-xs text-[#7C542A]/70">
+                <span className="font-serif text-[11px] sm:text-xs text-[#3e444b]">
                   (48 Patron Reviews)
                 </span>
               </div>
             </div>
           </div>
 
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#8C6239]/10 text-[#7C542A] border border-[#8C6239]/20 text-[10px] sm:text-[11px] font-medium tracking-wide">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#003152]/10 text-[#003152] border border-[#003152]/20 text-[10px] sm:text-[11px] font-medium tracking-wide">
             ✦ Guestbook
           </span>
         </div>
@@ -163,12 +163,12 @@ export function VirtuosoFolio({
 
                 <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <span className="font-serif font-bold text-sm sm:text-base lg:text-lg text-[#1E120A] truncate">
+                    <span className="font-serif font-bold text-sm sm:text-base lg:text-lg text-[#003152] truncate">
                       {current.author}
                     </span>
                   </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10.5px] sm:text-xs text-[#7C542A]/80 font-serif">
-                    <span className="text-[#A35D22] font-medium truncate">{meta.badge}</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10.5px] sm:text-xs text-[#3e444b] font-serif">
+                    <span className="text-[#c2a15a] font-medium truncate">{meta.badge}</span>
                     <span>·</span>
                     <span className="shrink-0">{meta.timeAgo}</span>
                   </div>
@@ -179,12 +179,12 @@ export function VirtuosoFolio({
 
           {/* 5 Stars Rating & Patron Credential Pill */}
           <div className="flex items-center gap-2 mb-2 sm:mb-3">
-            <div className="flex text-[#C68628] gap-0.5">
+            <div className="flex text-[#c2a15a] gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={13} fill="currentColor" className="text-[#C68628]" />
+                <Star key={i} size={13} fill="currentColor" className="text-[#c2a15a]" />
               ))}
             </div>
-            <span className="text-[10px] sm:text-[11px] font-serif italic px-2.5 py-0.5 rounded-md bg-[#FAF4E6] text-[#7C542A] border border-[#8C6239]/20 truncate max-w-[220px] sm:max-w-[280px]">
+            <span className="text-[10px] sm:text-[11px] font-serif italic px-2.5 py-0.5 rounded-md bg-[#FAF7F0] text-[#003152] border border-[#c2a15a]/25 truncate max-w-[220px] sm:max-w-[280px]">
               {current.role}
             </span>
           </div>
@@ -200,7 +200,7 @@ export function VirtuosoFolio({
                 transition={{ duration: 0.25, ease: "easeInOut" }}
                 className="w-full"
               >
-                <p className="font-book text-sm sm:text-base lg:text-lg text-[#2A190E] leading-relaxed italic font-normal">
+                <p className="font-book text-sm sm:text-base lg:text-lg text-[#1c2024] leading-relaxed italic font-normal">
                   &ldquo;{current.quote}&rdquo;
                 </p>
               </motion.div>
@@ -210,20 +210,20 @@ export function VirtuosoFolio({
         </div>
 
         {/* Bottom Bar: Google Footer & Warm Craft Arrows */}
-        <div className="pt-3 sm:pt-4 border-t border-[#8C6239]/15 flex items-center justify-between gap-4 relative z-10">
-          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#7C542A]/80 font-serif">
+        <div className="pt-3 sm:pt-4 border-t border-[#c2a15a]/20 flex items-center justify-between gap-4 relative z-10">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#3e444b] font-serif">
             <GoogleGIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-            <span>Verified Google Review · Louisville, KY</span>
+            <span>Verified Google Review · Jeffersontown, KY</span>
           </div>
 
-          {/* Antique Ivory & Brass Navigation Buttons */}
+          {/* Navigation Buttons */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
               }}
-              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-[#8C6239]/30 bg-[#FAF4E6] hover:bg-[#8C6239] hover:text-white text-[#7C542A] transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
+              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-[#c2a15a]/40 bg-[#FAF7F0] hover:bg-[#003152] hover:text-white text-[#003152] transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
               title="Previous Review"
               aria-label="Previous Review"
             >
@@ -234,7 +234,7 @@ export function VirtuosoFolio({
                 e.stopPropagation();
                 setReviewIndex((prev) => (prev + 1) % testimonials.length);
               }}
-              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-[#8C6239]/30 bg-[#FAF4E6] hover:bg-[#8C6239] hover:text-white text-[#7C542A] transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
+              className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full border border-[#c2a15a]/40 bg-[#FAF7F0] hover:bg-[#003152] hover:text-white text-[#003152] transition-colors flex items-center justify-center cursor-pointer active:scale-95 shadow-xs"
               title="Next Review"
               aria-label="Next Review"
             >
@@ -243,14 +243,14 @@ export function VirtuosoFolio({
           </div>
         </div>
 
-        {/* Warm Amber Progress Bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#8C6239]/10 overflow-hidden">
+        {/* Progress Bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#003152]/10 overflow-hidden">
           <motion.div
             key={reviewIndex}
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 7, ease: "linear" }}
-            className="h-full bg-gradient-to-r from-[#8C6239] to-[#C68628]"
+            className="h-full bg-gradient-to-r from-[#003152] to-[#c2a15a]"
           />
         </div>
 

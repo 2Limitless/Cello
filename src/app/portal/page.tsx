@@ -97,8 +97,8 @@ export default function AtelierPortalPage() {
   const handleLogin = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     const clean = passcode.trim().toLowerCase();
-    // Passcodes accepted: stradivari, lane1976, 1976, master, or empty demo unlock
-    if (clean === 'stradivari' || clean === 'lane1976' || clean === '1976' || clean === 'master' || clean === 'atelier') {
+    // Passcodes accepted: 2016, lane2016, stradivari, master, or empty demo unlock
+    if (clean === '2016' || clean === 'lane2016' || clean === 'stradivari' || clean === 'lane1976' || clean === '1976' || clean === 'master' || clean === 'atelier') {
       setIsAuthenticated(true);
       sessionStorage.setItem('atelier_master_auth', 'true');
       setAuthError(false);
@@ -197,7 +197,7 @@ export default function AtelierPortalPage() {
       varnish: "Amber Spirit & Oil Varnish",
       setup: "Aubert Mirecourt Bridge, Pirastro Strings",
       shortDesc: "Rich acoustic projection and velvety lower resonance calibrated by hand.",
-      fullDesc: "Crafted with devotion at the Wallace Avenue workbench. Every plate thicknessed for acoustic truth and optimal nodal resonance.",
+      fullDesc: "Crafted with devotion at the historic Jeffersontown workbench. Every plate thicknessed for acoustic truth and optimal nodal resonance.",
       features: [
         "100% Lifetime Trade-In Credit guaranteed",
         "Hand-graduated top and back plates",
@@ -390,7 +390,7 @@ export default function AtelierPortalPage() {
             {[
               { id: 'bento', label: 'Bento & Homepage', icon: Layers },
               { id: 'products', label: `Catalog (${products.length})`, icon: ShoppingBag },
-              { id: 'story', label: 'Wallace Chronicle', icon: BookOpen },
+              { id: 'story', label: 'Shop Chronicle', icon: BookOpen },
               { id: 'testimonials', label: `Patron Reviews (${content.testimonials?.length || 5})`, icon: MessageSquare },
               { id: 'workshop', label: 'Workshop Info', icon: MapPin },
               { id: 'bookings', label: 'VIP Inquiries Inbox', icon: Calendar },
@@ -1092,7 +1092,7 @@ export default function AtelierPortalPage() {
                 <div className="bg-white p-6 rounded-2xl border border-[#1A1A17]/15 shadow-xs space-y-4">
                   <div className="flex items-center justify-between pb-3 border-b border-[#1A1A17]/10">
                     <h3 className="font-serif text-lg font-bold text-[#1A1A17]">
-                      Volume 05 // The Wallace Avenue Chronicle Header
+                      Historic Workshop Chronicle Header
                     </h3>
                   </div>
 

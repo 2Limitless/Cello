@@ -150,14 +150,14 @@ export function HeritageOverlay({ close }: { close: () => void }) {
         
         <motion.div variants={itemVariants} className="prose prose-invert prose-lg mx-auto text-white/70 font-sans font-light leading-relaxed">
           <p className="mb-6 text-xl">
-            After decades of pairing musicians with quality instruments, offering generous rental credits, and friendly service to all, teachers continue to insist on the knowledge and experience offered by Mark Edwards and Matt Lane.
+            After years of pairing musicians with quality instruments, offering generous rental credits, and friendly service to all, teachers and players continue to trust the dedicated expertise of Matthew Lane.
           </p>
           <p className="mb-6">
-            Enthusiasts and professionals alike trust Lane & Edwards for exquisite work, prompt turnaround, and unmatched dedication. We believe that every instrument holds a unique voice, waiting to be drawn out by the right hands.
+            Enthusiasts and professionals alike trust Lane &amp; Edwards Violins for exquisite work, prompt turnaround, and unmatched dedication. We believe that every instrument holds a unique voice, waiting to be drawn out by the right hands.
           </p>
           <div className="mt-16 inline-block">
-            <div className="text-3xl font-serif italic text-white/40 mb-2 font-light">Mark Edwards & Matt Lane</div>
-            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+            <div className="text-3xl font-serif italic text-white/60 mb-2 font-light">Matthew Lane · Owner &amp; Luthier</div>
+            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#c2a15a] to-transparent" />
           </div>
         </motion.div>
       </div>

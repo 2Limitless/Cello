@@ -1,0 +1,18 @@
+<svg viewBox="0 0 680 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="leGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dfc88a"/>
+      <stop offset="50%" stop-color="#c2a15a"/>
+      <stop offset="100%" stop-color="#9e7f3b"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="676" height="136" rx="8" fill="#FAF7F0" stroke="#c2a15a" stroke-width="1.5"/>
+  <rect x="8" y="8" width="664" height="124" rx="6" fill="none" stroke="#003152" stroke-width="0.75" stroke-dasharray="4 2" opacity="0.35"/>
+  <text x="340" y="68" text-anchor="middle" fill="#003152" font-family="'Cormorant Garamond', Georgia, serif" font-size="44" font-weight="700" letter-spacing="0.06em">
+    <tspan fill="#003152">Lane </tspan>
+    <tspan fill="#c2a15a" font-family="Georgia, serif" font-style="italic" font-weight="400">&amp; </tspan>
+    <tspan fill="#003152">Edwards</tspan>
+  </text>
+  <text x="340" y="93" text-anchor="middle" fill="#003152" font-family="'Cinzel', Georgia, serif" font-size="14" font-weight="600" letter-spacing="0.45em">VIOLINS</text>
+  <text x="340" y="112" text-anchor="middle" fill="#c2a15a" font-family="'EB Garamond', Georgia, serif" font-size="10.5" letter-spacing="0.22em" font-style="italic">FINE VIOLINS, VIOLAS, CELLOS, AND BASSES · SINCE 2016</text>
+</svg>

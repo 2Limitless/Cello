@@ -66,8 +66,10 @@ export function ProductDetailModal() {
               <p className="text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-serif font-bold">
                 {selectedProduct.origin}
               </p>
-              <h4 className="font-serif text-3xl md:text-4xl text-white mt-1 font-medium">
-                ${selectedProduct.price.toFixed(2)}
+              <h4 className="font-serif text-2xl md:text-3xl text-white mt-1 font-medium">
+                {selectedProduct.category === 'instruments' || selectedProduct.category === 'bows'
+                  ? 'Sample Benchmark · In-Shop Trial'
+                  : `$${selectedProduct.price.toFixed(2)}`}
               </h4>
             </div>
           </div>
@@ -76,8 +78,8 @@ export function ProductDetailModal() {
           <div className="lg:w-1/2 flex-1 p-8 md:p-12 overflow-y-auto no-scrollbar flex flex-col justify-between space-y-8">
             <div className="space-y-6">
               <div>
-                <span className="text-xs uppercase font-serif tracking-[0.25em] text-[#8C6239] font-bold">
-                  ✦ Atelier Catalog · {selectedProduct.category.toUpperCase()}
+                <span className="text-xs uppercase font-serif tracking-[0.25em] text-[#c2a15a] font-bold">
+                  ✦ Workshop Collection · {selectedProduct.category.toUpperCase()}
                 </span>
                 <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1E1107] mt-2 leading-tight font-medium">
                   {selectedProduct.name}
@@ -96,10 +98,10 @@ export function ProductDetailModal() {
               {selectedProduct.toneProfile && (
                 <div className="bg-[#24160C] text-[#FAF5EA] p-6 shadow-xl space-y-4 rounded-[18px] border border-[#8C6239]/30">
                   <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                    <span className="text-xs uppercase font-serif tracking-[0.25em] text-[#D4AF37] font-bold flex items-center gap-2">
-                      <Sparkles size={14} /> Acoustic Tone Architecture
+                    <span className="text-xs uppercase font-serif tracking-[0.25em] text-[#dfc88a] font-bold flex items-center gap-2">
+                      <Sparkles size={14} className="text-[#c2a15a]" /> Acoustic Tone Architecture
                     </span>
-                    <span className="text-[10px] text-white/60 font-serif italic">Calibrated at Wallace Ave Bench</span>
+                    <span className="text-[10px] text-white/70 font-serif italic">Calibrated at Jeffersontown Bench</span>
                   </div>
 
                   <div className="space-y-3">
@@ -190,22 +192,22 @@ export function ProductDetailModal() {
                     setBookingProduct(p);
                     setIsBookingModalOpen(true);
                   }}
-                  className="w-full py-4.5 bg-[#2A190E] text-[#FAF5EA] uppercase font-serif tracking-[0.2em] text-xs font-bold hover:bg-[#8C6239] transition-colors shadow-xl flex items-center justify-center gap-3 cursor-pointer rounded-full"
+                  className="w-full py-4.5 bg-[#003152] text-[#FAF5EA] uppercase font-serif tracking-[0.2em] text-xs font-bold hover:bg-[#c2a15a] hover:text-[#001f35] transition-colors shadow-xl flex items-center justify-center gap-3 cursor-pointer rounded-full"
                 >
-                  <Calendar size={16} className="text-[#C68628]" />
-                  <span>Reserve In-Shop Playing Session (Complimentary)</span>
+                  <Calendar size={16} className="text-[#c2a15a]" />
+                  <span>Schedule In-Shop Acoustic Trial (Complimentary)</span>
                 </button>
               ) : (
-                <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-[#FAF4E6] border border-[#8C6239]/30 rounded-[16px]">
+                <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-[#FAF7F0] border border-[#c2a15a]/35 rounded-[16px]">
                   <div className="text-left">
-                    <span className="text-[10.5px] font-serif uppercase tracking-widest text-[#8C6239] font-bold block">✦ In-Stock at 315 Wallace Ave</span>
-                    <span className="text-xs text-[#5C3818] font-book italic">Walk in during workshop hours or hold for in-store pickup</span>
+                    <span className="text-[10.5px] font-serif uppercase tracking-widest text-[#003152] font-bold block">✦ In-Stock at 3606 College Dr, Jeffersontown</span>
+                    <span className="text-xs text-[#3e444b] font-book italic">Visit our historic shop or call to hold for pickup</span>
                   </div>
                   <a
                     href="tel:5026905908"
-                    className="px-6 py-3.5 bg-[#2A190E] text-[#FAF5EA] hover:bg-[#8C6239] uppercase font-serif tracking-[0.15em] text-xs font-bold transition-colors flex items-center gap-2 shrink-0 cursor-pointer shadow-md rounded-full"
+                    className="px-6 py-3 bg-[#003152] text-[#FAF7F0] hover:bg-[#00223a] uppercase font-serif tracking-[0.15em] text-xs font-bold transition-colors flex items-center gap-2 shrink-0 cursor-pointer shadow-sm rounded-full"
                   >
-                    <Phone size={14} className="text-[#C68628]" />
+                    <Phone size={14} className="text-[#c2a15a]" />
                     <span>Call Shop: (502) 690-5908</span>
                   </a>
                 </div>
